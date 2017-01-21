@@ -1,0 +1,22 @@
+<section class="formFrame">
+	<div class="listHeader center clearFix">
+		<div class="row cell5">#</div>
+		<div class="row cell15">{$lang.name}</div>
+		<div class="row cell15">{$lang.parent}</div>
+		<div class="row cell60">{$lang.url}</div>
+		<div class="row cell5">{$lang.icon}</div>
+	</div>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="blockquote clearFix">
+		<div class="row cell5 center">{$entityItem.num}</div>
+		<div class="row cell15">{$entityItem.name}</div>
+		<div class="row cell15">{$entityItem.category}&nbsp;</div>
+		<div class="row cell60 left"><a href="{$entityItem.url}">{$entityItem.url}&nbsp;</a></div>
+		<div class="row cell5 center"><img src="{$settings.phpThumbLibraryAddress}/usage.php?file={$entityItem.icon}&width=32&height=32" width="32" height="32" alt="{$entityItem.name}" title="{$entityItem.name}"></div>
+	</div>
+	{/foreach}
+	<br>
+	<div class="blockquote">{$navigation}</div>
+	{/nocache}
+</section>

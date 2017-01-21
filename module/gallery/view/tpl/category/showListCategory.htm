@@ -1,0 +1,17 @@
+{nocache}
+<div>
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="row cell19" style="margin-right: 1px;">
+		<a href="gallery/c_showListObject/{$entityItem.id}_{$entityItem.name|replace:' ':'-'}">
+			<div class="hover paddy2 pointer">
+				{iimg id={$entityItem.id} src={$entityItem.url} width=180 height=180 class="tip otherImage" alt={$entityItem.name} title={$entityItem.name} caption={$entityItem.name}}
+			</div>
+		</a>
+  	</div>
+  	{if $entityKey is div by 5}
+ 	<br class="clear">
+ 	<br>
+	{/if}
+	{/foreach}
+</div>
+{/nocache}

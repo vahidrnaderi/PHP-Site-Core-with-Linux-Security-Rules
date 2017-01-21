@@ -1,0 +1,38 @@
+<div class="listFull">
+	<h2 class="title">{$lang.categoryList}</h2>
+	<div class="listHeader clearFix">
+		<div class="row cell5 center">#</div>
+		<div class="row cell10 center">{$lang.id}</div>
+		<div class="row cell30 center">{$lang.name}</div>
+		<div class="row cell30 center">{$lang.parent}</div>
+		<div class="row cell25 center">{$lang.properties}</div>
+	</div>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="blockquote clearFix" id="row{$entityItem.id}">
+		<div class="row cell5">{$entityItem.num}</div>
+		<div class="row cell10">{$entityItem.id}</div>
+		<div class="row cell30">{$entityItem.name}</div>
+		<div class="row cell30">{$entityItem.category}&nbsp;</div>
+		<div class="row cell25 center">
+			<a href="/directory/c_infoCategory/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/information.png" title="{$entityItem.description}" alt="{$entityItem.description}">
+			</a>
+			<a href="/directory/v_delCategory/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/delete.png" title="{$lang.delete}" alt="{$lang.delete}">
+			</a>
+			<a href="/directory/v_editCategory/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/edit.png" title="{$lang.edit}" alt="{$lang.edit}">
+			</a>
+			{if $entityItem.actvie == '1'} 
+			<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+		</div>
+	</div>
+	{/foreach}
+	<br>
+	<div class="blockquote">{$navigation}</div>
+	{/nocache}
+</div>

@@ -1,0 +1,62 @@
+<div class="curvedFull" style="background: #fff; padding: 5px;">
+	<div id="postContentEntry" class="curvedBottome" style="background: #e7e7e7; padding: 5px;">
+		<div class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell5 LH35">&nbsp;</div>
+			<div class="row cell5 LH35">
+				{$lang.name}:
+			</div>
+			<div class="row cell85 LH35">
+				<input id="name" name="name" class="input" type="text" maxlength="500" value="{nocache}{$entity.name}{/nocache}">
+			</div>
+		</div>
+		<div class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell5 LH35">&nbsp;</div>
+			<div class="row cell5 LH35">
+				{$lang.category}:
+			</div>
+			
+			<div class="row cell90 LH35">
+				{$category}
+				<input type="text" name="category" id="category" value="{nocache}{$entity.category}{/nocache}">
+			</div>
+			<br class="clear">
+			
+<!-- 
+			<div class="row cell90">
+				<ul id="categorymenu" class="mcDropdown_menu">
+					{nocache}{$category}{/nocache}
+				</ul>
+				<input type="text" name="category" id="category" value="{nocache}{$entity.category}{/nocache}">
+			</div>
+ -->
+		</div>
+		<div class="clearFix" style="padding: 1px 0px 0px 0px;">
+			<div class="row cell5 LH35">&nbsp;</div>
+			<div class="row cell5 LH35">
+				{$lang.message}:
+			</div>
+			<div class="row cell85 LH35">
+				<div id="editorFullText"></div>
+				<div id="textcontents" style="display: none">
+					<!-- This div will be used to display the editor contents. -->
+					<div id="description">{nocache}{$entity.description}{/nocache}</div>
+				</div>
+				<textarea id="fullText" name="fullText" rows="10" onclick="this.style.display='none';" onfocus="createEditor('description', 'editorFullText'); this.style.display='none';" style="border: 3px solid #d3d3d3;">{$entity.description}</textarea>
+			</div>
+		</div>
+		<br>
+		<center>
+			<button style="padding: 20px 60px;" onclick="
+				$('#content').farajax('loader', '/post/c_editObject', 
+					   'id={nocache}{$entity.id}{/nocache}' +
+					   '&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>ce<>11' +
+					   '&description=' + getText('description') + '::{$lang.description}<>Multi<>1<>ce<>1000000000'
+				);
+			">
+				<span>{$lang.submit}</span>
+			</button>
+		</center>
+	</div>
+</div>
+<commands value="{literal}$('#category').mcDropdown('#directoryCategory', {allowParentSelect: true});{/literal}">

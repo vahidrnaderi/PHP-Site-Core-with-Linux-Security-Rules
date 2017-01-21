@@ -1,0 +1,13 @@
+<div>{$lang.groupAdd}</div>
+<div class="curvedFull">
+	<div>
+		<sub><input id="name" name="name" placeholder="{$lang.name}" maxlength="100" size="20"></sub>
+		<sup><button onclick="
+			$('#content').farajax('loader', '/groupMan/c_addObject', 
+				   'name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>100'
+			);
+		">
+		<span>{$lang.submit}</span>
+		</button></sup>
+	</div>
+</div>

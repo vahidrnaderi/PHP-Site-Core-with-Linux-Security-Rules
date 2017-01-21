@@ -1,0 +1,44 @@
+{nocache}
+<div class="row cell20 LH25 left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<div class="row cell2 LH25 left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<div class="row cell15 LH25 left">
+	<input id="loginUserName" name="loginUserName" placeholder="{$lang.userName}/{$lang.email}" maxlength="100" required>
+</div>
+<div class="row cell2 LH25 left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<div class="row cell15 LH25">
+	<input id="loginPassword" name="loginPassword" placeholder="{$lang.password}" type="password" maxlength="20" required>
+</div>
+<div class="row cell2 LH25 left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<div class="row cell8 LH25">
+	<button onclick="
+			$('#login').farajax('loader', '/userMan/c_login',
+				   'userName=' + document.getElementById('loginUserName').value + '::{$lang.userName}<>Multi<>1<>ce<>100' +
+				   '&amp;password=' + document.getElementById('loginPassword').value + '::{$lang.password}<>Multi<>1<>ce<>20'			   
+			);
+			$('#basket').farajax('loader', '/pageLoader/v_load/basket');
+			setTimeout('$(\'#loginGate\').farajax(\'loader\', \'/pageLoader/v_load/loginGate\');', 1000);
+//			$('#loginGate').farajax('loader', '/pageLoader/v_load/loginGate');
+			$('#footerSendMessage').farajax('loader', '/pageLoader/v_load/sendMessage');
+			$('#googleAnalytics').farajax('loader', '/pageLoader/v_load/googleAnalytic');
+	 	"><span>{$lang.login}</span></button>
+</div>
+<div class="row cell30 LH25 right">
+	<!-- [<a href="/userMan/v_signUp" rel="nofollow">{$lang.signUp}</a>]  -->
+	<div class="row cell21 tip pointer" style="line-height: 27px;" title="{$lang.signUpHere}" onclick="$('#signUp').farajax('loader', '/userMan/v_signUp');$('#signUp').css('display','block');$('#login').css('display','none');">
+		[{$lang.signUp}]
+	</div>
+	[<a href="/userMan/v_changePass" rel="nofollow">{$lang.forgetPassword}</a>] 
+</div>
+<div class="row cell5 LH25 left">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<br class="clear">
+{/nocache}

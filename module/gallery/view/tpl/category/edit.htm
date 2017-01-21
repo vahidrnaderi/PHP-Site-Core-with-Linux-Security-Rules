@@ -1,0 +1,30 @@
+<div class="clearFix">
+	<div class="row cell10 LH35">
+		{$lang.categoryName}:
+	</div>
+	<div class="row cell20">
+		<input id="name" name="name" class="input" type="text" size="20" maxlength="100" value="{$entity.name}">
+	</div>
+	<div class="row cell10 LH35">
+		{$lang.categoryParent}:
+	</div>
+	<div class="row cell50">
+		<ul id="categorymenu" class="mcdropdown_menu">
+			{$category}
+		</ul>
+		<input id="category" name="category" style="height: 28px;" value="">
+	</div>
+	<div class="row cell10">
+		<button onclick="
+			$('#content').farajax('loader', '/post/c_editCategory', 
+					'id={$entity.id}::{$lang.name}<>Number<>1<>ce<>11' +
+					'&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+				   	'&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>11'		   				   
+			); 
+			$('#list').farajax('loader', '/gallery/c_listCategory');
+			">
+			{$lang.submit}
+		</button>
+	</div>
+</div>
+<commands value="{literal}$('#category').mcDropdown('#galleryCategory', {allowParentSelect: true});{/literal}">

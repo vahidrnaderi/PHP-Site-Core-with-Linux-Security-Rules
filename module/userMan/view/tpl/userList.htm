@@ -1,0 +1,50 @@
+{nocache}
+<div class="h3"></div>
+<div class="blockquote">
+	<div class="listHeader clearFix">
+		<div class="row cell3 center" style="border-left: 1px solid #D8D5D5;">#</div>
+		<div class="row cell3 center" style="border-left: 1px solid #D8D5D5;">{$lang.id}</div>
+		<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">{$lang.userPic}</div>
+		<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">{$lang.userType}</div>
+		<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.name}</div>
+		<div class="row cell12 center" style="border-left: 1px solid #D8D5D5;">{$lang.userName}</div>
+		<div class="row cell8 center" style="border-left: 1px solid #D8D5D5;">{$lang.mobile}</div>
+		<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.email}</div>
+		<div class="row cell6 center" style="border-left: 1px solid #D8D5D5;">{$lang.registerTime}</div>
+		<div class="row cell17 center">{$lang.properties}</div>
+	</div>
+	{foreach name=user key=userKey item=userItem from=$userList}
+	<div class="blockquote clearFix" id="row{$entityItem.id}">
+		<div class="row cell3 center LH30" style="border-left: 1px solid #D8D5D5;">{$userItem.count}</div>
+		<div class="row cell3 center LH30" style="border-left: 1px solid #D8D5D5;">{$userItem.id}</div>
+		<div class="row cell5 center LH10" style="border-left: 1px solid #D8D5D5;">
+			<img width="30" height="30" src="{$userItem.userPic}" alt="{$userItem.firstName} {$userItem.lastName}">
+		</div>
+		{if $userItem.userType == 1}
+			<div class="row cell5 center LH30" style="border-left: 1px solid #D8D5D5;">{$lang.person}</div>
+		{elseif $userItem.userType == 2}
+			<div class="row cell5 center LH30" style="border-left: 1px solid #D8D5D5;">{$lang.legal}</div>
+		{/if}
+		<div class="row cell20 right LH30" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$userItem.firstName}&nbsp;{$userItem.lastName}</div>
+		<div class="row cell12 left LH30" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$userItem.userName}&nbsp;&nbsp;</div>
+		<div class="row cell8 left LH30" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$userItem.mobile}&nbsp;&nbsp;</div>
+		<div class="row cell20 left LH30" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;<a href="mailto:{$userItem.email}">{$userItem.email}</a>&nbsp;&nbsp;</div>
+		<div id="count{$entityItem.id}" class="row cell6 center LH30" style="border-left: 1px solid #D8D5D5;">{$userItem.timeStamp}</div>
+		<div class="row cell17 center LH30" align="center">
+			<a href="/userMan/v_profile/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/information.png" title="" alt=""></a>
+			<a href="/sms/v_addObject/to={$userItem.mobile}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/mobile.png" title="" alt=""></a>
+			<a href="/userMan/v_edit/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/edit.png">
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/group.png">
+			<a href="/userMan/c_userDel/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/delete.png" onclick="$('#content').farajax('loader', '/userMan/v_userMan');"></a>
+			{if $userItem.actvie == '1'} 
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+		</div>
+	</div>
+	{/foreach}
+	<br>
+	<div class="blockquote">{$navigation}</div>
+</div>
+{/nocache}

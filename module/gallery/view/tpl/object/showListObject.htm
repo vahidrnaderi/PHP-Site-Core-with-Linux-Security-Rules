@@ -1,0 +1,12 @@
+{nocache}
+<div id="shutterFrame" class="shutterFrame">
+	<ul>
+		{foreach name=entity key=entityKey item=entityItem from=$entityList}
+		<li>
+			<img src="{$entityItem.url}" width="700" height="500" alt="{$entityItem.name}" title="{$entityItem.name}">
+	  	</li>
+		{/foreach}
+	</ul>
+</div>
+<commands value="shutter();">
+{/nocache}

@@ -1,0 +1,53 @@
+<table class="listFull">
+	<tr>
+		<td width="60%">
+			<div>
+				<div class="row cell30">
+					{$lang.name}:
+				</div>
+				<div class="row cell70">
+					<input id="name" name="name" class="input" type="text" size="30" maxlength="100">
+				</div>
+			</div>
+			<div>
+				<div class="row cell30">
+					{$lang.category}:
+				</div>
+				<div class="row cell70">
+					<select id="category" name="category">
+						{nocache}
+						{foreach name=category key=categoryKey item=categoryItem from=$category}
+							{if $categoryKey == $category.selected}
+								<option value="{$categoryKey}" selected="selected">{$categoryItem}</option>
+							{else}
+								{if $categoryKey == "selected" || !isset($categoryItem)}
+									<option value=""> ... </option>
+								{else}
+						  			<option value="{$categoryKey}">{$categoryItem}</option>
+						  		{/if}
+						  	{/if}
+					  	{/foreach}
+					  	{/nocache}
+			  		</select>
+			  	</div>
+			</div>
+			<div>
+				<div class="row cell30">
+					{$lang.description}:
+				</div>
+				<div class="row cell70">
+					<textarea id="description" name="description" rows="5" cols="25"></textarea>
+				</div>
+			</div>
+		</td>
+		<td width="40%" style="vertical-align: top; text-align: left;">
+			<button class="curvedFull shadowFull" style="width: 140px; height: 160px" onclick="loader('POST', '', 'content', 'op=draw&mode=c_addObject' +
+				   '&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>100' +
+				   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>ce<>3' +
+				   '&description=' + document.getElementById('description').value + '::{$lang.description}<>Multi<>1<>nce<>5000'
+			);">
+				<span>{$lang.submit}</span>
+			</button>
+		</td>
+	</tr>
+</table>

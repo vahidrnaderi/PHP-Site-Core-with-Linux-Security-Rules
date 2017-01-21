@@ -1,0 +1,12 @@
+<!-- Related content -->
+<div id="relatedContent" class="relatedContent curvedFull boxShadow" style="padding: 10px; border: 5px solid #cecece;" onclick="$(this).fadeOut('slow')">
+	<h3>{$lang.relatedContent}:</h3>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$relatedContent}
+	
+	<a href="{$entityItem.url}" title="{$entityItem.title}" rel="nofollow">{$entityItem.title}</a><br>
+	
+	{/foreach}
+	{/nocache}
+</div>
+<!-- /Related content -->

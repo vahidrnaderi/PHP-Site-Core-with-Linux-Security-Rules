@@ -1,0 +1,26 @@
+<h1 style="color:black">ارسال کد فعالسازی</h1>
+<div>
+	<div class="curvedFull paddy10">
+		<div class="clearFix">
+			<div class="row cell25 LH35">{$lang.mobile}:</div>
+			<div class="row cell75"><input id="emailMobile" name="emailMobile" class="input" type="text" size="30" maxlength="100" value="{$mobile}"></div>
+		</div>
+		<div id="verificationCodeSection" class="clearFix">
+			<div class="row cell25 LH35">{$lang.code}:</div>
+			<div class="row cell75"><input id="verificationCode" name="verificationCode" class="input" type="text" size="30" maxlength="16"></div>
+		</div>
+		<br><br><br><br>
+		<div class="paddy1 center">
+			<button onclick="
+				$('#content').farajax('loader', '/userMan/c_emActivation',
+					   'uid={$id}'+
+					   '&emailMobile=' + document.getElementById('emailMobile').value + '::{$lang.mobile}<>Multi<>1<>ce<>100' +
+					   '&verificationCode=' + document.getElementById('verificationCode').value + '::{$lang.code}<>Multi<>1<>nce<>8' +
+					   '&mode=mobileVerificationCodeSuccessfullSent'
+				);
+			">
+			ارسال کد / فعالسازی
+			</button>
+		</div>
+	</div>
+</div>

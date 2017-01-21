@@ -1,0 +1,10 @@
+<ul class="sf-menu">
+	{nocache}
+	{foreach name=menu key=menuKey item=menuItem from=$menuList}
+	<li class="current" style="float: right;">
+		<a href="/{$menuItem.op}/{$menuItem.mode}" title="{$menuItem.caption}">{$menuItem.caption}</a>
+	</li>
+	{/foreach}
+	{/nocache}
+</ul>
+

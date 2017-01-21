@@ -1,0 +1,48 @@
+{nocache}
+<font face="Nazanin" color="black"> 
+	<div class="LH26 left col-xs-12 col-lg-4">
+		<input id="loginUserName" class="h25" name="loginUserName" placeholder="{$lang.userName}/{$lang.email}" maxlength="100" required>
+	</div>
+	<div class="clearfix visible-xs"></div>
+	<div class="LH26 col-xs-12 col-lg-4">
+		<input id="loginPassword" class="h25" name="loginPassword" placeholder="{$lang.password}" type="password" maxlength="20" required>
+	</div>
+	<div class="clearfix visible-xs"></div>
+	<div class="LH26 col-xs-2 col-lg-1">
+		<button class="xs-button" style="margin-top:3px;" onclick="
+				$('#login').farajax('loader', '/userMan/c_login',
+					   'userName=' + document.getElementById('loginUserName').value + '::{$lang.userName}<>Multi<>1<>ce<>100' +
+					   '&amp;password=' + document.getElementById('loginPassword').value + '::{$lang.password}<>Multi<>1<>nce<>20'			   
+				);
+		
+				$('#slidebarTitle').farajax('loader', '/userMan/c_loginContentTitle');
+//alert ('1');
+//				$('#temp').farajax('loader', '/basket/v_basketCount');
+//alert ('2');				
+				
+//				$('#basket').farajax('loader', '/pageLoader/v_load/basket');
+				$('#basket').farajax('loader', '/pageLoader/v_load/basket');
+				
+				setTimeout('$(\'#basketCount\').farajax(\'loader\', \'/basket/v_basketCount\');', 1000);
+//				$('#basket').farajax('loader', '/basket/v_basketCount');
+
+				setTimeout('$(\'#loginGate\').farajax(\'loader\', \'/pageLoader/v_load/loginGate\');', 1000);
+	//			$('#loginGate').farajax('loader', '/pageLoader/v_load/loginGate');
+				$('#footerSendMessage').farajax('loader', '/pageLoader/v_load/sendMessage');
+				$('#googleAnalytics').farajax('loader', '/pageLoader/v_load/googleAnalytic');
+				setTimeout('$(\'#sliderTitle\').farajax(\'loader\', \'/userMan/c_loginContentTitle\');', 1000);
+				
+		 	"><span>{$lang.login}</span></button>
+	</div>
+	<div class="LH25 right col-xs-10 xs-font col-lg-3">
+		<!-- [<a href="/userMan/v_signUp" rel="nofollow">{$lang.signUp}</a>]  -->
+		<div class="tip pointer col-xs-6 col-lg-6 center LH30" style="padding:0px 5px;" title="{$lang.signUpHere}" onclick="$('#signUp').farajax('loader', '/userMan/v_signUp');$('#signUp').css('display','block');$('#login').css('display','none');">
+			[&nbsp;{$lang.signUp}]
+		</div>
+		<div class="col-xs-6 col-lg-6 center LH30" style="padding:0px 5px;">
+			[<a href="/userMan/v_changePass" rel="nofollow" style="color:black">&nbsp;{$lang.forgetPassword}</a>] 
+		</div>
+	</div>
+</font>
+<br class="clear">
+{/nocache}

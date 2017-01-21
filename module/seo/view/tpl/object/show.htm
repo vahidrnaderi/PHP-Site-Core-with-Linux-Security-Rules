@@ -1,0 +1,33 @@
+<div id="date" class="curvedFull blackGradient h60" style="font-size: 38px; vertical-align: center; text-align: center; text-shadow: -1px -1px 2px #777777;">
+	{$rand.drawName}
+</div>
+<br>
+<div id="randFrom" style="direction: ltr; text-align: center;"></div>
+<img src="theme/{$settings.theme}/img/icon/s.png" onload="{literal}$('#randFrom').flipCounter('startAnimation', { easing: jQuery.easing.easeOutCubic, duration: 3000, onAnimationStarted: false, onAnimationStopped: randInfo, onAnimationPaused: false, onAnimationResumed: false, imagePath:'theme/movie/img/flipCounter-custom.png', number: 0, digitHeight:67,digitWidth:50{/literal}, end_number: {$rand.fromVirtual} });">
+<br>
+<div id="randInfo" class="curvedFull blackGradient h200" style="padding: 17px; display: none;">
+	<div>
+		<div class="row cell70">
+			<div class="yellowGradient curvedFull h80" style="padding: 5px 15px; width: 90%; color: #000; font-size: 24px; vertical-align: center;">
+				<div style="background: url('theme/{$settings.theme}/img/leftArrow.png') no-repeat right; padding-right: 60px; min-height: 50px;">
+					تعداد شرکت در مسابقه: {$rand.count}
+				</div> 
+			</div>
+			<br>
+			<div class="yellowGradient curvedFull h80" style="padding: 5px 15px; width: 90%; color: #000;; font-size: 24px; vertical-align: center;">
+				<div style="background: url('theme/{$settings.theme}/img/leftArrow.png') no-repeat right; padding-right: 60px; min-height: 50px;">
+					زمان ارسال پیامک: {$rand.date}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row cell30" style="text-align: center">
+		<div class="blueGradient curvedTop">
+			<br>
+			<img src="theme/{$settings.theme}/img/user.png">
+			<br>
+			<br>
+		</div>
+		<div class="curvedBottom h25" style="background: #CBCBCB;"></div>
+	</div>
+</div>

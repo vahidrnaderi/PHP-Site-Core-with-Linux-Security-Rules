@@ -1,0 +1,212 @@
+<div class="curvedFull" style="background: #fff; padding: 5px;">
+	<div id="postContentType">
+		<div class="row cell24">
+			<div id="videoContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/DVCamera.png">
+			</div>
+		</div>
+		<div class="row cell1">&nbsp;</div>
+		<div class="row cell24">
+			<div id="imageContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/DCamera.png">
+			</div>
+		</div>
+		<div class="row cell2">&nbsp;</div>
+		<div class="row cell24">
+			<div id="voiceContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/headset.png">
+			</div>
+		</div>
+		<div class="row cell1">&nbsp;</div>
+		<div class="row cell24">
+			<div id="textContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/content.png">
+			</div>
+		</div>
+		<br class="clear">
+		<input id="contentType" name="contentType" type="hidden" size="6">
+	</div>
+	<div id="postContentEntry" class="curvedBottome" style="display: none; background: #e7e7e7; padding: 5px;">
+		<div id="uploader" style="padding: 1px 0px; display: none;">
+			<div class="row cell10">
+				{$lang.file}:
+			</div>
+			<div class="row cell90">
+				<div id="srcfilePath" style="border: 1px solid #000;" onclick="BrowseServer('filePath', 'single');">
+					<img src="theme/{$settings.theme}/img/icon/plus.png">
+				</div>
+				<input id="contentPath" name="contentPath" type="hidden" size="15">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.title}:
+			</div>
+			<div class="row cell90">
+				<input id="title" name="title" class="input" type="text" maxlength="500">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.category}:
+			</div>
+			<div class="row cell90">
+				<ul id="categorymenu" class="mcdropdown_menu">
+					{$category}
+				</ul>
+				<input type="text" name="category" id="category" value="">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px 0px 0px;">
+			<div class="row cell10">
+				{$lang.message}:
+			</div>
+			<div class="row cell90">
+				<div id="editorFullText"></div>
+				<div id="textcontents" style="display: none">
+					<!-- This div will be used to display the editor contents. -->
+					<div id="description"></div>
+				</div>
+				<textarea id="fullText" name="fullText" rows="10" onclick=" this.style.display='none';" onfocus="createEditor('description', 'editorFullText'); this.style.display='none';" style="border: 3px solid #d3d3d3;"></textarea>
+				<div style="padding: 0px 0px 1px 0px; position: relative;">
+					<div id="timePanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.startTime}:
+						</div>
+						<div class="row cell85">
+							<select id="startDay" name="startDay">
+								{section name=startDay start=1 loop=32}
+								<option value="{$smarty.section.startDay.iteration}">{$smarty.section.startDay.iteration}</option>
+								{/section}
+							</select>
+							<select id="startMonth" name="startMonth">
+								{section name=startMonth start=1 loop=13}
+								<option value="{$smarty.section.startMonth.iteration}">{$smarty.section.startMonth.iteration}</option>
+								{/section}
+							</select>
+							<select id="startYear" name="startYear">
+								{section name=startYear start=1392 loop=1401}
+								<option value="{$smarty.section.startYear.index}">{$smarty.section.startYear.index}</option>
+								{/section}
+							</select>
+							{$lang.hour}: 
+							<select id="startMinute" name="startMinute">
+								{section name="startMinute" loop=60}
+								<option value="{$smarty.section.startMinute.index}">{$smarty.section.startMinute.index}</option>
+								{/section}
+							</select>
+							:
+							<select id="startHour" name="startHour">
+								{section name="startHour" loop=24}
+								<option value="{$smarty.section.startHour.index}">{$smarty.section.startHour.index}</option>
+								{/section}
+							</select>
+						</div>
+						<br style="clear: both;">
+						<div class="row cell15">
+							{$lang.endTime}:
+						</div>
+						<div class="row cell85">
+							<select id="endDay" name="endDay">
+								{section name=endDay start=1 loop=32}
+								<option value="{$smarty.section.endDay.iteration}">{$smarty.section.endDay.iteration}</option>
+								{/section}
+							</select>
+							<select id="endMonth" name="endMonth">
+								{section name=endMonth start=1 loop=13}
+								<option value="{$smarty.section.endMonth.iteration}">{$smarty.section.endMonth.iteration}</option>
+								{/section}
+							</select>
+							<select id="endYear" name="endYear">
+								{section name=endYear start=1391 loop=1401}
+								<option value="{$smarty.section.endYear.index}">{$smarty.section.endYear.index}</option>
+								{/section}
+							</select>
+							{$lang.hour}: 
+							<select id="endMinute" name="endMinute">
+								{section name="endMinute" loop=60}
+								<option value="{$smarty.section.endMinute.index}">{$smarty.section.endMinute.index}</option>
+								{/section}
+							</select>
+							:
+							<select id="endHour" name="endHour">
+								{section name="endHour" loop=24}
+								<option value="{$smarty.section.endHour.index}">{$smarty.section.endHour.index}</option>
+								{/section}
+							</select>
+						</div>
+						<br class="clear">
+					</div>
+					<div id="sourcePanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.resources}:
+						</div>
+						<div class="row cell85">
+							<textarea id="resources" rows="5" cols="84"></textarea>
+						</div>
+						<br class="clear">
+					</div>
+					<div id="attachPanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.attach}:
+						</div>
+						<div class="row cell85">
+							<div id="fileLister">
+								<img src="theme/{$settings.theme}/img/goldButton.png" onclick="createUploader('file', 'fileLister');">
+								<input id="filePath" name="filePath" type="hidden" size="15"><br>
+							</div>
+						</div>
+						<br class="clear">
+					</div>
+					<div>
+						<div class="row cell5 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setTime" src="theme/{$settings.theme}/img/icon/time.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell1 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setSource" src="theme/{$settings.theme}/img/icon/resource.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell1 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setAttach" src="theme/{$settings.theme}/img/icon/attach.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell63 center">&nbsp;</div>
+						<br class="clear">
+					</div>
+				</div>
+			</div>
+			<br style="clear: both;">
+		</div>
+		<br>
+		<center>
+			<button style="padding: 20px 60px;" onclick="
+				$('#content').farajax('loader', '/post/c_addObject', 
+					   'title=' + document.getElementById('title').value + '::{$lang.title}<>Multi<>1<>ce<>200' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>ce<>11' +
+					   '&description=' + getText('description') + '::{$lang.description}<>Multi<>1<>ce<>1000000000' +
+					   '&startDay=' + document.getElementById('startDay').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startMonth=' + document.getElementById('startMonth').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startYear=' + document.getElementById('startYear').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startMinute=' + document.getElementById('startMinute').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startHour=' + document.getElementById('startHour').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&endDay=' + document.getElementById('endDay').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endMonth=' + document.getElementById('endMonth').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endYear=' + document.getElementById('endYear').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endMinute=' + document.getElementById('endMinute').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endHour=' + document.getElementById('endHour').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&resources=' + document.getElementById('resources').value + '::{$lang.resources}<>Multi<>1<>nce<>2000' +
+					   '&filePath=' + document.getElementById('filePath').value + '::{$lang.attach}<>Multi<>1<>nce<>200' +
+					   '&contentType=' + document.getElementById('contentType').value + '::{$lang.contentType}<>String<>1<>ce<>6' +
+					   '&contentPath=' + document.getElementById('contentPath').value + '::{$lang.file}<>Multi<>1<>nce<>200'
+				);
+			">
+			<span>{$lang.submit}</span>
+			</button>
+		</center>
+	</div>
+</div>
+<commands value="postModuleInitial();">

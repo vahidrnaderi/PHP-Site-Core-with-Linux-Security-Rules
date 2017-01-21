@@ -1,0 +1,51 @@
+<section class="formFrame">
+	<section class="clearFix">
+		<section class="row cell20">
+			{$lang.name}:
+		</section>
+		<section class="row cell80">
+			<input id="name" name="name" maxlength="100" required>
+		</section>
+	</section>
+	<section class="clearFix">
+		<section class="row cell20">
+			{$lang.parent}:
+		</section>
+		<section class="row cell80">
+			{$menuObject}
+			<input id="parent" name="parent" style="height: 28px;" value="">
+		</section>
+	</section>
+	<section class="clearFix">
+		<section class="row cell20">
+			{$lang.url}:
+		</section>
+		<section class="row cell80">
+			<input id="url" name="url" maxlength="300" dir="ltr" required>
+			<img id="contentSelector" src="theme/{$settings.theme}/img/icon/edit.png" width="16" height="16" alt="{$lang.content}" title="{$lang.content}" onclick="$('#temp').farajax('loader', '/menu/c_contentList')" style="cursor: pointer;">
+		</section>
+	</section>
+	<section class="clearFix">
+		<section class="row cell20">
+			{$lang.icon}:
+		</section>
+		<section class="row cell80">
+			<input id="icon" name="icon" maxlength="150" dir="ltr" required>
+		</section>
+	</section>
+	<section>
+		<button onclick="
+			$('#add').farajax('loader', '/menu/c_addObject', 
+				   '&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+				   '&parent=' + document.getElementById('parent').value + '::{$lang.parent}<>Number<>1<>nce<>6' +
+				   '&url=' + document.getElementById('url').value + '::{$lang.url}<>Multi<>1<>nce<>300' +
+				   '&icon=' + document.getElementById('icon').value + '::{$lang.icon}<>Multi<>1<>nce<>150' 
+			); 
+			$('#add').farajax('loader', '/menu/v_addObject');	
+			$('#list').farajax('loader', '/menu/c_listObject');
+		">
+		{$lang.submit}
+		</button>
+	</section>
+</section>
+<commands value="{literal}$('#parent').mcDropdown('#menuObject', {allowParentSelect: true});{/literal}">

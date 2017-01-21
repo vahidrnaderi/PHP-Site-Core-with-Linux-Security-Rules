@@ -1,0 +1,262 @@
+<div class="cell3 row">
+	&nbsp;
+</div>
+<div id="profile_edit" class="cell30 row">
+<h1 class="LH50">{$lang.profile} {$lang.user} "{$userList.1.userName}"</h1>
+{nocache}
+{foreach name=user key=userKey item=userItem from=$userList}
+	<div>
+		<img style="cursor: pointer;" id="srccontentPath" width="200" height="240" src="{$userItem.userPic}" onclick="BrowseServer('contentPath', 'single');"><br>
+		<input id="contentPath" name="contentPath" type="hidden" size="15" value="{$entity.imagePath}"><br>				
+	</div>
+	<div class="clearFix" style="border-bottom: 1px solid #D8D5D5;">
+		<div class="row cell20 LH20">{$lang.id}:</div>
+		<div class="row cell80 LH20">{$userItem.id}&nbsp;</div>
+	</div>
+	<div class="clearFix" style="border-bottom: 1px solid #D8D5D5;">
+		<div class="row cell20 LH20">{$lang.status}:</div>
+		<div class="row cell80 LH20">{$userItem.active}&nbsp;</div>
+	</div>
+	<div class="clearFix" style="border-bottom: 1px solid #D8D5D5;">
+		<div class="row cell20 LH20">{$lang.registerTime}:</div>
+		<div class="row cell80 LH20">{$userItem.timeStamp}&nbsp;</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.firstName}:</div>
+		<div class="row cell20"><input id="firstName" name="firstName" maxlength="45" value="{$userItem.firstName}"></div>
+	</div>
+	{if $userItem.coName != ''}
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.coName}:</div>
+		<div class="row cell20"><input id="coName" name="firstName" maxlength="100" value="{$userItem.coName}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.workField}:</div>
+		<div class="row cell20"><input id="workField" name="workField" maxlength="45" value="{$userItem.workField}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.regTime}:</div>
+		<div class="row cell20"><input id="regTime" name="regTime" maxlength="45" value="{$userItem.regTime}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.workDetails}:</div>
+		<div class="row cell20"><input id="workDetails" name="workDetails" maxlength="1000" value="{$userItem.workDetails}"></div>
+	</div>
+	{/if}			
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.lastName}:</div>
+		<div class="row cell80"><input id="lastName" name="lastName" maxlength="45" value="{$userItem.lastName}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.fatherName}:</div>
+		<div class="row cell80"><input id="fatherName" name="fatherName" maxlength="45" value="{$userItem.fatherName}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH20">{$lang.userName}:</div>
+		<div class="row cell80 LH20">{$userItem.userName}&nbsp;</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.gender}:</div> 
+		<div class="row cell80">
+			<select id="gender" name="gender">
+				{foreach name=gender key=genderKey item=genderItem from=$userItem.genderCombo}
+					{if $genderKey == $userItem.genderCombo.selected}
+						<option value="{$genderKey}" selected="selected">{$genderItem}</option>
+					{else}
+						{if $genderKey == "selected" || !isset($genderItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$genderKey}">{$genderItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.idNumber}:</div>
+		<div class="row cell80"><input id="idNumber" name="idNumber" maxlength="16" value="{$userItem.idNumber}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.nationalCode}:</div>
+		<div class="row cell80"><input id="nationalCode" name="nationalCode" maxlength="16" value="{$userItem.nationalCode}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.state}:</div>
+		<div class="row cell80"> 
+			<select id="state" name="state">
+				{foreach name=state key=stateKey item=stateItem from=$userItem.stateCombo}
+					{if $stateKey == $userItem.stateCombo.selected}
+						<option value="{$stateKey}" selected="selected">{$stateItem}</option>
+					{else}
+						{if $stateKey == "selected" || !isset($stateItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$stateKey}">{$stateItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.city}:</div>
+		<div class="row cell80"> 
+			<select id="city" name="city">
+				{foreach name=city key=cityKey item=cityItem from=$userItem.cityCombo}
+					{if $cityKey == $userItem.cityCombo.selected}
+						<option value="{$cityKey}" selected="selected">{$cityItem}</option>
+					{else}
+						{if $cityKey == "selected" || !isset($cityItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$cityKey}">{$cityItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.nationality}:</div>
+		<div class="row cell80"> 
+			<select id="nationality" name="nationality">
+				{foreach name=nationality key=nationalityKey item=nationalityItem from=$userItem.nationalityCombo}
+					{if $nationalityKey == $userItem.nationalityCombo.selected}
+						<option value="{$nationalityKey}" selected="selected">{$nationalityItem}</option>
+					{else}
+						{if $nationalityKey == "selected" || !isset($nationalityItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$nationalityKey}">{$nationalityItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.religion}:</div>
+		<div class="row cell80"> 
+			<select id="religion" name="religion">
+				{foreach name=religion key=religionKey item=religionItem from=$userItem.religionCombo}
+					{if $religionKey == $userItem.religionCombo.selected}
+						<option value="{$religionKey}" selected="selected">{$religionItem}</option>
+					{else}
+						{if $religionKey == "selected" || !isset($religionItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$religionKey}">{$religionItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>	
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.financialStatus}:</div>
+		<div class="row cell80"> 
+			<select id="financialStatus" name="financialStatus">
+				{foreach name=financialStatus key=financialStatusKey item=financialStatusItem from=$userItem.financialStatusCombo}
+					{if $financialStatusKey == $userItem.financialStatusCombo.selected}
+						<option value="{$financialStatusKey}" selected="selected">{$financialStatusItem}</option>
+					{else}
+						{if $financialStatusKey == "selected" || !isset($financialStatusItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$financialStatusKey}">{$financialStatusItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>	
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.level}:</div>
+		<div class="row cell80"> 
+			<select id="level" name="level">
+				{foreach name=level key=levelKey item=levelItem from=$userItem.levelCombo}
+					{if $levelKey == $userItem.levelCombo.selected}
+						<option value="{$levelKey}" selected="selected">{$levelItem}</option>
+					{else}
+						{if $levelKey == "selected" || !isset($levelItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$levelKey}">{$levelItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  	</div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.mobile}:</div>
+		<div class="row cell80"><input id="mobile" name="mobile" maxlength="11" value="{$userItem.mobile}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.phone}:</div>
+		<div class="row cell80"><input id="phone" name="phone" maxlength="11" value="{$userItem.phone}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.email}:</div>
+		<div class="row cell80"><input id="email" name="email" maxlength="100" value="{$userItem.email}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.address}:</div>
+		<div class="row cell20"><input id="address" name="address" maxlength="500" value="{$userItem.address}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.pNo}:</div>
+		<div class="row cell20"><input id="pNo" name="pNo" maxlength="500" value="{$userItem.pNo}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.floor}:</div>
+		<div class="row cell20"><input id="floor" name="floor" maxlength="500" value="{$userItem.floor}"></div>
+	</div>
+	<div class="clearFix">
+		<div class="row cell20 LH35">{$lang.unit}:</div>
+		<div class="row cell20"><input id="unit" name="unit" maxlength="500" value="{$userItem.unit}"></div>
+	</div>
+	<div class="LH10">
+		&nbsp;
+	</div>
+	<div>
+		<button onclick="
+			$('#content').farajax('loader', '/userMan/c_edit',
+					   'id={$userItem.id}::{$lang.id}<>Number<>1<>ce<>11' +
+					   '&userPic=' + document.getElementById('imagePath').value + '::{$lang.fileName}<>Alphabet<>1<>nce<>150' +
+					   '&firstName=' + document.getElementById('firstName').value + '::{$lang.firstName}<>Multi<>1<>nce<>45' +
+					   '&coName=' + document.getElementById('coName').value + '::{$lang.coName}<>Multi<>1<>nce<>100' +
+					   '&workField=' + document.getElementById('workField').value + '::{$lang.workField}<>Multi<>1<>nce<>45' +
+					   '&regTime=' + document.getElementById('regTime').value + '::{$lang.regTime}<>Multi<>1<>nce<>45' +
+					   '&workDetails=' + document.getElementById('workDetails').value + '::{$lang.workDetails}<>Multi<>1<>nce<>100' +
+					   '&lastName=' + document.getElementById('lastName').value + '::{$lang.lastName}<>Multi<>1<>ce<>45' +
+					   '&fatherName=' + document.getElementById('fatherName').value + '::{$lang.fatherName}<>Multi<>1<>nce<>45' +
+					   '&gender=' + document.getElementById('gender').value + '::{$lang.gender}<>Number<>1<>ce<>1' +
+					   '&idNumber=' + document.getElementById('idNumber').value + '::{$lang.idNumber}<>Multi<>1<>nce<>16' +
+					   '&nationalCode=' + document.getElementById('nationalCode').value + '::{$lang.nationalCode}<>Multi<>1<>nce<>16' +
+					   '&state=' + document.getElementById('state').value + '::{$lang.state}<>Number<>1<>ce<>2' +
+					   '&city=' + document.getElementById('city').value + '::{$lang.city}<>Number<>1<>ce<>5' +
+					   '&nationality=' + document.getElementById('nationality').value + '::{$lang.nationality}<>Number<>1<>ce<>3' +
+					   '&religion=' + document.getElementById('religion').value + '::{$lang.religion}<>Number<>1<>ce<>2' +
+					   '&financialStatus=' + document.getElementById('financialStatus').value + '::{$lang.financialStatus}<>Number<>1<>ce<>2' +
+					   '&level=' + document.getElementById('level').value + '::{$lang.level}<>Number<>1<>ce<>2' +
+					   '&mobile=' + document.getElementById('mobile').value	+ '::{$lang.mobile}<>Multi<>1<>ce<>11<>09100000000<>09999999999' +
+					   '&phone=' + document.getElementById('phone').value	+ '::{$lang.phone}<>Multi<>1<>nce<>11' +
+					   '&email=' + document.getElementById('email').value	+ '::{$lang.email}<>Mail<>1<>ce<>100' +
+					   '&address=' + document.getElementById('address').value	+ '::{$lang.address}<>Multi<>1<>nce<>500' +
+					   '&pNo=' + document.getElementById('pNo').value	+ '::{$lang.pNo}<>Number<>1<>ce<>6' +
+					    '&floor=' + document.getElementById('floor').value	+ '::{$lang.floor}<>Number<>1<>ce<>4' +
+					    '&unit=' + document.getElementById('unit').value	+ '::{$lang.unit}<>Number<>1<>ce<>5' +
+					   '&pNo=' + document.getElementById('pNo').value	+ '::{$lang.pNo}<>Number<>1<>ce<>6' +
+					   '&floor=' + document.getElementById('floor').value	+ '::{$lang.floor}<>Number<>1<>ce<>4' +
+					   '&unit=' + document.getElementById('unit').value	+ '::{$lang.unit}<>Number<>1<>ce<>5'
+				);">
+			<span>{$lang.submit}</span>
+		</button>
+	</div>
+{/foreach}
+{/nocache}
+</div>
+<div class="cell67 row">
+</div>

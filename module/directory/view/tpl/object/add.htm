@@ -1,0 +1,67 @@
+<div class="curvedFull paddy5" style="background: #fff;">
+	<div class="curvedFull paddy5" style="background: #e7e7e7;">
+		<div class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell5 LH35">&nbsp;</div>
+			<div class="row cell5 LH35">
+				{$lang.name}:
+			</div>
+			<div class="row cell80 LH35">
+				<input id="name" name="title" class="input" type="text" maxlength="500">
+			</div>
+		</div>
+		<div class="clearFix" style="padding: 1px 0px;">
+<!--		
+			<div class="row cell10">
+				{$lang.category}:
+			</div>
+ -->
+ 			
+			
+				<div class="row cell5 LH35">&nbsp;</div>
+				<div class="row cell5 LH35">
+					{$lang.category}:
+				</div>
+				<div class="row cell85 LH35">
+					{$category}
+					<input type="text" name="category" id="category" value="">
+				</div>
+				<br class="clear">
+			
+<!-- 			
+			<div class="row cell90">
+				<ul id="categorymenu" class="mcDropdown_menu">
+					{$category}
+				</ul>
+				<input type="text" name="category" id="category" value="">
+			</div>
+ -->
+		</div>
+		<div class="clearFix" style="padding: 1px 0px 0px 0px;">
+			<div class="row cell5 LH35">&nbsp;</div>
+			<div class="row cell5 LH35">
+				{$lang.message}:
+			</div>
+			<div class="row cell80 LH35">
+				<div id="editorFullText"></div>
+				<div id="textcontents" style="display: none">
+					<!-- This div will be used to display the editor contents. -->
+					<div id="description"></div>
+				</div>
+				<textarea id="fullText" name="fullText" rows="10" onclick=" this.style.display='none';" onfocus="createEditor('description', 'editorFullText'); this.style.display='none';" style="border: 3px solid #d3d3d3;"></textarea>
+			</div>
+		</div>
+		<br>
+		<center>
+			<button style="padding: 10px 30px;" onclick="
+				$('#content').farajax('loader', '/directory/c_addObject', 
+					   'name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>11' +
+					   '&description=' + getText('description') + '::{$lang.description}<>Multi<>1<>nce<>1000000000'
+				);
+			">
+			{$lang.submit}
+			</button>
+		</center>
+	</div>
+</div>
+<commands value="{literal}$('#category').mcDropdown('#directoryCategory', {allowParentSelect: true});{/literal}">

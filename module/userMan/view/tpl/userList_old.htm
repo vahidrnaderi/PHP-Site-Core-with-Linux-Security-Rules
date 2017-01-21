@@ -1,0 +1,45 @@
+<table id="resultBox" class="listFull">
+	<tr class="listHeader">
+		<td width="5%" align="center" style="border-left: 1px solid #D8D5D5;">#</td>
+		<td width="5%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.id}</td>
+		<td width="10%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.userPic}</td>
+		<td width="5%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.userType}</td>
+		<td width="15%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.userName}</td>
+		<td width="10%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.mobile}</td>
+		<td width="20%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.email}</td>
+		<td width="10%" align="center" style="border-left: 1px solid #D8D5D5;">{$lang.registerTime}</td>
+		<td width="20%" align="center">{$lang.properties}</td>
+	</tr>
+	{nocache}
+	{foreach name=user key=userKey item=userItem from=$userList}
+	<tr class="blockquote">
+		<td align="center" style="border-left: 1px solid #D8D5D5;">{$userItem.count}</td>
+		<td align="center" style="border-left: 1px solid #D8D5D5;">{$userItem.id}</td>
+		<td align="center" style="border-left: 1px solid #D8D5D5;"><img width="45" height="45" src="{$userItem.userPic}" alt="{$userItem.firstName} {$userItem.lastName}"></td>
+		{if $userItem.userType == 1}
+			<td align="center" style="border-left: 1px solid #D8D5D5;">{$lang.person}</td>
+		{elseif $userItem.userType == 2}
+			<td align="center" style="border-left: 1px solid #D8D5D5;">{$lang.legal}</td>
+		{/if}
+		<td style="border-left: 1px solid #D8D5D5;">{$userItem.userName}</td>
+		<td align="center" style="border-left: 1px solid #D8D5D5;">{$userItem.mobile}</td>
+		<td align="center" style="border-left: 1px solid #D8D5D5;"><a href="mailto:{$userItem.email}">{$userItem.email}</a></td>
+		<td align="center" style="border-left: 1px solid #D8D5D5;">{$userItem.timeStamp}</td>
+		<td align="center">
+			<a href="/userMan/v_profile/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/information.png" title="" alt=""></a>
+			<a href="/sms/v_addObject/to={$userItem.mobile}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/mobile.png" title="" alt=""></a>
+			<a href="/userMan/v_edit/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/edit.png">
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/group.png">
+			<a href="/userMan/c_userDel/id={$userItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/delete.png" onclick="$('#content').farajax('loader', '/userMan/v_userMan');"></a>
+			{if $userItem.actvie == '1'} 
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+		</td>
+	</tr>
+{/foreach}
+{/nocache}
+</table>
+<br>
+<div class="blockquote">{$navigation}</div>

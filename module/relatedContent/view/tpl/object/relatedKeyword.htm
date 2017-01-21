@@ -1,0 +1,13 @@
+{nocache}
+{foreach name=entity key=entityKey item=entityItem from=$entityList}
+<section>
+	<article>
+		<div class="blockquote curvedFull">
+			<h3><a href="{$entityItem.url}" title="{$entityItem.title}" rel="nofollow">{$entityItem.title}</a></h3>
+			<p>{$entityItem.text|strip_tags:false|truncate:600:"...":true} <a href="{$entityItem.url}" rel="nofollow">{$lang.readMore}</a></p>
+		</div>
+	</article>
+</section>
+<br>
+{/foreach}
+{/nocache}

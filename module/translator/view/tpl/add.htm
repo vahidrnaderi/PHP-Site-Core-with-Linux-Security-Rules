@@ -1,0 +1,50 @@
+<div id="pageIn" class="pageIn">
+	<div class="row cell10">&nbsp;</div>
+	<h1 class="title">{$lang.addPhrase} [<a href="/translator/c_listPhrase">{$lang.listPhrase}</a>]</h1>
+	<div>
+		<div class="row cell15">&nbsp;</div>
+		<div class="row cell5 LH20">{$lang.langCode}</div>
+		<div class="row cell80">
+			{nocache}
+			<select id="langCode" name="langCode">
+				{foreach name=langCodeSelector key=langCodeSelectorKey item=langCodeSelectorItem from=$langCodeSelector}
+					{if $langCodeSelectorKey == $langCodeSelector.selected}
+						<option value="{$langCodeSelectorKey}" selected="selected">{$langCodeSelectorItem}</option>
+					{else}
+						{if $langCodeSelectorKey == "selected" || !isset($langCodeSelectorItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$langCodeSelectorKey}">{$langCodeSelectorItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+	  		</select>
+	  		{/nocache}
+		</div>
+		<br style="clear: both;">
+	</div>
+	<div>
+		<div class="row cell15">&nbsp;</div>
+		<div class="row cell5 LH20">{$lang.code}</div>
+		<div class="row cell80">
+			<input id="code" name="code" class="input" type="text" size="40" maxlength="100">
+		</div>
+		<br style="clear: both;">
+	</div>
+	<div>
+		<div class="row cell15">&nbsp;</div>
+		<div class="row cell5">{$lang.translate}</div>
+		<div class="row cell80">
+			<textarea id="translate" name="translate" rows="6" cols="40"></textarea>
+		</div>
+		<br style="clear: both;">
+	</div>
+	<div class="row cell20">&nbsp;</div>
+	<button onclick="$('#content').farajax('loader', '/translator/c_addPhrase',
+					'langCode=' + document.getElementById('langCode').value + '::{$lang.langCode}<>Number<>1<>ce<>1' +
+				   	'&code=' + document.getElementById('code').value + '::{$lang.code}<>String<>1<>ce<>100' +
+				   	'&translate=' + document.getElementById('translate').value + '::{$lang.translate}<>Multi<>1<>ce<>100000'
+			);">
+		<span>{$lang.submit}</span>
+	</button>
+</div>

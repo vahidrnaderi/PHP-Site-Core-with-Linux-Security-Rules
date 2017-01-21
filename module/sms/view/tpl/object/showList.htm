@@ -1,0 +1,23 @@
+{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<table class="listFull">
+  		<tr>
+		    <td width="20%" style="vertical-align: top;"><img width="150" height="200" border="1" src="{$entityItem.imagePath}"></td>
+		    <td width="75%" style="vertical-align: top;">
+		    	<h3>{$entityItem.name}</h3>
+		    	<p>{$entityItem.abstract}</p>
+		    	<div>{$lang.author}: {$entityItem.author}</div>
+		    	<div>{$lang.price}: {$entityItem.price} {$lang.currencySign}</div>
+		    </td>
+		    <td width="5%" style="vertical-align: top;" align="left">
+		    	<img style="cursor: pointer;" src="theme/{$settings.theme}/img/buyBook.png" onclick="">
+		    	<br>
+		    	<a href="/sms/c_showObject" data="id={$entityItem.id}"><img src="theme/{$settings.theme}/img/studyBook.png" alt="{$lang.study}"></a>
+		    </td>
+  		</tr>
+	</table>
+	<br>
+	{/foreach}
+{/nocache}
+<br>
+<div class="blockquote">{$navigation}</div>

@@ -1,0 +1,268 @@
+<div class="curvedFull" style="background: #fff; padding: 5px;">
+	<div id="postContentType">
+		<div class="row cell24">
+			<div id="videoContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/DVCamera.png">
+			</div>
+		</div>
+		<div class="row cell1">&nbsp;</div>
+		<div class="row cell24">
+			<div id="imageContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/DCamera.png">
+			</div>
+		</div>
+		<div class="row cell2">&nbsp;</div>
+		<div class="row cell24">
+			<div id="voiceContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/headset.png">
+			</div>
+		</div>
+		<div class="row cell1">&nbsp;</div>
+		<div class="row cell24">
+			<div id="textContent" class="h100 curvedTop center opacity8" style="background: #efefef; padding: 5px; cursor: pointer;">
+				<img src="theme/{$settings.theme}/img/icon/content.png">
+			</div>
+		</div>
+		<br class="clear">
+		<input id="contentType" name="contentType" type="hidden" size="6" value="{$entity.contentType}">
+	</div>
+	<div id="postContentEntry" class="curvedBottome" style="background: #e7e7e7; padding: 5px;">
+		<div id="uploader" style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.file}:
+			</div>
+			<div class="row cell90">
+				<div id="srcfilePath" style="border: 1px solid #000;" onclick="BrowseServer('filePath', 'single');">
+					{nocache}{$entity.contentPath}{/nocache}&nbsp;
+				</div>
+				<input id="contentPath" name="contentPath" type="hidden" size="15" value="{$entity.contentPath}">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.title}:
+			</div>
+			<div class="row cell90">
+				<input id="title" name="title" class="input" type="text" maxlength="500" value="{nocache}{$entity.title}{/nocache}">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.category}:
+			</div>
+			<div class="row cell90">
+				<ul id="categorymenu" class="mcdropdown_menu">
+					{nocache}{$category}{/nocache}
+				</ul>
+				<input type="text" name="category" id="category" value="{nocache}{$entity.category}{/nocache}">
+			</div>
+			<br class="clear">
+		</div>
+		<div style="padding: 1px 0px 0px 0px;">
+			<div class="row cell10">
+				{$lang.message}:
+			</div>
+			<div class="row cell90">
+				<div id="editorFullText"></div>
+				<div id="textcontents" style="display: none">
+					<!-- This div will be used to display the editor contents. -->
+					<div id="description">{nocache}{$entity.description}{/nocache}</div>
+				</div>
+				<textarea id="fullText" name="fullText" rows="10" onclick="this.style.display='none';" onfocus="createEditor('description', 'editorFullText'); this.style.display='none';" style="border: 3px solid #d3d3d3;">{$entity.description}</textarea>
+				<div style="padding: 0px 0px 1px 0px; position: relative;">
+					<div id="timePanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.startTime}:
+						</div>
+						<div class="row cell85">
+							<div onclick="$(this).fadeOut('slow'); $('#editStartTime').fadeIn('slow')" style="cursor: pointer;">
+								{nocache}{$startTime}{/nocache}
+							</div>
+							<div id="editStartTime" style="display: none;">
+								{nocache}
+								<select id="startDay" name="startDay">
+									{section name=startDay start=1 loop=32}
+									{if $smarty.section.startDay.iteration == $startDay}
+									<option value="{$smarty.section.startDay.iteration}" selected="selected">{$smarty.section.startDay.iteration}</option>
+									{else}
+									<option value="{$smarty.section.startDay.iteration}">{$smarty.section.startDay.iteration}</option>
+									{/if}
+									{/section}
+								</select>
+								<select id="startMonth" name="startMonth">
+									{section name=startMonth start=1 loop=13}
+									{if $smarty.section.startMonth.iteration == $startMonth}
+									<option value="{$smarty.section.startMonth.iteration}" selected="selected">{$smarty.section.startMonth.iteration}</option>
+									{else}
+									<option value="{$smarty.section.startMonth.iteration}">{$smarty.section.startMonth.iteration}</option>
+									{/if}
+									{/section}
+								</select>
+								<select id="startYear" name="startYear">
+									{section name=startYear start=1391 loop=1401}
+									{if $smarty.section.startYear.index == $startYear}
+									<option value="{$smarty.section.startYear.index}" selected="selected">{$smarty.section.startYear.index}</option>
+									{else}
+									<option value="{$smarty.section.startYear.index}">{$smarty.section.startYear.index}</option>
+									{/if}
+									{/section}
+								</select>
+								{$lang.hour}: 
+								<select id="startMinute" name="startMinute">
+									{section name="startMinute" loop=60}
+									{if $smarty.section.startMinute.index == $startMinute}
+									<option value="{$smarty.section.startMinute.index}" selected="selected">{$smarty.section.startMinute.index}</option>
+									{else}
+									<option value="{$smarty.section.startMinute.index}">{$smarty.section.startMinute.index}</option>
+									{/if}
+									{/section}
+								</select>
+								:
+								<select id="startHour" name="startHour">
+									{section name="startHour" loop=24}
+									{if $smarty.section.startHour.index == $startHour}
+									<option value="{$smarty.section.startHour.index}" selected="selected">{$smarty.section.startHour.index}</option>
+									{else}
+									<option value="{$smarty.section.startHour.index}">{$smarty.section.startHour.index}</option>
+									{/if}
+									{/section}
+								</select>
+								{/nocache}
+							</div>
+						</div>
+						<br class="clear">
+						<div class="row cell15">
+							{$lang.endTime}:
+						</div>
+						<div class="row cell85">
+							<div onclick="$(this).fadeOut('slow'); $('#editEndTime').fadeIn('slow')" style="cursor: pointer;">
+								{nocache}{$endTime}{/nocache}
+							</div>
+							<div id="editEndTime" style="display: none;">
+								{nocache}
+								<select id="endDay" name="endDay">
+									{section name=endDay start=1 loop=32}
+									{if $smarty.section.endDay.iteration == $endDay}
+									<option value="{$smarty.section.endDay.iteration}" selected="selected">{$smarty.section.endDay.iteration}</option>
+									{else}
+									<option value="{$smarty.section.endDay.iteration}">{$smarty.section.endDay.iteration}</option>
+									{/if}
+									{/section}
+								</select>
+								<select id="endMonth" name="endMonth">
+									{section name=endMonth start=1 loop=13}
+									{if $smarty.section.endMonth.iteration == $endMonth}
+									<option value="{$smarty.section.endMonth.iteration}" selected="selected">{$smarty.section.endMonth.iteration}</option>
+									{else}
+									<option value="{$smarty.section.endMonth.iteration}">{$smarty.section.endMonth.iteration}</option>
+									{/if}
+									{/section}
+								</select>
+								<select id="endYear" name="endYear">
+									{section name=endYear start=1391 loop=1401}
+									{if $smarty.section.endYear.index == $endYear}
+									<option value="{$smarty.section.endYear.index}" selected="selected">{$smarty.section.endYear.index}</option>
+									{else}
+									<option value="{$smarty.section.endYear.index}">{$smarty.section.endYear.index}</option>
+									{/if}
+									{/section}
+								</select>
+								{$lang.hour}: 
+								<select id="endMinute" name="endMinute">
+									{section name="endMinute" loop=60}
+									{if $smarty.section.endMinute.index == $endMinute}
+									<option value="{$smarty.section.endMinute.index}" selected="selected">{$smarty.section.endMinute.index}</option>
+									{else}
+									<option value="{$smarty.section.endMinute.index}">{$smarty.section.endMinute.index}</option>
+									{/if}
+									{/section}
+								</select>
+								:
+								<select id="endHour" name="endHour">
+									{section name="endHour" loop=24}
+									{if $smarty.section.endHour.index == $endHour}
+									<option value="{$smarty.section.endHour.index}" selected="selected">{$smarty.section.endHour.index}</option>
+									{else}
+									<option value="{$smarty.section.endHour.index}">{$smarty.section.endHour.index}</option>
+									{/if}
+									{/section}
+								</select>
+								{/nocache}
+							</div>
+						</div>
+						<br class="clear">
+					</div>
+					<div id="sourcePanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.resources}:
+						</div>
+						<div class="row cell85">
+							<textarea id="resources" rows="5" cols="84">{nocache}{$entity.resources}{/nocache}</textarea>
+						</div>
+						<br class="clear">
+					</div>
+					<div id="attachPanel" style="display:none; background: #d3d3d3; padding: 5px;">
+						<div class="row cell15">
+							{$lang.attach}:
+						</div>
+						<div class="row cell85">
+							<div id="fileLister">
+								<img src="theme/{$settings.theme}/img/goldButton.png" onclick="createUploader('file', 'fileLister');">
+								<input id="filePath" name="filePath" type="hidden" size="15" value="{$entity.filePath}"><br>
+								{nocache}{$entity.filePath}{/nocache}
+							</div>
+						</div>
+						<br class="clear">
+					</div>
+					<div>
+						<div class="row cell5 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setTime" src="theme/{$settings.theme}/img/icon/time.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell1 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setSource" src="theme/{$settings.theme}/img/icon/resource.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell1 center">&nbsp;</div>
+						<div class="row cell10 center curvedBottom" style="background: #D3D3D3; padding: 3px 0px;">
+							<img id="setAttach" src="theme/{$settings.theme}/img/icon/attach.png" style="cursor: pointer;">
+						</div>
+						<div class="row cell63 center">&nbsp;</div>
+						<br class="clear">
+					</div>
+				</div>
+			</div>
+			<br class="clear">
+		</div>
+		<br>
+		<center>
+			<button style="padding: 20px 60px;" onclick="
+				$('#content').farajax('loader', '/post/c_editObject', 
+					   'id={nocache}{$entity.id}{/nocache}' +
+					   '&title=' + document.getElementById('title').value + '::{$lang.title}<>Multi<>1<>ce<>200' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>ce<>11' +
+					   '&description=' + getText('description') + '::{$lang.description}<>Multi<>1<>ce<>1000000000' +
+					   '&startDay=' + document.getElementById('startDay').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startMonth=' + document.getElementById('startMonth').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startYear=' + document.getElementById('startYear').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startMinute=' + document.getElementById('startMinute').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&startHour=' + document.getElementById('startHour').value + '::{$lang.startTime}<>Number<>1<>nce<>11' +
+					   '&endDay=' + document.getElementById('endDay').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endMonth=' + document.getElementById('endMonth').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endYear=' + document.getElementById('endYear').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endMinute=' + document.getElementById('endMinute').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&endHour=' + document.getElementById('endHour').value + '::{$lang.endTime}<>Number<>1<>nce<>11' +
+					   '&resources=' + document.getElementById('resources').value + '::{$lang.resources}<>Multi<>1<>nce<>2000' +
+					   '&filePath=' + document.getElementById('filePath').value + '::{$lang.attach}<>Multi<>1<>nce<>200' +
+					   '&contentType=' + document.getElementById('contentType').value + '::{$lang.contentType}<>String<>1<>ce<>6' +
+					   '&contentPath=' + document.getElementById('contentPath').value + '::{$lang.file}<>Multi<>1<>nce<>200'
+				);
+			">
+				<span>{$lang.submit}</span>
+			</button>
+		</center>
+	</div>
+</div>
+<commands value="postModuleInitial(); $('#messageBar').draggable();">

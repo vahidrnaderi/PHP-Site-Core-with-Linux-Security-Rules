@@ -1,0 +1,37 @@
+<table class="listFull">
+	<tr>
+		<td width="10%">{$lang.categoryName}:</td>
+		<td width="20%"><input id="name" name="name" class="input" type="text" size="20" maxlength="100"></td>
+		<td width="10%">{$lang.categoryParent}:</td>
+		<td width="20%">
+			<select id="category" name="category">
+				{nocache}
+				{foreach name=category key=categoryKey item=categoryItem from=$category}
+					{if $categoryKey == $category.selected}
+						<option value="{$categoryKey}" selected="selected">{$categoryItem}</option>
+					{else}
+						{if $categoryKey == "selected" || !isset($categoryItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$categoryKey}">{$categoryItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+			  	{/nocache}
+	  		</select>
+		</td>
+		<td width="20%">
+			&nbsp;
+			<!-- Icon <img src=""> -->
+		</td>
+		<td width="20%">
+			<button onclick="
+				$('#content').farajax('loader', '/sms/c_addCategory' +
+				   'name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>500' +
+				   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>3'
+			);">
+				<span>{$lang.submit}</span>
+			</button>
+		</td>
+	</tr>
+</table>

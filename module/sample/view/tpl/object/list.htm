@@ -1,0 +1,45 @@
+<div class="pageIn">
+	<h2>{$lang.postList}</h2>
+	<br>
+	<div class="listHeader clearFix">
+		<div class="row cell5 center">#</div>
+		<div class="row cell10 center">{$lang.id}</div>
+		<div class="row cell30 center">{$lang.title}</div>
+		<div class="row cell10 center">{$lang.category}</div>
+		<div class="row cell15 center">{$lang.startTime}</div>
+		<div class="row cell15 center">{$lang.endTime}</div>
+		<div class="row cell15 center">{$lang.properties}</div>
+	</div>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="blockquote clearFix" id="row{$entityItem.id}">
+		<div class="row cell5">{$entityItem.num}</div>
+		<div class="row cell10">{$entityItem.id}</div>
+		<div class="row cell30">
+			<a href="/post/c_showListObject/id={$entityItem.id}" rel="nofollow">{$entityItem.title}</a>
+		</div>
+		<div class="row cell10 center">{$entityItem.category}&nbsp;</div>
+		<div class="row cell15 center">{$entityItem.startTime}&nbsp;</div>
+		<div class="row cell15 center">{$entityItem.endTime}&nbsp;</div>
+		<div class="row cell15" align="center">
+			<a href="/post/c_showListObject/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/information.png" title="" alt="">
+			</a>
+			<a href="/post/v_delObject/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/delete.png" title="{$lang.delete}" alt="{$lang.delete}">
+			</a>
+			<a href="/post/v_editObject/id={$entityItem.id}" rel="nofollow">
+				<img src="theme/{$settings.theme}/img/icon/edit.png" title="{$lang.edit}" alt="{$lang.edit}">
+			</a>
+			{if $entityItem.actvie == '1'} 
+			<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+		</div>
+	</div>
+	{/foreach}
+	<br>
+	<div class="blockquote">{$navigation}</div>
+	{/nocache}
+</div>

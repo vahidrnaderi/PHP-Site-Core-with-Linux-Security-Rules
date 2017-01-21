@@ -1,0 +1,331 @@
+{nocache}
+<div id="profile" class="greyFrame curvedFull paddy10">
+	<div class="curvedFull clearFix boxShadow" style="background: #cecece; padding: 2px 10px">
+		<div class="row cell20 LH35 center bold">
+			{$userList.1.email}
+			&nbsp;
+		</div>
+		<div class="row cell15 LH35 center pointer">
+			<div id="systemInfoLink" style="border-left: dashed 1px #e7e7e7; border-right: dashed 1px #e7e7e7">اطلاعات سیستمی</div>
+		</div>
+		<div class="row cell15 LH35 center pointer">
+			{if $userList.1.userType == 1}
+			<div id="personalInfoLink" style="border-left: dashed 1px #e7e7e7; color: gray">اطلاعات شخصی</div>
+			{elseif $userList.1.userType == 2}
+			<div id="personalInfoLink" style="border-left: dashed 1px #e7e7e7; color: gray">اطلاعات حقوقی</div>
+			{/if}
+		</div>
+		<div class="row cell15 LH35 center pointer">
+			<div id="contactInfoLink" style="border-left: dashed 1px #e7e7e7; color: gray">اطلاعات ارتباطی</div>
+		</div>
+		<div class="row cell15 LH35 center pointer">
+			<div id="permissionInfoLink" style="border-left: dashed 1px #e7e7e7; color: gray">اطلاعات دسترسی</div>
+		</div>
+		<div class="row cell10 LH35 center pointer">
+			<div id="changePasswordLink" style="border-left: dashed 1px #e7e7e7; color: gray">تغیر کلمه عبور</div>
+		</div>
+		<div class="row cell10 LH35 center pointer" style="color: #ff7b00;">
+			<div id="editProfileLink">{$lang.edit}</div>
+			<div id="showProfileLink" class="displayNone">{$lang.show}</div>
+		</div>	
+	</div>
+	<br>
+	<div class="clearFix">
+		<div class="row cell75">
+			{foreach name=user key=userKey item=userItem from=$userList}
+			<div id="systemInfo">
+				<input id="profileId" name="profileId" value="{$userItem.id}" type="hidden">
+				<div class="clearFix displayNone">
+					<div class="row cell20 bold LH35">{$lang.id}:</div> 
+					<div class="row cell80 LH35"><em>{$userItem.id}</em></div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.status}:</div> 
+					<div class="row cell80 LH35"><em>{$userItem.active}</em></div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.registerTime}:</div> 
+					<div class="row cell80 LH35"><em>{$userItem.timeStamp}</em></div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.userName}:</div> 
+					<div class="row cell80 LH35">
+						{if $userItem.userName!=null}
+							<em class="showProfile LH35">
+								{$userItem.userName}							
+							</em>
+						{else}
+							<em class="showProfile LH35">
+								{$userItem.email}
+							</em>
+							<input class="editProfile" id="userName" name="userName" maxlength="16" value="{$userItem.userName}">
+						{/if}
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.activated}:</div> 
+					<div class="row cell80 LH35">
+						
+						{if !isset($userItem.email) || $userItem.showEmail == 0}
+						<em><a href="userMan/v_emailActivation/id={$userItem.id}" target="activateArea">{$lang.emailActivation}:&nbsp;{$userItem.email}</a></em>
+						{else}
+						<em class="green">{$userItem.email}</em>
+						{/if}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						{if !isset($userItem.mobile) || $userItem.showMobile == 0}
+						<em><a href="userMan/v_mobileActivation/id={$userItem.id}" target="activateArea">{$lang.mobileActivation}:&nbsp;{$userItem.mobile}</a></em>
+						{else}
+						<em class="green">{$userItem.mobile}</em>
+						{/if}
+						
+					</div>
+				</div>
+				<br>
+				<div id="activateArea"></div>
+			</div>
+			<div id="personalInfo" class="displayNone">
+				{if $userItem.userType == 2}
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.coName}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.coName}</em>
+						<input class="editProfile" id="coName" name="coName" maxlength="100" value="{$userItem.coName}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.workField}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.workField}</em>
+						<input class="editProfile" id="workField" name="workField" maxlength="45" value="{$userItem.workField}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.regTime}:</div>
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.regTime}</em>
+						<input class="editProfile" id="regTime" name="regTime" maxlength="45" value="{$userItem.regTime}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.workDetails}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.workDetails}</em>
+						<input class="editProfile" id="workDetails" name="workDetails" maxlength="1000" value="{$userItem.workDetails}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.nationalCode}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.nationalCode}</em>
+						<input class="editProfile" id="nationalCode" name="nationalCode" maxlength="11" value="{$userItem.nationalCode}">
+					</div>
+				</div>
+				{elseif $userItem.userType == 1}
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.firstName}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.firstName}</em>
+						<input class="editProfile" id="firstName" name="firstName" maxlength="45" value="{$userItem.firstName}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.lastName}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.lastName}</em>
+						<input class="editProfile" id="lastName" name="lastName" maxlength="45" value="{$userItem.lastName}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.fatherName}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.fatherName}</em>
+						<input class="editProfile" id="fatherName" name="fatherName" maxlength="45" value="{$userItem.fatherName}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.gender}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.gender}</em>
+						<input id="genderId" name="genderId" type="hidden" maxlength="45" value="{$userItem.genderId}">
+						<span class="editProfile" id="genderSelectBox"></span>
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.idNumber}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.idNumber}</em>
+						<input class="editProfile" id="idNumber" name="idNumber" maxlength="45" value="{$userItem.idNumber}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.nationalCode}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.nationalCode}</em>
+						<input class="editProfile" id="nationalCode" name="nationalCode" maxlength="10" value="{$userItem.nationalCode}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.religion}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.religion}</em>
+						<input id="religionId" name="religionId" type="hidden" maxlength="45" value="{$userItem.religionId}">
+						<span class="editProfile" id="religionSelectBox"></span>
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.level}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.level}</em>
+						<input id="levelId" name="levelId" type="hidden" maxlength="45" value="{$userItem.levelId}">
+						<span class="editProfile" id="levelSelectBox"></span>
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.nationality}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.nationality}</em>
+						<input id="nationalityId" name="nationalityId" type="hidden" maxlength="45" value="{$userItem.nationalityId}">
+						<span class="editProfile" id="nationalitySelectBox"></span>
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.financialStatus}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.financialStatus}</em>
+						<input id="financialStatusId" name="financialStatusId" type="hidden" maxlength="45" value="{$userItem.financialStatusId}">
+						<span class="editProfile" id="statusSelectBox"></span>
+					</div>
+				</div>
+				{/if}
+			</div>
+			<div id="contactInfo" class="displayNone">
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.mobile}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.mobile}</em>
+						<input class="editProfile" id="mobile" name="mobile" maxlength="11" value="{$userItem.mobile}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.phone}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.phone}</em>
+						<input class="editProfile" id="phone" name="phone" maxlength="14" value="{$userItem.phone}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.email}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+						<em class="editProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+					</div>
+				</div>
+				
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.state}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.state}</em>
+						<input id="stateId" name="stateId" type="hidden" maxlength="45" value="{$userItem.stateId}">
+						<span class="editProfile" id="stateSelectBox"></span>
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.city}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.issued}</em>
+						<input id="cityId" name="cityId" type="hidden" maxlength="45" value="{$userItem.issuedId}">
+						{if $userItem.issued != ''}
+						<span class="editProfile" id="citySelectBox">{$userItem.issued} <span onclick="$('#citySelectBox').farajax('loader', '/htmlElements/v_selectCity', 'name=city&sid=' + $('#stateId').val() + '&selected={$userItem.issued}');">[ویرایش]</span></span>
+						{else}
+						<span class="editProfile" id="citySelectBox">ابتدا استان خود را انتخاب نمایید</span>
+						{/if}
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.region}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.region}</em>
+						<input id="regionId" name="regionId" type="hidden" maxlength="45" value="{$userItem.regionId}">
+						{if $userItem.region != ''}
+						<span class="editPro=file" id="regionSelectBox">{$userItem.region} <span onclick="$('#regionSelectBox').farajax('loader', '/htmlElements/v_selectRegion', 'name=region&selected=' + $('#regionId').val() + '&selected={$userItem.region}');">[ویرایش]</span></span>
+						{else}
+						<span class="editPro=file" id="regionSelectBox">ابتدا شهر خود را انتخاب نمایید</span>
+						{/if}
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.district}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.district}</em>
+						<input id="districtId" name="districtId" type="hidden" maxlength="45" value="{$userItem.districtId}">
+						{if $userItem.districtId != ''}
+						<span class="editProfile" id="districtSelectBox">{$userItem.district} <span onclick="$('#districtSelectBox').farajax('loader', '/htmlElements/v_selectDistrict', 'name=district&selected=' + $('#districtId').val() + '&selected={$userItem.district}');">[ویرایش]</span></span>
+						{else}
+						<span class="editProfile" id="districtSelectBox">ابتدا منطقه خود را انتخاب نمایید</span>
+						{/if}
+					</div>
+				</div>
+				
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.zipcode}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.zipcode}</em>						
+						<input class="editProfile" id="zipcode" name="zipcode" maxlength="10" value="{$userItem.zipcode}">
+					</div>
+				</div>
+				<div class="clearFix">
+					<div class="row cell20 bold LH35">{$lang.address}:</div> 
+					<div class="row cell80">
+						<em class="showProfile LH35">{$userItem.address}</em>
+						<textarea class="editProfile" id="address" name="address" rows="5" cols="40">{$userItem.address}</textarea>
+					</div>
+				</div>
+			</div>
+			<div id="permissionInfo" class="displayNone">دسترسی به سبد خرید</div>
+			<div id="changePassword" class="displayNone"></div>
+			{/foreach}
+		</div>
+		<div class="row cell25">
+			<img class="pointer" id="srcimagePath" width="200" height="250" src="{$userItem.userPic}" onclick="BrowseServer('imagePath', 'single');">
+			<input id="contentPath" name="contentPath" type="hidden" size="15" value="{$entity.imagePath}"><br>
+		</div>
+	</div>
+	<div id="submitProfile" style="display: none;">
+		<button onclick="$('#content').farajax('loader', '/userMan/c_edit',
+					   'id={$userItem.id}::{$lang.id}<>Number<>1<>ce<>11' +
+					   '&userType={$userItem.userType}' +
+					   '&userPic=' + document.getElementById('contentPath').value + '::{$lang.fileName}<>Alphabet<>1<>nce<>150' +
+					   '&userName=' + document.getElementById('userName').value + '::{$lang.userName}<>Multi<>1<>nce<>45' +
+					   {if $userItem.userType == 2}
+					   '&coName=' + document.getElementById('coName').value + '::{$lang.coName}<>Multi<>1<>ce<>100' +
+					   '&workField=' + document.getElementById('workField').value + '::{$lang.workField}<>Multi<>1<>nce<>45' +
+					   '&regTime=' + document.getElementById('regTime').value + '::{$lang.regTime}<>Multi<>1<>ce<>45' +
+					   '&workDetails=' + document.getElementById('workDetails').value + '::{$lang.workDetails}<>Multi<>1<>nce<>100' +
+					   '&nationalCode=' + document.getElementById('nationalCode').value + '::{$lang.nationalCode}<>Multi<>1<>ce<>11<>10000000000<>99999999999' +
+					   {elseif $userItem.userType == 1}
+					   '&firstName=' + document.getElementById('firstName').value + '::{$lang.firstName}<>Multi<>1<>ce<>45' +
+					   '&lastName=' + document.getElementById('lastName').value + '::{$lang.lastName}<>Multi<>1<>ce<>45' +
+					   '&fatherName=' + document.getElementById('fatherName').value + '::{$lang.fatherName}<>Multi<>1<>nce<>45' +
+					   '&gender=' + document.getElementById('gender').value + '::{$lang.gender}<>Number<>1<>ce<>1' +
+					   '&idNumber=' + document.getElementById('idNumber').value + '::{$lang.idNumber}<>Multi<>1<>nce<>16' +
+					   '&nationalCode=' + document.getElementById('nationalCode').value + '::{$lang.nationalCode}<>Multi<>1<>nce<>10<>1000000000<>9999999999' +
+					   '&nationality=' + document.getElementById('nationality').value + '::{$lang.nationality}<>Number<>1<>nce<>3' +
+					   '&religion=' + document.getElementById('religion').value + '::{$lang.religion}<>Number<>1<>nce<>2' +
+					   '&financialStatus=' + document.getElementById('financialStatus').value + '::{$lang.financialStatus}<>Number<>1<>nce<>2' +
+					   '&level=' + document.getElementById('level').value + '::{$lang.level}<>Number<>1<>nce<>2' +
+					   {/if}
+					   '&state=' + document.getElementById('state').value + '::{$lang.state}<>Number<>1<>ce<>2' +
+					   '&city=' + document.getElementById('city').value + '::{$lang.city}<>Number<>1<>ce<>5' +
+					   '&region=' + document.getElementById('region').value + '::{$lang.region}<>Number<>1<>ce<>2' +
+					   '&district=' + document.getElementById('district').value + '::{$lang.district}<>Number<>1<>nce<>11' +
+					   '&zipcode=' + document.getElementById('zipcode').value + '::{$lang.zipcode}<>Number<>1<>nce<>10' +
+					   '&mobile=' + document.getElementById('mobile').value	+ '::{$lang.mobile}<>Multi<>1<>ce<>11<>09100000000<>09999999999' +
+					   '&phone=' + document.getElementById('phone').value	+ '::{$lang.phone}<>Multi<>1<>nce<>14' +
+					   '&address=' + document.getElementById('address').value	+ '::{$lang.address}<>Multi<>1<>nce<>500'
+				);
+			">
+			{$lang.submit}
+		</button>
+	</div>
+</div>
+{/nocache}

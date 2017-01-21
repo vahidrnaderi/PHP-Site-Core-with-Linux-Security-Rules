@@ -1,0 +1,39 @@
+<table id="resultBox" class="listFull">
+	<tr class="listHeader">
+		<td width="5%">#</td>
+		<td width="10%">{$lang.id}</td>
+		<td width="35%">{$lang.name}</td>
+		<td width="20%">{$lang.category}</td>
+		<td width="30%">{$lang.properties}</td>
+	</tr>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<tr class="blockquote" id="row{$entityItem.id}">
+		<td>{$entityItem.num}</td>
+		<td>{$entityItem.id}</td>
+		<td>
+			<span class="link" onclick="loader('POST', '', 'content', 'op=draw&mode=c_show&id={$entityItem.id}', 1);">
+				{$entityItem.name}
+			</span>	
+		</td>
+		<td>
+			{$entityItem.category}
+		</td>
+		<td align="center">
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/information.png" onclick="loader('POST', '', 'content', 'op=draw&mode=c_showObject&id={$entityItem.id}');">
+			{if $smarty.session.uid == 1}
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/delete.png" onclick="loader('POST', '', 'content', 'op=draw&mode=c_del&id={$entityItem.id}'); loader('POST', '', 'content', 'op=draw&mode=c_list');">
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/edit.png">
+			{if $entityItem.active == 1} 
+			<img style="cursor: pointer;" alt="{$deAtivate}" alt="{$deAtivate}" src="theme/{$settings.theme}/img/icon/powerOn.png" onclick="loader('POST', '', 'content', 'op=draw&mode=c_deactivate&id={$entityItem.id}'); loader('POST', '', 'content', 'op=draw&mode=c_list');">
+			{else}
+			<img style="cursor: pointer;" alt="{$ativate}" alt="{$ativate}" src="theme/{$settings.theme}/img/icon/powerOff.png" onclick="loader('POST', '', 'content', 'op=draw&mode=c_activate&id={$entityItem.id}'); loader('POST', '', 'content', 'op=draw&mode=c_list');">
+			{/if}
+			{/if}
+		</td>
+	</tr>
+	{/foreach}
+	{/nocache}
+</table>
+<br>
+<div class="blockquote">{$navigation}</div>

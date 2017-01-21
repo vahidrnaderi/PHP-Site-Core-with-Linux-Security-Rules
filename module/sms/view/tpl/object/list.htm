@@ -1,0 +1,41 @@
+<table id="resultBox" class="listFull">
+	<tr class="listHeader">
+		<td width="5%">#</td>
+		<td width="10%">{$lang.id}</td>
+		<td width="30%">{$lang.name}</td>
+		<td width="20%">{$lang.author}</td>
+		<td width="15%">{$lang.price}</td>
+		<td width="20%">{$lang.properties}</td>
+	</tr>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<tr class="blockquote" id="row{$entityItem.id}">
+		<td>{$entityItem.num}</td>
+		<td>{$entityItem.id}</td>
+		<td>
+			<a href="/sms/c_show" data="id={$entityItem.id}">{$entityItem.name}</a>	
+		</td>
+		<td>
+			{$entityItem.author}
+		</td>
+		<td>
+			{$entityItem.price}
+		</td>
+		<td align="center">
+			<a href="/sms/c_showObject" data="id={$entityItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/information.png"></a>
+			{if $smarty.session.uid == 1}
+			<a href="/sms/c_del" data="id={$entityItem.id}"><img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/delete.png" onclick="$('#content').farajax('loader', '/sms/c_list');"></a>
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/edit.png">
+			{if $entityItem.active == 1} 
+			<a href="/sms/c_deactivate" data="id={$entityItem.id"><img style="cursor: pointer;" alt="{$deAtivate}" alt="{$deAtivate}" src="theme/{$settings.theme}/img/icon/powerOn.png" onclick="$('#content').farajax('loader', '/sms/c_list');"></a>
+			{else}
+			<a href="/sms/c_activate" data="id={$entityItem.id}"><img style="cursor: pointer;" alt="{$ativate}" alt="{$ativate}" src="theme/{$settings.theme}/img/icon/powerOff.png" onclick="$('#content').farajax('loader', '/sms/c_list');"></a>
+			{/if}
+			{/if}
+		</td>
+	</tr>
+	{/foreach}
+	{/nocache}
+</table>
+<br>
+<div class="blockquote">{$navigation}</div>

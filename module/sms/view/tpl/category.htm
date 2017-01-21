@@ -1,0 +1,7 @@
+<div id="pageIn" class="pageIn">
+	<h1 class="title">{$lang.category}</h1>
+	<div id="add"></div>
+	<br>
+	<div id="list"></div>
+	<img src="theme/{$settings.theme}/img/icon/s.png" onload="$('#add').farajax('loader', '/sms/v_addCategory'); $('#list').farajax('loader', '/sms/c_listCategory');">
+</div>

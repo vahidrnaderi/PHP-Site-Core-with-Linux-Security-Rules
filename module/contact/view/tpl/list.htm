@@ -1,0 +1,42 @@
+<div id="pageIn" class="pageIn">
+	<h1 class="title">{$lang.messages}</h1>
+	<div id="resultBox" class="listFull">
+		<div class="listHeader">
+			<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">#</div>
+			<div class="row cell10 center" style="border-left: 1px solid #D8D5D5;">{$lang.id}</div>
+			<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.sender}</div>
+			<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.email}</div>
+			<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.subject}</div>
+			<div class="row cell10 center" style="border-left: 1px solid #D8D5D5;">{$lang.date}</div>
+			<div class="row cell13 center">{$lang.properties}</div>
+			<br style="clear: both;">
+		</div>
+		{nocache}
+		{foreach name=entity key=entityKey item=entityItem from=$entityList}
+		<div class="blockquote" id="row{$entityItem.id}">
+			<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">{$entityItem.num}&nbsp;</div>
+			<div class="row cell10 center" style="border-left: 1px solid #D8D5D5;">{$entityItem.id}&nbsp;</div>
+			<div class="row cell20 right" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$entityItem.sender}&nbsp;&nbsp;</div>
+			<div class="row cell20 left" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$entityItem.email}&nbsp;&nbsp;</div>
+			<div class="row cell20 right" style="border-left: 1px solid #D8D5D5;">&nbsp;<a href="/contact/c_showMessage/id={$entityItem.id}" title="{$lang.information}">{$entityItem.subject}</a>&nbsp;</div>
+			<div class="row cell10 center" style="border-left: 1px solid #D8D5D5;">{$entityItem.timeStamp}&nbsp;</div>
+			<div class="row cell13 center">
+				<a href="/contact/c_showMessage/id={$entityItem.id}" title="{$lang.information}"><img src="theme/{$settings.theme}/img/icon/information.png" alt="{$lang.information}"></a>
+				{if $smarty.session.uid == 1}
+				<img src="theme/{$settings.theme}/img/icon/delete.png" alt="{$lang.delete}">
+				<img src="theme/{$settings.theme}/img/icon/edit.png" alt="{$lang.edit}">
+				{if $entityItem.active == 1} 
+				<img alt="{$deAtivate}" alt="{$deAtivate}" src="theme/{$settings.theme}/img/icon/powerOn.png">
+				{else}
+				<img alt="{$ativate}" alt="{$ativate}" src="theme/{$settings.theme}/img/icon/powerOff.png">
+				{/if}
+				{/if}
+			</div>
+			<br style="clear: both;">
+		</div>
+		{/foreach}
+	</div>
+	<br>
+	<div class="blockquote">{$navigation}</div>
+	{/nocache}
+</div>

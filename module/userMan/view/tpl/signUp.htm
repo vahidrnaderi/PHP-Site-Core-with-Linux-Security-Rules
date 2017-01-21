@@ -1,0 +1,37 @@
+<!-- 
+<h1>{$lang.signUp}</h1>
+<br>
+ -->
+<font face="Nazanin" color="black"> 
+	<div class="paddy5 clearfix LH25" style="border: 2px dashed #cecece;">
+		<div class="col-xs-11 col-lg-4">
+			<input id="email" name="email" class="LH25" placeholder="{$lang.email}" type="email" maxlength="100" pattern="{literal}^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{2,5}${/literal}">
+		</div>
+		<div class="col-xs-1 col-lg-1">
+			<img class="tip pointer" title="ایمیل واقعی خود را وارد کنید زیرا به عنوان نام کاربری شما بوده، راه ارتباطی اولیه با شما می باشد و غیر قابل تغییر است." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+		</div>
+		<div class="col-xs-11 LH25 col-lg-3">
+			<input id="securityQuestion" class="LH25" name="securityQuestion" placeholder="{$securityQuestion.question}" type="text" maxlength="200">
+		</div>
+		<div class="col-xs-1 col-lg-1">
+			<img class="tip pointer" title="پاسخ سوال را بصورت صحیح و به فارسی تایپ کنید." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+		</div>
+		<div class="paddy1 col-xs-10 col-lg-2" style="margin-right:1%;">
+			<div class="col-xs-1 col-lg-1">&nbsp;</div>
+			<button class="col-xs-3 col-lg-5 LH20" style="margin-top:1px;"  id="submitSignup" onclick="
+				$('#temp').farajax('loader', '/userMan/c_signUp',
+						'&email=' + document.getElementById('email').value + '::{$lang.email}<>Mail<>1<>ce<>100' +
+					   	'&securityQuestion=' + document.getElementById('securityQuestion').value + '::{$lang.securityQuestion}<>Multi<>1<>ce<>100' +
+					   	'&securityId=' + document.getElementById('securityId').value + '::{$lang.securityId}<>Multi<>1<>nce<>11'
+				);
+			">{$lang.submit}
+			</button>
+			<div class="col-xs-1 col-lg-1">
+				<img class="tip pointer" title="با ثبت نام خود در سایت تایید می نمایم که قوانین و حقوق و مجوزهای انتشار مطالب بازار بزرگ ایده آل را خوانده، تغییرات آتی را نیز مطالعه خواهم کرد و قبول می نمایم." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+			</div>
+		</div>
+		<div class="col-xs-2 col-lg-12 LH25">
+			<input id="securityId" name="securityId" value="{$securityQuestion.id}" type="hidden" maxlength="11">
+		</div>
+	</div>
+</font>

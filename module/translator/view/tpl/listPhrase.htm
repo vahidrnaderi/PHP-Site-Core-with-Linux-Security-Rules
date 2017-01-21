@@ -1,0 +1,50 @@
+{nocache}
+<div class="blockquote">
+	<h2 class="title">{$lang.listPhrase} [<a href="/translator/v_addPhrase">{$lang.addPhrase}</a>]</h2>
+	<br>
+	<div class="listHeader clearFix">
+		<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">#</div>
+		<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">{$lang.id}</div>
+		<div class="row cell10 center" style="border-left: 1px solid #D8D5D5;">{$lang.timeStamp}</div>
+		<div class="row cell5 center" style="border-left: 1px solid #D8D5D5;">{$lang.langCode}</div>
+		<div class="row cell20 center" style="border-left: 1px solid #D8D5D5;">{$lang.code}</div>
+		<div class="row cell30 center" style="border-left: 1px solid #D8D5D5;">{$lang.translate}</div>
+		<div class="row cell19 center">{$lang.properties}</div>
+	</div>
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="blockquote clearFix" id="row{$entityItem.id}">
+		<div class="row cell5 center LH30" style="border-left: 1px solid #D8D5D5;">{$entityItem.num}</div>
+		<div class="row cell5 center LH30" style="border-left: 1px solid #D8D5D5;">{$entityItem.id}</div>
+		<div class="row cell10 right LH30" style="border-left: 1px solid #D8D5D5;">&nbsp;&nbsp;{$entityItem.timeStamp}</div>
+		<div id="langCode{$entityItem.id}" class="row cell5 center LH30" style="border-left: 1px solid #D8D5D5;">{$entityItem.langCode}</div>
+		<div id="code{$entityItem.id}" class="row cell20 center LH30" style="border-left: 1px solid #D8D5D5;">{$entityItem.code}</div>
+		<div id="translate{$entityItem.id}" class="row cell30 center LH30" style="border-left: 1px solid #D8D5D5;">{$entityItem.translate}</div>
+		<div class="row cell19 center LH30" align="center">
+			<img src="theme/{$settings.theme}/img/icon/information.png" title="{$entityItem.description}" alt="{$entityItem.description}">
+			<a href="/translator/c_delPhrase/id={$entityItem.id},phrase={$entityItem.code}">
+				<img src="theme/{$settings.theme}/img/icon/delete.png" onclick="$('#content').farajax('loader', '/translator/c_listPhrase');">
+			</a>
+			<img class="pointer" src="theme/{$settings.theme}/img/icon/edit.png" onclick="document.getElementById('langCode{$entityItem.id}').innerHTML = '<select id=\'langCodeValue{$entityItem.id}\' name=\'langCodeValue{$entityItem.id}\'>{foreach name=langCodeSelector key=langCodeKey item=langCodeItem from=$langCodeSelector}{if $langCodeKey == $langCodeSelector.selected}<option value={$langCodeKey} selected=selected>{$langCodeItem}</option>{else}{if $langCodeKey == selected || !isset($langCodeItem)}<option value=\'\'> ... </option>{else}<option value={$langCodeKey}>{$langCodeItem}</option>{/if}{/if}{/foreach}'; document.getElementById('translate{$entityItem.id}').innerHTML = '<input id=\'translateValue{$entityItem.id}\' name=\'translate{$entityItem.id}\' class=\'input\' type=\'text\' size=\'30\' maxlength=\'100\' value=\'{$entityItem.translate|escape}\'>';$('#transEditSubmit').show();">
+			{if $entityItem.actvie == '1'} 
+			<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+			<button id="transEditSubmit" class="rowl" style="display:none;" onclick="if(document.getElementById('translate{$entityItem.id}')){
+							$('#content').farajax('loader', '/translator/c_editPhrase',
+							'langId={$entityItem.id}' + '::{$lang.id}<>Number<>1<>ce<>11' +
+							'&langCode=' + document.getElementById('langCodeValue{$entityItem.id}').value + '::{$lang.langCode}<>Multi<>1<>ce<>45' +
+						   	'&code=' + document.getElementById('code{$entityItem.id}').innerHTML + '::{$lang.code}<>Multi<>1<>ce<>100' +
+						   	'&translate=' + document.getElementById('translateValue{$entityItem.id}').value + '::{$lang.translate}<>Multi<>1<>ce<>100000'
+					);
+				$('#transEditSubmit').show();
+				}">
+				<span>{$lang.submit}</span>
+			</button>
+		</div>
+	</div>
+	{/foreach}
+	<br>
+	<div class="blockquote">{$navigation}</div>
+</div>
+{/nocache}

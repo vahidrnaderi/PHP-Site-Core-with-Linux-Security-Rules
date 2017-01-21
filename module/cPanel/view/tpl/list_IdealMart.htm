@@ -1,0 +1,33 @@
+<table style="border-spacing: 2px; border-collapse: separate;width: 98%;">
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<td width="16.5%" id="td{$entityItem.id}">
+		<div id="cell{$entityItem.id}" class="boxShadow curvedFull h94" style="padding: 4px; background: #f2f2f2;">
+			<div class="row cell49 center h94" style="border-left: 1px solid black;">
+				<div class="paddy3 h30" style="border-bottom: 1px solid black;">
+					<font face="Arial" size="2" color="blue">
+					{if $lang.{$entityItem.op}!=null}
+						{$lang.{$entityItem.op}}
+					{else}
+						{$entityItem.op}
+					{/if}
+					</font>
+				</div>
+				<img class="paddy3 h50" alt="{$entityItem.op}" src="{$settings.moduleAddress}/{$entityItem.op}/view/img/icon.png" width="50" height="50">&nbsp;
+			</div>
+			<div class="row cell50 h94" style="height: 71px; overflow: auto;">
+				<ul style="padding: 0px;">
+					{foreach name=entityChild key=entityChildKey item=entityItemChild from=$entityItem.child}
+					<li><a href="/{$entityItem.op}/{$entityItemChild.mode}">{$lang.{$entityItemChild.caption}}</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			<br style="clear: both;">
+		</div>
+	</td>
+	{if $entityKey is div by 6}
+  	<tr>
+	{/if}
+	{/foreach}
+</table>
+{/nocache}

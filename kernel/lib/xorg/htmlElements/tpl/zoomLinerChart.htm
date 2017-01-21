@@ -1,0 +1,25 @@
+<div id="chart" style="height: {$height}; width: {$width};"></div>
+	<img src="theme/{$settings.theme}/img/icon/s.png" onload="
+		$.jqplot('chart', [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]], { 
+	      title: '{$title}', 
+	      series: [{ 
+	          label: '{$label}', 
+	          neighborThreshold: {$neighborThreshold} 
+	      }], 
+	      axes: { 
+	          xaxis: { 
+	              renderer: {$xaxisRenderer},
+	              min:'{$xaxisMin}', 
+	              tickInterval: '{$xaxisTickInterval}', 
+	              tickOptions: {$xaxisTickOptions} 
+	          }, 
+	          yaxis: { 
+	              tickOptions: {$yaxisTickOptions}
+	          } 
+	      }, 
+	      cursor:{ 
+	        show: {$cursorShow},
+	        zoom: {$cursorZoom}, 
+	        showTooltip: {$cursorShowTooltip}
+	      } 
+	  });">

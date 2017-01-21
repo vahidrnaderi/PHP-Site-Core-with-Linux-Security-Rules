@@ -1,0 +1,19 @@
+<table class="listFull">
+	<tr>
+		<td>{$lang.userName}: <input id="userName" name="userName" class="input" type="text" size="20" maxlength="45"></td>
+		<td>{$lang.password}: <input id="password" name="password" class="input" type="password" size="20" maxlength="20"></td>
+		<td>{$lang.rePassword}: <input id="rePassword" name="rePassword" class="input" type="password" size="20" maxlength="20"></td>
+		<td>
+			<button onclick="
+				$('#userAdd').farajax('loader', '/userMan/c_userAdd',
+						'userName=' + document.getElementById('userName').value + '::{$lang.userName}<>Multi<>1<>ce<>45' +
+					   	'&password=' + document.getElementById('password').value + '::{$lang.password}<>Multi<>1<>ce<>20' +
+					   	'&rePassword=' + document.getElementById('rePassword').value + '::{$lang.rePassword}<>Multi<>1<>ce<>20'
+				);
+			$('#userList').farajax('loader', '/userMan/c_userList');
+		 	">
+		 	<span>{$lang.submit}</span>
+		 	</button>
+		</td>
+	</tr>
+</table>

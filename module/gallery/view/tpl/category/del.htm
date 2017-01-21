@@ -1,0 +1,12 @@
+<div>
+	{$text}
+	<div style="text-align: center;">
+		<button onclick="$('#content').farajax('loader', '/gallery/c_delCategory', 
+			'id={$entity.id}::{$lang.id}<>Number<>1<>ce<>11'	
+			);
+			$('#list').farajax('loader', '/gallery/c_listCategory');
+			">
+			<span>{$lang.approve}</span>
+		</button>
+	</div>
+</div>

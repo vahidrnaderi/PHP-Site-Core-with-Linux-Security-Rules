@@ -1,0 +1,37 @@
+<table id="resultBox" class="listFull">
+	<tr class="listHeader">
+		<td width="5%">#</td>
+		<td width="10%">{$lang.id}</td>
+		<td width="30%">{$lang.name}</td>
+		<td width="30%">{$lang.parent}</td>
+		<td width="25%">{$lang.properties}</td>
+	</tr>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<tr class="blockquote" id="row{$entityItem.id}">
+		<td>{$entityItem.num}</td>
+		<td>{$entityItem.id}</td>
+		<td id="name{$entityItem.id}">{$entityItem.name}</td>
+		<td id="category{$entityItem.id}">{$entityItem.category}</td>
+		<td align="center">
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/information.png" title="{$entityItem.description}" alt="{$entityItem.description}">
+			<a href="/draw/c_drawCategoryDel" data="id={$entityItem.id}&name={$entityItem.name}::{$lang.name}<>Multi<>1<>ce<>200"><img src="theme/{$settings.theme}/img/icon/delete.png" title="{$lang.delete}" alt="{$lang.delete}" onclick="$('#categoryList').farajax('loader', '/draw/v_categoryAdd');"></img></a>
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/edit.png" title="{$lang.edit}" alt="{$lang.edit}" onclick="document.getElementById('category{$entityItem.id}').innerHTML = '<select id=\'categoryValue{$entityItem.id}\' name=\'categoryValue{$entityItem.id}\'>{foreach name=categorySelector key=categoryKey item=categoryItem from=$category}{if $categoryKey == $category.selected}<option value={$categoryKey} selected=selected>{$categoryItem}</option>{else}{if $categoryKey == selected || !isset($categoryItem)}<option value=\'\'> ... </option>{else}<option value={$categoryKey}>{$categoryItem}</option>{/if}{/if}{/foreach}'; document.getElementById('name{$entityItem.id}').innerHTML = '<input id=\'nameValue{$entityItem.id}\' name=\'nameValue{$entityItem.id}\' class=\'input\' type=\'text\' size=\'50\' maxlength=\'100\' value=\'{$entityItem.name}\'>';">
+			{if $entityItem.actvie == '1'} 
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOn.png">
+			{else}
+			<img style="cursor: pointer;" src="theme/{$settings.theme}/img/icon/powerOff.png">
+			{/if}
+			<button onclick="if(existObj('nameValue{$entityItem.id}')){
+																			$('#row{$entityItem.id}').farajax('loader', '/draw/c_editCategory', 
+																			'id={$entityItem.id}' + '::{$lang.id}<>Number<>1<>ce<>11' +
+																		   	'&name=' + document.getElementById('nameValue{$entityItem.id}').value + '::{$lang.name}<>Multi<>1<>ce<>45' +
+																		   	'&category=' + document.getElementById('categoryValue{$entityItem.id}').value + '::{$lang.category}<>Multi<>1<>nce<>12'
+																	);}"><span>{$lang.submit}</span></button>
+		</td>
+	</tr>
+	{/foreach}
+	{/nocache}
+</table>
+<br>
+<div class="blockquote">{$navigation}</div>

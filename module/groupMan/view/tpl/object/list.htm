@@ -1,0 +1,39 @@
+<div>{$lang.groupList}</div>
+<br>
+<div class="listHeader">
+	<div class="row cell5 center">#</div>
+	<div class="row cell10 center">{$lang.id}</div>
+	<div class="row cell65 center">{$lang.name}</div>
+	<div class="row cell20 center">{$lang.properties}</div>
+	<br class="clear">
+</div>
+{nocache}
+{foreach name=entity key=entityKey item=entityItem from=$entityList}
+<div class="blockquote center" id="row{$entityItem.id}">
+	<div class="row cell5 center">{$entityItem.num}</div>
+	<div class="row cell10 center">{$entityItem.id}</div>
+	<div class="row cell65 center">
+		{$entityItem.name}
+	</div>
+	<div class="row cell20 center">
+		<a href="/groupMan/v_listMembers/gid={$entityItem.id}" data="gid={$groupItem.id}">
+			<img src="theme/{$settings.theme}/img/icon/members.png" alt="{$lang.members}" title="{$lang.members}">
+		</a>
+		<a href="/groupMan/v_delObject/id={$entityItem.id}" rel="nofollow">
+			<img src="theme/{$settings.theme}/img/icon/delete.png" title="{$lang.delete}" alt="{$lang.delete}">
+		</a>
+		<a href="/groupMan/v_editObject/id={$entityItem.id}" rel="nofollow">
+			<img src="theme/{$settings.theme}/img/icon/edit.png" title="{$lang.edit}" alt="{$lang.edit}">
+		</a>
+		{if $entityItem.actvie == '1'} 
+		<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+		{else}
+		<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+		{/if}
+	</div>
+	<br class="clear">
+</div>
+{/foreach}
+<br>
+<div class="blockquote">{$navigation}</div>
+{/nocache}

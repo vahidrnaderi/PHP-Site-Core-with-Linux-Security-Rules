@@ -1,0 +1,67 @@
+<div style="padding: 20px;" class="simpleBorder curvedFull shadowFull blueGradient">
+	<div style="display: none;">POPUP: #</div>
+	<table>
+		<tr>
+			<td width="60%">
+				{nocache}
+				<div>
+					<div class="row cell30">
+						<b>{$lang.to}:</b>
+					</div>
+					{if isset($to)}
+					<div class="row cell70">
+						<b>&nbsp;{$to}</b>
+						<input id="to" name="to" class="input" type="hidden" size="30" maxlength="500" value="{$to}">
+					</div>
+					{else}
+					<div class="row cell70">
+						<input id="to" name="to" class="input" type="text" size="30" maxlength="500">
+					</div>
+					{/if}
+				</div>
+				{/nocache}
+				<div>
+					<div class="row cell30">
+						<b>{$lang.category}:</b>
+					</div>
+					<div class="row cell70">
+						<select id="category" name="category">
+							{nocache}
+							{foreach name=category key=categoryKey item=categoryItem from=$category}
+								{if $categoryKey == $category.selected}
+									<option value="{$categoryKey}" selected="selected">{$categoryItem}</option>
+								{else}
+									{if $categoryKey == "selected" || !isset($categoryItem)}
+										<option value=""> ... </option>
+									{else}
+							  			<option value="{$categoryKey}">{$categoryItem}</option>
+							  		{/if}
+							  	{/if}
+						  	{/foreach}
+						  	{/nocache}
+				  		</select>
+				  	</div>
+				</div>
+				<div>
+					<div class="row cell30">
+						<b>{$lang.message}:</b>
+					</div>
+					<div class="row cell70">
+						<textarea id="message" name="message" rows="5" cols="30"></textarea>
+					</div>
+				</div>
+			</td>
+			<td width="20%" style="vertical-align: top;">
+				<button class="curvedFull shadowFull" style="width: 140px; height: 160px" onclick="
+						$('#content').farajax('loader', '/sms/c_addObject',
+					   'to=' + document.getElementById('to').value + '::{$lang.to}<>Multi<>1<>ce<>500' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>3' +
+					   '&message=' + document.getElementById('message').value + '::{$lang.message}<>Multi<>1<>ce<>5000'
+					); 
+					$('#modalWindow').faraModal('closeModal', 'modalWindow');">
+					<span>{$lang.send}</span>
+				</button>
+			</td>
+		</tr>
+	</table>
+</div>

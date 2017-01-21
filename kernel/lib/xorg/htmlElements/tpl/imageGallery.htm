@@ -1,0 +1,24 @@
+{nocache}
+<div id="{$galleryId}">
+	<div>
+		{iimg id=$entityList.1.id src=$entityList.1.url width=300 height=300 class="tip masterImage" alt=$entityList.1.name title=$entityList.1.name}
+	</div>
+	<br>
+	<div class="whiteFrame" style="height: 58px; overflow: auto;">
+		{foreach name=entity key=entityKey item=entityItem from=$entityList}
+		<div class="row cell19" style="margin-right: 1px;">
+			<div class="hover paddy2 greyFrame pointer">
+				{iimg id={$entityItem.id} src={$entityItem.url} width=50 height=50 class="tip otherImage" alt={$entityItem.name} title={$entityItem.name}}
+			</div>
+			<div class="displayNone">
+				{iimg id={$entityItem.id} src={$entityItem.url} width=300 height=300 class="tip otherImage" alt={$entityItem.name} title={$entityItem.name}}
+			</div>
+	  	</div>
+	  	{if $entityKey is div by 5}
+	 	<br class="clear">
+	 	<br>
+		{/if}
+		{/foreach}
+	</div>
+</div>
+{/nocache}

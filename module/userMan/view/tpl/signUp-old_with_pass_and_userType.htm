@@ -1,0 +1,88 @@
+<!-- 
+<h1>{$lang.signUp}</h1>
+<br>
+ -->
+<font face="Nazanin"> 
+<div class="paddy10" style="border: 2px dashed #cecece">
+		<div class="row cell1">
+			&nbsp;
+		</div>
+		<div class="row cell20">
+			<input id="email" class="cell94" name="email" placeholder="{$lang.email}" type="email" maxlength="100" pattern="{literal}^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{2,5}${/literal}">
+		</div>
+		<div class="row cell1">
+			<img class="tip pointer" title="ایمیل واقعی خود را وارد کنید زیرا به عنوان نام کاربری شما بوده، راه ارتباطی اولیه با شما می باشد و غیر قابل تغییر است." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+		</div>
+		<div class="row cell4 LH25">
+			&nbsp;
+		</div>
+		<div class="row cell1">
+			&nbsp;
+		</div>
+		<div class="row cell20">
+			<input id="password" dir="rtl" style="direction: rtl;" class="cell94" name="password" placeholder="{$lang.password}" type="password" maxlength="20" data-typetoggle="#show-password" required>
+		</div>
+		<div class="row cell7 clearFix" style="background: #cecece; height: 20px; margin-top: 3px; margin-right: -96px;">
+			<div class="row cell15" style="margin-top: 3px;">
+				<input id="show-password" type="checkbox" style="height:12px">
+			</div>
+			<div class="row cell85 LH23">
+				نمایش کلمه عبور
+			</div>
+		</div>
+		<div class="row cell4 LH25">
+			&nbsp;
+		</div>
+		<div class="row cell1">
+			&nbsp;
+		</div>
+		<div class="row cell20">
+			<select id="userType" name="userType"  class="cell97 h25">
+				<option value="0"> تعیین نوع کاربر </option>
+				<option value="1">حقیقی</option>
+				<option value="2">حقوقی</option>
+			</select>
+		</div>
+		<div class="row cell1">
+			<img class="tip pointer" title="لطفا شخصیت حقیقی یا حقوقی خود را بدرستی انتخاب نمایید." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+		</div>
+		<div class="row cell4 LH25">
+			&nbsp;
+		</div>
+		<div class="row cell1">
+			&nbsp;
+		</div>
+		<div class="row cell20">
+			<input id="securityQuestion" class="cell94" name="securityQuestion" placeholder="{$securityQuestion.question}" type="text" maxlength="200">
+		</div>
+		<div class="row cell1">
+			<img class="tip pointer" title="پاسخ سوال را بصورت صحیح و به فارسی تایپ کنید." src="theme/{$settings.theme}/img/icon/unknown.png" style="margin-top: 7px;">
+		</div>
+		<div class="row cell4 LH25">
+			<input id="securityId" class="cell94" name="securityId" value="{$securityQuestion.id}" type="hidden" maxlength="11">
+		</div>
+	<div class="clearFix">
+		<div class="row cell1">
+		</div>
+		<div class="row cell99 LH25">
+			<input class="row cell3" id="acceptLaws" type="checkbox" style="height:12px;margin-top: 6px;">
+			<font class="row cell95" color="white" size="3px">
+				با ثبت نام خود در سایت تایید می نمایم که <a title="قوانین بازار بزرگ ایده آل" class="tip" style="color:yellow;" href="pageLoader/v_load/idealmart_laws">قوانین</a> و حقوق و مجوزهای انتشار مطالب بازار بزرگ ایده آل را خوانده، تغییرات آتی را نیز مطالعه خواهم کرد و قبول می نمایم.
+			</font>
+		</div>
+	</div>
+	<div class="paddy1" style="margin-right:1%;">
+		<button id="submitSignup" onclick="
+			$('#content').farajax('loader', '/userMan/c_signUp',
+					'&email=' + document.getElementById('email').value + '::{$lang.email}<>Mail<>1<>ce<>100' +
+				   	'&password=' + document.getElementById('password').value + '::{$lang.password}<>Multi<>1<>ce<>45' + 
+				   	'&securityQuestion=' + document.getElementById('securityQuestion').value + '::{$lang.securityQuestion}<>Multi<>1<>ce<>100' +
+				   	'&securityId=' + document.getElementById('securityId').value + '::{$lang.securityId}<>Multi<>1<>nce<>11' +
+				   	'&userType=' + document.getElementById('userType').value + '::نوع کاربری<>Number<>1<>ce<>1'
+			);
+		" disabled="disabled" style="background-color:grey;">{$lang.submit}
+		</button>
+	</div>
+</div>
+</font>
+<commands value="$('#password').showPassword();">

@@ -1,0 +1,8 @@
+{nocache}
+<select id="{$name}" name="{$name}" class="input" size="{$size}">
+	<option value=""> ... </option>
+	{foreach $options as $option}
+			<option value="{$option[1]}" style="background-color:#{$option[3]};">{$option[2]}</option>
+	{/foreach}
+</select>
+{/nocache}

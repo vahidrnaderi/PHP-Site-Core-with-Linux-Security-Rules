@@ -1,0 +1,21 @@
+<div class="listFull clearFix">
+	<div class="row cell4">&nbsp;</div>
+	<div class="row cell25">{$lang.userName}: <input id="userName" name="userName" class="input" type="text" size="20" maxlength="45"></div>
+	<div class="row cell2">&nbsp;</div>
+	<div class="row cell25">{$lang.password}: <input id="password" name="password" class="input" type="password" size="20" maxlength="20"></div>
+	<div class="row cell2">&nbsp;</div>
+	<div class="row cell25">{$lang.rePassword}: <input id="rePassword" name="rePassword" class="input" type="password" size="20" maxlength="20"></div>
+	<div class="row cell5">&nbsp;</div>
+	<div class="row cell10 LH35" style="padding-top: 12px;">
+		<button onclick="
+			$('#userAdd').farajax('loader', '/userMan/c_userAdd',
+					'userName=' + document.getElementById('userName').value + '::{$lang.userName}<>Multi<>1<>ce<>45' +
+				   	'&password=' + document.getElementById('password').value + '::{$lang.password}<>Multi<>1<>ce<>20' +
+				   	'&rePassword=' + document.getElementById('rePassword').value + '::{$lang.rePassword}<>Multi<>1<>ce<>20'
+			);
+			$('#userList').farajax('loader', '/userMan/c_userList');
+		 	">
+	 		<span>{$lang.submit}</span>
+	 	</button>
+	</div>
+</div>

@@ -1,0 +1,28 @@
+<hgroup class="center" style="margin-top: 50px;">
+	<h1>Free Site Map Generator</h1>
+	<h2>ساخت نقشه سایت رایگان</h2>
+</hgroup>
+<div class="center" style="margin-top: 40px;">
+	<input id="url" name="url" dir="auto" maxlength="40" class="sitemapInputBox" placeholder="{$lang.url}" onclick="this.value='http://';" autocomplete="off" required>
+	<button style="margin: 10px auto; padding: 30px 150px;" onclick="
+				$('#content').farajax('loader', '/seo/c_sitemapGenerate', 
+			   'url=' + document.getElementById('url').value + '::{$lang.url}<>Multi<>1<>ce<>40'
+		);
+	">
+	{$lang.submit}
+	</button>
+	<br><br>
+	<div class="bgBox paddy10">
+		<p>
+			نقشه سایت به منظور کمک و اطلاع رسانی خزنده های موتورهای جستجو تولید می شود. این فایل به موتورهای جستجو کمک میکند تا صفحات و منوهای سایت شما را
+			به راحتی یافته و درون بانک اطلاعاتی خود ذخیره نماید.
+			<br>
+			موتور جستجوی گوگل برای سرعت عمل بالاتر و بهتر نسبت به این فایلها بسیار حساس می باشد.
+		</p>
+		<br>
+		<p>
+			برای اطلاعات بیشتر به لینک زیر مراجعه فرمایید.<br>
+			<a href="http://www.sitemaps.org/protocol.html">http://www.sitemaps.org/protocol.html</a>
+		</p>
+	</div>
+</div>

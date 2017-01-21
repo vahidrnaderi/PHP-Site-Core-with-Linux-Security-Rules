@@ -1,0 +1,12 @@
+<div id="pageIn" class="pageIn">
+	<h1 class="title">{$lang.userList}</h1>
+	<img src="theme/{$settings.theme}/img/icon/s.png" onload="$('#userAdd').farajax('loader', '/userMan/v_userAdd'); $('#userList').farajax('loader', '/userMan/c_userList');">
+	<div id="resultBox" class="listFull">
+		<div>
+				<div id="userAdd"></div>
+		</div>
+		<div>
+				<div id="userList"></div>
+		</div>
+	</div>	
+</div>

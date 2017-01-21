@@ -1,0 +1,30 @@
+<div class="listHeader">
+	<div class="row cell5 center">#</div>
+	<div class="row cell10 center">{$lang.id}</div>
+	<div class="row cell20 center">{$lang.userName}</div>
+	<div class="row cell30 center">{$lang.email}</div>
+	<div class="row cell30 center">{$lang.firstName} {$lang.lastName}</div>
+	<div class="row cell5 center">{$lang.members}</div>
+	<br class="clear">
+</div>
+	{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	<div class="blockquote">
+		<div class="row cell5 center">#</div>
+		<div class="row cell10 center">{$entityItem.id}</div>
+		<div class="row cell20 center">{$entityItem.userName}&nbsp;</div>
+		<div class="row cell30 center">{$entityItem.email}&nbsp;</div>
+		<div class="row cell30 center">{$entityItem.firstName}&nbsp;{$entityItem.lastName}</div>
+		<div class="row cell5 center">
+			{if $entityItem.isMember > 0}
+			<input id="{$entityItem.id}" name="{$entityItem.id}" type="checkbox" checked="checked" onchange="$('#temp').farajax('loader', '/groupMan/c_setMembers', 'gid={$entityItem.gid}&uid={$entityItem.id}');"></input>
+			{else}
+			<input id="{$entityItem.id}" name="{$entityItem.id}" type="checkbox" onchange="$('#temp').farajax('loader', '/groupMan/c_setMembers', 'gid={$entityItem.gid}&uid={$entityItem.id}');"></input>
+			{/if}
+		</div>
+		<br class="clear">
+	</div>
+{/foreach}
+{/nocache}
+<br>
+<div class="blockquote">{$navigation}</div>

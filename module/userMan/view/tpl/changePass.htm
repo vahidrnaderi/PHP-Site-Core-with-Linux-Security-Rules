@@ -1,0 +1,36 @@
+<h1 style="color:black;">{$lang.forgetPassword}</h1>
+<div>
+	<div class="curvedFull paddy10">
+		<p>{$lang.rememberTip}</p>
+		<br>
+		<div class="clearFix">
+			<div class="row col-xs-5 col-lxs-3 LH35">{$lang.userName} / {$lang.email}:</div>
+			<div class="row col-xs-7 col-lxs-5"><input id="userName" name="userName" class="input" type="text" size="30" maxlength="100"></div>
+		</div>
+		<div id="resetPassSection" class="clearFix displayNone">
+			<div class="row cell25 LH35">{$lang.code}:</div>
+			<div class="row cell75"><input id="resetPass" name="resetPass" class="input" type="text" size="30" maxlength="16"></div>
+		</div>
+		<div id="newPasswordSection" class="clearFix displayNone">
+			<div class="row cell25 LH35">{$lang.newPassword}:</div>
+			<div class="row cell75"><input id="newPassword" name="newPassword" class="input" type="password" size="30" maxlength="45"></div>
+		</div>
+		<br><br>
+		<div class="paddy1 center">
+			<button onclick="
+				$('#content').farajax('loader', '/userMan/c_changePass',
+					   'userName=' + document.getElementById('userName').value + '::{$lang.userName}<>Multi<>1<>ce<>100' +
+					   '&resetPass=' + document.getElementById('resetPass').value + '::{$lang.code}<>Multi<>1<>nce<>8' +
+					   '&newPassword=' + document.getElementById('newPassword').value + '::{$lang.newPassword}<>Multi<>1<>nce<>45'
+				);
+				//alert('userMail: ' + document.getElementById('userName').value + '\n' + 'resetPass: ' + document.getElementById('resetPass').value + '\n' +'newPassword: ' + document.getElementById('newPassword').value);
+				if(document.getElementById('userName').value){
+					$('#resetPassSection').fadeIn('slow');
+					$('#newPasswordSection').fadeIn('slow');
+				}
+			">
+			ارسال کد تغییر رمز
+			</button>
+		</div>
+	</div>
+</div>

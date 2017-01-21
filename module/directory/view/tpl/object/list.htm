@@ -1,0 +1,39 @@
+<h2>{$lang.directoryList}</h2>
+<br>
+<div class="listHeader clearFix">
+	<div class="row cell5 center">#</div>
+	<div class="row cell10 center">{$lang.id}</div>
+	<div class="row cell30 center">{$lang.name}</div>
+	<div class="row cell25 center">{$lang.category}</div>
+	<div class="row cell30 center">{$lang.properties}</div>
+</div>
+{nocache}
+{foreach name=entity key=entityKey item=entityItem from=$entityList}
+<div class="blockquote clearFix" id="row{$entityItem.id}">
+	<div class="row cell5 center">{$entityItem.num}</div>
+	<div class="row cell10 center">{$entityItem.id}</div>
+	<div class="row cell30 center">
+		<a href="/directory/c_showListObject/{$entityItem.id}_{$entityItem.name}" rel="nofollow">{$entityItem.name}</a>
+	</div>
+	<div class="row cell25 center">{$entityItem.category}&nbsp;</div>
+	<div class="row cell30" align="center">
+		<a href="/directory/c_showListObject/{$entityItem.id}_{$entityItem.name}" rel="nofollow">
+			<img src="theme/{$settings.theme}/img/icon/information.png" title="{$lang.info}" alt="{$lang.info}">
+		</a>
+		<a href="/directory/v_delObject/id={$entityItem.id}" rel="nofollow">
+			<img src="theme/{$settings.theme}/img/icon/delete.png" title="{$lang.delete}" alt="{$lang.delete}">
+		</a>
+		<a href="/directory/v_editObject/id={$entityItem.id}" rel="nofollow">
+			<img src="theme/{$settings.theme}/img/icon/edit.png" title="{$lang.edit}" alt="{$lang.edit}">
+		</a>
+		{if $entityItem.actvie == '1'} 
+		<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+		{else}
+		<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+		{/if}
+	</div>
+</div>
+{/foreach}
+<br>
+<div class="blockquote">{$navigation}</div>
+{/nocache}

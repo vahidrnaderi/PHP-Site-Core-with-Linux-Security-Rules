@@ -1,0 +1,7 @@
+{nocache}
+<div id="{$id}" class="microGallery">
+	{foreach name={$id} key=alt item=image from=$images}
+	<img src="{$image}" alt="{$alt}"/>
+	{/foreach}
+</div>
+{/nocache}

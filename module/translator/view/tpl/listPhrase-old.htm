@@ -1,0 +1,51 @@
+<div id="pageIn" class="pageIn">
+	<h1 class="title">{$lang.listPhrase} [<a href="/translator/v_addPhrase">{$lang.addPhrase}</a>]</h1>
+	<table id="resultBox" class="listFull">
+		<tr class="listHeader">
+			<td width="5%">#</td>
+			<td width="5%">{$lang.id}</td>
+			<td width="10%">{$lang.timeStamp}</td>
+			<td width="5%">{$lang.langCode}</td>
+			<td width="20%">{$lang.code}</td>
+			<td width="40%">{$lang.translate}</td>
+			<td width="15%">{$lang.properties}</td>
+		</tr>
+		{nocache}
+		{foreach name=entity key=entityKey item=entityItem from=$entityList}
+		<tr class="blockquote" id="row{$entityItem.id}">
+			<td align="center">{$entityItem.num}</td>
+			<td align="center">{$entityItem.id}</td>
+			<td align="center">{$entityItem.timeStamp}</td>
+			<td id="langCode{$entityItem.id}" align="center">{$entityItem.langCode}</td>
+			<td id="code{$entityItem.id}">{$entityItem.code}</td>
+			<td id="translate{$entityItem.id}">{$entityItem.translate}</td>
+			<td align="center">
+				<img src="theme/{$settings.theme}/img/icon/information.png" title="{$entityItem.description}" alt="{$entityItem.description}">
+				<a href="/translator/c_delPhrase/id={$entityItem.id},phrase={$entityItem.code}">
+					<img src="theme/{$settings.theme}/img/icon/delete.png" onclick="$('#content').farajax('loader', '/translator/c_listPhrase');">
+				</a>
+				<img src="theme/{$settings.theme}/img/icon/edit.png" onclick="document.getElementById('langCode{$entityItem.id}').innerHTML = '<select id=\'langCodeValue{$entityItem.id}\' name=\'langCodeValue{$entityItem.id}\'>{foreach name=langCodeSelector key=langCodeKey item=langCodeItem from=$langCodeSelector}{if $langCodeKey == $langCodeSelector.selected}<option value={$langCodeKey} selected=selected>{$langCodeItem}</option>{else}{if $langCodeKey == selected || !isset($langCodeItem)}<option value=\'\'> ... </option>{else}<option value={$langCodeKey}>{$langCodeItem}</option>{/if}{/if}{/foreach}'; document.getElementById('translate{$entityItem.id}').innerHTML = '<input id=\'translateValue{$entityItem.id}\' name=\'translate{$entityItem.id}\' class=\'input\' type=\'text\' size=\'30\' maxlength=\'100\' value=\'{$entityItem.translate|escape}\'>';">
+				{if $entityItem.actvie == '1'} 
+				<img src="theme/{$settings.theme}/img/icon/powerOn.png">
+				{else}
+				<img src="theme/{$settings.theme}/img/icon/powerOff.png">
+				{/if}
+				<button onclick="if(existObj('translateValue{$entityItem.id}')){
+																				$('#content').farajax('loader', '/translator/c_editPhrase',
+																				'langId={$entityItem.id}' + '::{$lang.id}<>Number<>1<>ce<>11' +
+																				'&langCode=' + document.getElementById('langCodeValue{$entityItem.id}').value + '::{$lang.langCode}<>Multi<>1<>ce<>45' +
+																			   	'&code=' + document.getElementById('code{$entityItem.id}').innerHTML + '::{$lang.code}<>Multi<>1<>ce<>100' +
+																			   	'&translate=' + document.getElementById('translateValue{$entityItem.id}').value + '::{$lang.translate}<>Multi<>1<>ce<>100000'
+																		);}">
+																		<span>{$lang.submit}</span>
+																		</button>
+			</td>
+		</tr>
+	{/foreach}
+	{/nocache}
+	</table>
+	<br>
+	{nocache}
+	<div class="blockquote">{$navigation}</div>
+	{/nocache}
+</div>

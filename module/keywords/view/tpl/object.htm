@@ -1,0 +1,7 @@
+<div id="pageIn" class="pageIn">
+	<h1 class="title">{$lang.draw} - [<a href="/draw/v_category" title="{$lang.category}">{$lang.category}</a>]</h1>
+	<div id="add"></div>
+	<br>
+	<div id="list"></div>
+	<img src="theme/{$settings.theme}/img/icon/s.png" onload="$('#add').farajax('loader', '/draw/v_addObject'); $('#list').farajax('loader', '/draw/c_listObject');">
+</div>

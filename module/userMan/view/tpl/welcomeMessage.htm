@@ -1,0 +1,26 @@
+{nocache}
+{if isset($userPic)}
+<div class="col-xs-2 col-lxs-1 center LH23">
+	<!-- <img width="20" height="20" src="{$userPic}"> -->
+	{iimg width=20 height=20 src="{$userPic}" class="img-rounded"}
+</div>
+{/if}
+<div class="col-xs-10 col-lxs-7">
+	{$welcomeMessage}
+</div>
+<div class="clearfix visible-xs"></div>
+<div class="col-xs-6 col-lxs-2 center">
+	<button type="button" class="LH20 pull-left" style="background-color: inherit;padding:2px;" onclick="
+			 $('#accessories').farajax('loader', '/cPanel/c_list');
+			 $('#accessories').slideToggle('slow');
+		 ">{$lang.cPanel}</button>
+</div>
+<div class="col-xs-6 col-lxs-2">
+	 <button type="button" class="LH20" style="background-color: inherit;padding:2px;" onclick="
+			 $('#temp').farajax('loader', '/userMan/c_logout');
+			 setTimeout('redirectToHome();', 5000);
+			 $('#footerSendMessage').farajax('loader', '/pageLoader/v_load/sendMessage');
+			 setTimeout('$(\'#loginGate\').farajax(\'loader\', \'/pageLoader/v_load/loginGate\');', 1000);
+		 ">{$lang.logout}</button>
+</div>
+{/nocache}

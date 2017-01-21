@@ -1,0 +1,61 @@
+<div class="curvedFull paddy5" style="background: #fff;">
+	<div class="curvedFull paddy5" style="background: #e7e7e7;">
+		<div id="uploader" class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.file}:
+			</div>
+			<div class="row cell90">
+				<div id="srcfilePath" style="border: 1px solid #000;" onclick="BrowseServer('filePath', 'single');">
+					<img src="theme/{$settings.theme}/img/icon/plus.png">
+				</div>
+				<input id="contentPath" name="contentPath" type="hidden" size="15">
+			</div>
+		</div>
+		<div class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.name}:
+			</div>
+			<div class="row cell90">
+				<input id="name" name="title" class="input" type="text" maxlength="500">
+			</div>
+		</div>
+		<div class="clearFix" style="padding: 1px 0px;">
+			<div class="row cell10">
+				{$lang.category}:
+			</div>
+			<div class="row cell90">
+				<ul id="categorymenu" class="mcdropdown_menu">
+					{$category}
+				</ul>
+				<input type="text" name="category" id="category" value="">
+			</div>
+		</div>
+		<div class="clearFix" style="padding: 1px 0px 0px 0px;">
+			<div class="row cell10">
+				{$lang.message}:
+			</div>
+			<div class="row cell90">
+				<div id="editorFullText"></div>
+				<div id="textcontents" style="display: none">
+					<!-- This div will be used to display the editor contents. -->
+					<div id="description"></div>
+				</div>
+				<textarea id="fullText" name="fullText" rows="10" onclick=" this.style.display='none';" onfocus="createEditor('description', 'editorFullText'); this.style.display='none';" style="border: 3px solid #d3d3d3;"></textarea>
+			</div>
+		</div>
+		<br>
+		<center>
+			<button style="padding: 20px 60px;" onclick="
+				$('#content').farajax('loader', '/gallery/c_addObject', 
+					   'name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+					   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>ce<>11' +
+					   '&description=' + getText('description') + '::{$lang.description}<>Multi<>1<>ce<>1000000000' +
+					   '&contentPath=' + document.getElementById('contentPath').value + '::{$lang.file}<>Multi<>1<>nce<>200'
+				);
+			">
+			{$lang.submit}
+			</button>
+		</center>
+	</div>
+</div>
+<commands value="{literal}$('#category').mcDropdown('#galleryCategory', {allowParentSelect: true});{/literal}">

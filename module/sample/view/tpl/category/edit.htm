@@ -1,0 +1,39 @@
+<table class="listFull">
+	<tr>
+		<td>{$lang.categoryName}:</td>
+		<td><input id="name" name="name" class="input" type="text" size="20" maxlength="100" value="{$entity.name}"></td>
+		<td>{$lang.categoryParent}:</td>
+		<td>
+			<select id="category" name="category">
+				{nocache}
+				{foreach name=category key=categoryKey item=categoryItem from=$category}
+					{if $categoryKey == $category.selected}
+						<option value="{$categoryKey}" selected="selected">{$categoryItem}</option>
+					{else}
+						{if $categoryKey == "selected" || !isset($categoryItem)}
+							<option value=""> ... </option>
+						{else}
+				  			<option value="{$categoryKey}">{$categoryItem}</option>
+				  		{/if}
+				  	{/if}
+			  	{/foreach}
+			  	{/nocache}
+	  		</select>
+		</td>
+		<td>{$lang.categoryDescription}:</td>
+		<td><textarea id="description" name="description" rows="3" cols="20">{$entity.description}</textarea></td>
+		<td>
+			<button onclick="
+			$('#content').farajax('loader', '/post/c_editCategory', 
+					'id={$entity.id}::{$lang.name}<>Number<>1<>ce<>11' +
+					'&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+				   	'&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>11' +
+				   	'&description=' + document.getElementById('description').value + '::{$lang.description}<>Multi<>1<>nce<>500'		   				   
+			); 
+			$('#list').farajax('loader', '/post/c_listCategory');
+			">
+			<span>{$lang.submit}</span>
+			</button>
+		</td>
+	</tr>
+</table>

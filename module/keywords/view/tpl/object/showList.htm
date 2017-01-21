@@ -1,0 +1,9 @@
+<script type="text/javascript">
+var word_array = [
+{nocache}
+	{foreach name=entity key=entityKey item=entityItem from=$entityList}
+	{literal}{text: "{/literal}{$entityKey}", weight: {$entityItem}, link: "/relatedContent/c_relatedKeyword/word={$entityKey}"{literal}},{/literal}
+	{/foreach}
+{/nocache}
+];
+</script>

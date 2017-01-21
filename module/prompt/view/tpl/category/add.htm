@@ -1,0 +1,27 @@
+<div class="clearFix">
+	<h2 class="title">{$lang.categoryAdd}</h2>
+	<div class="row cell15">{$lang.categoryName}:</div>
+	<div class="row cell20"><input id="name" name="name" class="input" type="text" size="10" maxlength="100"></div>
+	<div class="row cell15">{$lang.categoryParent}:</div>
+	<div class="row cell40">
+		<ul id="categorymenu" class="mcdropdown_menu">
+			{$category}
+		</ul>
+		<input id="category" name="category" style="height: 28px;" value="">
+	</div>
+	<!-- <div class="row cell10">{$lang.categoryDescription}:</div>
+	<div class="row cell20"><textarea id="description" name="description" rows="3" cols="20"></textarea></div> -->
+	<div class="row cell10 center">
+		<button onclick="
+			$('#content').farajax('loader', '/gallery/c_addCategory', 
+				   '&name=' + document.getElementById('name').value + '::{$lang.name}<>Multi<>1<>ce<>200' +
+				   '&category=' + document.getElementById('category').value + '::{$lang.category}<>Number<>1<>nce<>11'		   				   
+			); 
+		$('#add').farajax('loader', '/gallery/v_addCategory');	
+		$('#list').farajax('loader', '/gallery/c_listCategory');
+		">
+		{$lang.submit}
+		</button>
+	</div>
+</div>
+<commands value="{literal}$('#category').mcDropdown('#galleryCategory', {allowParentSelect: true});{/literal}">
