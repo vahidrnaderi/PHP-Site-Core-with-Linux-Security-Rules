@@ -8,7 +8,7 @@ class m_logger extends masterModule{
 
 	}
 
-	// List Poll
+	// List log
 	public function m_list($filter = null){
 		global $system, $lang, $settings;
 

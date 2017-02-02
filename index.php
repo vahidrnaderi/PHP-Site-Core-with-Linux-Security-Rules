@@ -2,7 +2,7 @@
 ob_start("ob_gzhandler");
 define("superVisor", "kernel/controller/superVisor");
 if(file_exists(superVisor . ".php"))
-require_once(superVisor . ".php");
+	require_once(superVisor . ".php");
 ////echo "<br> **** 11 **** <br>";
 //if($_SERVER['HTTP_REFERER'] == '' || in_array($_SERVER['HTTP_REFERER'], $system->security->trustUrl->trustUrlList())){
 $system->security->session->manager();

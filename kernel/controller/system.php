@@ -15,12 +15,37 @@ class system{
 	public $watchDog;
 	public $logger;
 	public $xorg;
+	public $debug;
 
+	public function debug($fileName, $type, $message){
+		global $settings;
+		
+		$localTime=date(" Y/m/d-h:i:sa ");
+		
+		if($settings['debug']=='on')
+			$message = $localTime."-->  ".$message;
+//			echo "message->$message<br>";
+			$myFile = fopen($fileName, "a") or die("Unable to open file!");
+//			echo "myfile->$myfile<br>";
+			fwrite($myFile, $message);
+			fclose($myFile);
+	}
+	
 	public function system(){
 		global $settings;
 
 		$this->tablePrefix = $settings['tablePrefix'];
 
+
+		/* logger sub system */
+		$subSystem = $settings['libraryAddress'] . "/logger/" . "logger" . $settings['ext2'];
+		if(file_exists($subSystem)){
+			$this->run($subSystem, 'On');
+			$this->logger = new logger();
+		}else{
+			$this->run($subSystem, 'Off');
+		}
+		
 		/* Database sub system */
 		$subSystem = $settings['libraryAddress'] . "/dbm/" . "dbm" . $settings['ext2'];
 		if(file_exists($subSystem)){
@@ -120,15 +145,6 @@ class system{
 			$this->run($subSystem, 'Off');
 		}
 
-		/* logger sub system */
-		$subSystem = $settings['libraryAddress'] . "/logger/" . "logger" . $settings['ext2'];
-		if(file_exists($subSystem)){
-			$this->run($subSystem, 'On');
-			$this->logger = new logger();
-		}else{
-			$this->run($subSystem, 'Off');
-		}
-
 		/* Xorg sub system */
 		$subSystem = $settings['libraryAddress'] . "/xorg/" . "xorg" . $settings['ext2'];
 		if(file_exists($subSystem)){
@@ -141,9 +157,10 @@ class system{
 	}
 
 	public function run($subSystem, $status){
-
+		
 		if($status == 1 || $status == 'On' || $status == 'on'){
 			require_once($subSystem);
+			$this->debug("logs/chart.log", "chr", "$subSystem\n");
 		}elseif($status == 0 || $status == 'Off' || $status == 'off'){
 			die("\"$subSystem\" is Off");
 		}

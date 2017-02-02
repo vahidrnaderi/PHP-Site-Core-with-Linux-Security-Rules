@@ -1,5 +1,5 @@
 <?php
-class c_watchDog extends m_logger{
+class c_logger extends m_logger{
 
 	public $active = 1;
 
@@ -8,7 +8,7 @@ class c_watchDog extends m_logger{
 		
 	}
 
-	// List Poll
+	// List Log
 	public function c_list($filter = null){
 		$this->m_list($filter);
 	}
