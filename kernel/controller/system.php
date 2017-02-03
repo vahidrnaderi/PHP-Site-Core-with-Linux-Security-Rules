@@ -23,7 +23,8 @@ class system{
 		$localTime=date(" Y/m/d-h:i:sa ");
 		
 		if($settings['debug']=='on')
-			$message = $localTime."-->  ".$message;
+			if($type=="chr")
+				$message = $localTime."--> chart: ".$message;
 //			echo "message->$message<br>";
 			$myFile = fopen($fileName, "a") or die("Unable to open file!");
 //			echo "myfile->$myfile<br>";
@@ -160,14 +161,15 @@ class system{
 		
 		if($status == 1 || $status == 'On' || $status == 'on'){
 			require_once($subSystem);
-			$this->debug("logs/chart.log", "chr", "$subSystem\n");
+			$this->debug("logs/chart.log", "chr", " subSystem=> $subSystem\n");
 		}elseif($status == 0 || $status == 'Off' || $status == 'off'){
 			die("\"$subSystem\" is Off");
 		}
 	}
 
 	public function filterSplitter($string){
-
+		$this->debug("logs/chart.log", "chr", " Function=> system.php-> filterSplitter($string)\n");
+		
 		if(strstr($string, ',') || strstr($string, '=')){
 			$records = explode(",", $string);
 			foreach ($records as $key => $record){
@@ -278,6 +280,7 @@ class system{
 	}
 	
 public function filterSplit($string){
+		$this->debug("logs/chart.log", "chr", " Function=> system.php-> filterSplit($string)\n");
 
 		if(strstr($string, ',') || strstr($string, '=')){
 			$records = explode(",", $string);
