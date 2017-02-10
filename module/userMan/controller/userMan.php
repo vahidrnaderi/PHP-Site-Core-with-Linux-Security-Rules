@@ -51,7 +51,7 @@ class c_userMan extends m_userMan{
 			$passwordOrg=$password;
 			$password = md5($password);
 		}
-		if($system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `userName` = '$userName' AND `password` = '$password'") == 1 || $system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `email` = '$userName' AND `password` = '$password'") == 1){
+		if($system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `userName` = '$userName' AND (`password` = '$password' OR `password` = '$passwordOrg')") == 1 || $system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `email` = '$userName' AND (`password` = '$password' OR `password` = '$passwordOrg')") == 1){
 // echo "<br>2-> ".$this->userTable."<br>";				
 			$result = mysql_query("SELECT `id`, `gid` FROM `$this->userTable` WHERE `userName` = '$userName' OR `email` = '$userName'");
 			$profile = mysql_fetch_array($result);

@@ -29,7 +29,7 @@ switch ($sysVar[mode]){
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/mobileActivation" . $settings['ext4']);
 		break;
 	case "v_signUp":
-		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_signUp\n");
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_signUp \$_POST=".print_r($_POST,true)." \$_GET=".print_r($_GET,true)."\n");
 		
 		$viewMode = (!empty($_POST[viewMode]) ? $_POST[viewMode] : "signUp");
 		$system->dbm->db->select("*", "`$settings[faqObject]`", "", "rand()", "", "", "0,1");

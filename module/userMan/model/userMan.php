@@ -85,7 +85,7 @@ class m_userMan extends masterModule{
 			//			if($values['password'] == $values['retypePassword']){
 ////1			if(strlen($values['password']) >= $settings['minCharPassword']){
 				if($_POST['securityQuestion'] === $system->dbm->db->informer("`$settings[faqObject]`", "`id` = $_POST[securityId]", "answer")){
-					$password =null; ////1 md5($values['password']);
+					$password =$values['password'];//null; ////1 md5($values['password']);
 
 					$system->dbm->db->insert("`$this->userTable`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gx`, `tr`, `tx`, `gid`, `password`, `email`, `userType`", "1, '$timeStamp', 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, '$password', '$values[email]', '0'");  ////1 $values[userType]
 
