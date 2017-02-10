@@ -2,11 +2,14 @@
 class prompt extends system{
 
 	function prompt(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> prompt.php-> \n");
 
 	}
 
 	public function promptType($type){
-		global $lang;
+		global $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> prompt.php-> \n");
 
 		switch($type){
 			default:
@@ -22,6 +25,7 @@ class prompt extends system{
 
 	public function promptShow($type, $title, $message, $button=null){
 		global $lang, $settings, $system, $sysVar;
+		system::debug($settings['debugFile'], "chrF", "	Function=> prompt.php-> \n");
 		
 		if(!is_array($button)){
 			$button = array($button);

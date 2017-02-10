@@ -5,12 +5,15 @@ class m_logger extends masterModule{
 	public $logger = "logger";
 
 	function m_logger(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> logger Module >> model/logger.php-> m_logger()\n");
 
 	}
 
 	// List log
 	public function m_list($filter = null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> logger Module >> model/logger.php-> m_list($filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("logger", "c_list", "`timeStamp`, `owner`, `id`, `active`, `agent`, `version`, `ip`, `reffer`, `host`, `os`, `op`, `mode`, `addressBar`, `message`", "`$this->logger`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 100, 7);

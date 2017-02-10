@@ -35,6 +35,7 @@ class m_userMan extends masterModule{
 	
 	public function __construct() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> __construct()\n");
 /*		
 //		$this->moduleName = "userMan";
 //		$this->userTable = $settings['user'];
@@ -59,6 +60,8 @@ class m_userMan extends masterModule{
 	}
 
 	function m_userMan(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_userMan()\n");
 
 		$this->userTable = $this->tablePrefix . $this->userTable;
 		$this->accessTable = $this->tablePrefix . $this->accessTable;
@@ -68,6 +71,7 @@ class m_userMan extends masterModule{
 
 	public function m_signUp($values){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_signUp($values)\n");
 
 		$timeStamp = time();
 //		if(strstr($values['userName'], '@')){
@@ -124,6 +128,7 @@ class m_userMan extends masterModule{
 
 	public function m_userAdd($userName, $password){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_userAdd($userName, $password)\n");
 
 		$timeStamp = time();
 		$password = md5($password);
@@ -138,6 +143,8 @@ class m_userMan extends masterModule{
 
 	public function m_edit($values){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_edit($values)\n");
+		
 //print_r($values);
 		$religion = (!empty($values['religion'])) ? ",`religion` = $values[religion]" : null;
 		$financialStatus = (!empty($values['financialStatus'])) ? ",`financialStatus` = $values[financialStatus]" : null;
@@ -161,6 +168,7 @@ class m_userMan extends masterModule{
 
 	public function m_userDel($filter){
 		global $lang, $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_userDel($filter)\n");
 
 		$filter = $system->filterSplitter($filter);
 
@@ -172,6 +180,8 @@ class m_userMan extends masterModule{
 
 	public function m_userList($filter=null, $viewMode='show'){
 		global $lang, $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_userList($filter, $viewMode)\n");
+		
 //echo $filter;
 		$filter = $system->filterSplitter($filter);
 
@@ -250,7 +260,8 @@ class m_userMan extends masterModule{
 	}
 
 	public function m_login($uid, $gid){
-		global $lang, $system;
+		global $lang, $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_login($uid, $gid)\n");
 
 		$system->security->session->manager($uid, $gid);
 		$system->xorg->smarty->assign("uid", $uid);
@@ -262,6 +273,7 @@ class m_userMan extends masterModule{
 	
 	function m_loginContent(){
 		global $lang, $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_loginContent()\n");
 		
 		if($_SESSION['uid'] && $_SESSION['uid'] != 2){
 //			echo "uid=" . $_SESSION['uid'] . " t1";
@@ -320,6 +332,7 @@ class m_userMan extends masterModule{
 
 	function m_loginContentTitle(){
 		global $lang, $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_loginContentTitle()\n");
 		
 		if($_SESSION['uid'] && $_SESSION['uid'] != 2){
 //echo "<br> uid=" . $_SESSION['uid'] . " t1";
@@ -353,12 +366,15 @@ class m_userMan extends masterModule{
 	
 	public function m_menu($pattern="dropDown"){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_menu($pattern)\n");
 
 		return $system->xorg->smarty->display($settings['commonTpl'] . 'menu' . $settings['ext4']);
 	}
 
 	public function m_logout(){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php->  m_logout()\n");
+		
 //echo "<br> m_logout --> $_SESSION[uid] <br>";
 //echo "<br>userMan.php_line316   uid --> $_SESSION[uid] # $uid **** gid --> $_SESSION[gid] # $gid time-->".time()."</br> ";
 		$uid = $_SESSION['uid'];
@@ -372,6 +388,7 @@ class m_userMan extends masterModule{
 
 	public function m_setSettings($name, $value){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_setSettings($name, $value)\n");
 
 		$timeStamp = time();
 		if($system->dbm->db->count_records("`$this->userSettings`", "`uid` = $_SESSION[uid] AND `name` = '$name'") > 0){
@@ -392,6 +409,7 @@ class m_userMan extends masterModule{
 
 	public function m_remember($userName,$mode){
 		global $settings, $lang, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_remember($userName,$mode)\n");
 
 		if(isset($userName)){
 			$code = rand(1111, 99999999);
@@ -441,6 +459,7 @@ class m_userMan extends masterModule{
 
 	public function m_emActivation($values){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_emActivation($values)\n");
 
 		if(isset($values['emailMobile'])){
 // 			echo 3;
@@ -480,6 +499,7 @@ class m_userMan extends masterModule{
 
 	public function m_resetPass($userName, $code, $newPassword){
 		global $settings, $lang, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=>  Module >> model/.php-> m_resetPass($userName, $code, $newPassword)\n");
 
 		$passReset = $system->dbm->db->informer("`$settings[userTalbe]`", "`userName` = '$userName' OR `email` = '$userName'", "passReset");
 		if($passReset){

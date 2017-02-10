@@ -2,6 +2,8 @@
 class m_sms extends masterModule{
 
 	function m_sms(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_sms()\n");
 
 	}
 
@@ -11,6 +13,7 @@ class m_sms extends masterModule{
 	// Add Category
 	public function m_addCategory($name, $category){
 		global $settings, $lang, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_addCategory($name, $category)\n");
 
 		$time = time();
 		$system->dbm->db->insert("`$settings[smsCategory]`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gx`, `name`, `category`", "1, $time, 1, 1, 1, 1, 1, 1, 1, '$name', '$category'");
@@ -18,15 +21,20 @@ class m_sms extends masterModule{
 	}
 	// Edit Category
 	public function m_editCategory($values){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_editCategory($values)\n");
 
 	}
 	// Del Category
 	public function m_delCategory($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_delCategory($id)\n");
 
 	}
 	// List Category
 	public function m_listCategory($filter = null){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_listCategory($filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("sms", "c_categoryList", "`id`, `active`, `name`, `category`", "`$settings[smsCategory]`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 20, 7);
@@ -49,10 +57,14 @@ class m_sms extends masterModule{
 	}
 	// Activate Category
 	public function m_activateCategory($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_activateCategory($id)\n");
 
 	}
 	// Deactive Category
 	public function m_deactivateCategory($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_deactivateCategory($id)\n");
 
 	}
 
@@ -62,6 +74,7 @@ class m_sms extends masterModule{
 	// Add Object
 	public function m_addObject($to, $message, $category=null, $show=true){
 		global $settings, $lang, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_addObject($to, $message, $category, $show)\n");
 
 		$category = (!empty($category)) ? $category : 1;
 		$time = time();
@@ -195,15 +208,20 @@ class m_sms extends masterModule{
 	}
 	// Edit Object
 	public function m_editObject($values){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_editObject($values)\n");
 
 	}
 	// Del Object
 	public function m_delObject($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_delObject($id)\n");
 
 	}
 	// List Object
 	public function m_listObject($viewMode, $filter = null){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_listObject($viewMode, $filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("sms", "c_$viewMode", "`id`, `active`, `name`, `category`, `author`, `imagePath`, `abstract`", "`$settings[smsObject]`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 20, 7);
@@ -231,6 +249,7 @@ class m_sms extends masterModule{
 	// Show Object
 	public function m_showObject($id){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_showObject($id)\n");
 
 		$files = explode(",", $system->dbm->db->informer("`$settings[smsObject]`", "`id` = $id", "filePath"));
 		$system->xorg->smarty->assign("fileName", $files[0]);
@@ -238,10 +257,14 @@ class m_sms extends masterModule{
 	}
 	// Activate Object
 	public function m_activateObject($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_activateObject($id)\n");
 
 	}
 	// Deactive Object
 	public function m_deactivateObject($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_deactivateObject($id)\n");
 
 	}
 
@@ -250,19 +273,27 @@ class m_sms extends masterModule{
 	###########################
 	// Add Object to favorite
 	public function m_addObjectToFavorite($name, $articleContent){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_addObjectToFavorite($name, $articleContent)\n");
 
 	}
 	// Del Object from favorite
 	public function m_delObjectFromFavorite($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_delObjectFromFavorite($id)\n");
 
 	}
 	// List favorite
 	public function m_listFavorite($filter = null){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> m_listFavorite($filter)\n");
 
 	}
 	
 	public function SendREST($username,$password, $Source, $Destination, $MsgBody, $Encoding){
 		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> model/sms.php-> SendREST($username,$password, $Source, $Destination, $MsgBody, $Encoding)\n");
+	
     		$URL = "http://www.asanak.ir/webservice/v1rest/sendsms";
     		$msg = urlencode(trim($MsgBody));
     		$url = $URL.'?username='.$username.'&password='.$password.'&source='.$Source.'&destination='.$Destination.'&message='. $msg;

@@ -13,6 +13,8 @@ switch ($sysVar[mode]){
 		$c_seo->c_listObject('list', $_POST[filter]);
 		break;
 	case "v_sitemapGenerate":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> index.php-> v_sitemapGenerate\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object/sitemapGenerate" . $settings['ext4']);
 		break;
 	case "c_sitemapGenerate":

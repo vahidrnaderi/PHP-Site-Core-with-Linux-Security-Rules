@@ -5,9 +5,11 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	case "v_aboutUs":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> index.php-> v_aboutUs\n");
 		$system->xorg->smarty->display($settings['customiseTpl'] . "aboutUs" . $settings['ext4']);
 		break;
 	case "v_sendMessage":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> index.php-> v_sendMessage\n");
 		$system->xorg->smarty->display($settings['customiseTpl'] . "sendMessage" . $settings['ext4']);
 		break;
 	case "c_sendMessage":
@@ -21,6 +23,7 @@ switch ($sysVar[mode]){
 		$c_contact->c_showMessage($id);
 		break;
 	case "v_contactUs":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> index.php-> v_contactUs\n");
 		$system->xorg->smarty->display($settings['customiseTpl'] . "contactUs" . $settings['ext4']);
 		break;
 	default:

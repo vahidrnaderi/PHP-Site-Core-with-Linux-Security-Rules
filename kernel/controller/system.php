@@ -20,16 +20,47 @@ class system{
 	public function debug($fileName, $type, $message){
 		global $settings;
 		
-		$localTime=date(" Y/m/d-h:i:sa ");
+		$localTime=date(" Y/m/d-h:i:sa");
 		
 		if($settings['debug']=='on')
-			if($type=="chr")
-				$message = $localTime."--> chart: ".$message;
-//			echo "message->$message<br>";
-			$myFile = fopen($fileName, "a") or die("Unable to open file!");
-//			echo "myfile->$myfile<br>";
-			fwrite($myFile, $message);
+			switch ($type){
+				case "str":
+					$message = $localTime."-->Start: ".$message;
+					break;
+				case "chr":
+					if($settings['chr']=='on')
+						$message = $localTime."-->Chart: ".$message;
+					break;
+				case "chrF":
+					if($settings['chrF']=='on')
+						$message = $localTime."-->Chart Functions: ".$message;
+					break;
+				case "chrM":
+					if($settings['chrM']=='on')
+						$message = $localTime."-->Chart Functions: ".$message;
+					break;
+				case "err":
+					if($settings['chrE']=='on')
+						$message = $localTime."-->Error: ".$message;
+					break;
+				default:
+					$message = $localTime."-->Fatal-Error: system.php=> Function: debug($fileName, $type, $message) -> No Debug's type definition.";
+					break;
+		}
+		
+		if($settings['debugMyFileWrite']=='on'){
+			$myFile = fopen($settings['debugFile'], "a") or die("Unable to open file!");
+			//			echo "myfile->$myfile<br>";
+			fwrite($myFile, "-----------$localTime************debug($fileName, $type, $message)\n");
 			fclose($myFile);
+		}
+		
+		
+//			echo "message->$message<br>";
+		$myFile = fopen($fileName, "a") or die("Unable to open file!");
+//			echo "myfile->$myfile<br>";
+		fwrite($myFile, $message);
+		fclose($myFile);
 	}
 	
 	public function system(){
@@ -158,17 +189,20 @@ class system{
 	}
 
 	public function run($subSystem, $status){
+		global $settings;
 		
 		if($status == 1 || $status == 'On' || $status == 'on'){
 			require_once($subSystem);
-			$this->debug("logs/chart.log", "chr", " subSystem=> $subSystem\n");
+			$this->debug($settings['debugFile'], "chr", "subSystem is ON=> $subSystem\n");
 		}elseif($status == 0 || $status == 'Off' || $status == 'off'){
+			$this->debug($settings['debugFile'], "err", "subSystem is OFF=> $subSystem\n");
 			die("\"$subSystem\" is Off");
 		}
 	}
 
 	public function filterSplitter($string){
-		$this->debug("logs/chart.log", "chr", " Function=> system.php-> filterSplitter($string)\n");
+		global $settings;
+		$this->debug($settings['debugFile'], "chrF", "	Function=> system.php-> filterSplitter($string)\n");
 		
 		if(strstr($string, ',') || strstr($string, '=')){
 			$records = explode(",", $string);
@@ -280,7 +314,8 @@ class system{
 	}
 	
 public function filterSplit($string){
-		$this->debug("logs/chart.log", "chr", " Function=> system.php-> filterSplit($string)\n");
+		global $settings;
+		$this->debug($settings['debugFile'], "chrF", "	Function=> system.php-> filterSplit($string)\n");
 
 		if(strstr($string, ',') || strstr($string, '=')){
 			$records = explode(",", $string);

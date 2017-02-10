@@ -5,18 +5,22 @@ class logger extends system{
 
 	public function __construct() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> logger.php-> __construct()\n");
 		
 		$this->table = $settings['logger'];
 //		print "In BaseClass constructor\n";
 	}
 
 	function logger(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> logger.php-> logger()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 	}
 
 	public function logIt($type, $message){
 		global $lang, $settings, $system, $sysVar;
+		system::debug($settings['debugFile'], "chrF", "	Function=> logger.php-> logIt($type, $message)\n");
 		
 ////	type= frm  -->  فیلدهای فرم
 ////	type= viw  -->  گردش در سایت

@@ -5,12 +5,15 @@ class lang extends system{
 	private $userSettings = "user_settings";
 	
 	function lang(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> lang.php-> lang()\n");
 		
 		$this->table = $this->tablePrefix . $this->table;
 	}
 	
 	public function langMan(){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> lang.php-> langMan()\n");
 		
 		if(!empty($_SESSION['uid'])){
 			if($system->dbm->db->informer("`$this->userSettings`", "`uid` = $_SESSION[uid] AND `name` = 'lang'", "value") != null){

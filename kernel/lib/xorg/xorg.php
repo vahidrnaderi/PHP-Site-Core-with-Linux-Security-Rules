@@ -16,6 +16,7 @@ class xorg extends system{
 
 	public function xorg(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> xorg.php-> xorg()\n");
 
 //		/* Ajax sub library */
 //		$subSystem = $settings[libraryAddress] . "/xorg/ajax/" . "ajax" . $settings[ext2];
@@ -94,6 +95,9 @@ class xorg extends system{
 	}
 
 	public function combo($fields, $table, $filter=null, $selected=null){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> xorg.php-> combo($fields, $table, $filter, $selected)\n");
+		
 //		int $i;
 //		print "<br>Selected: " . $selected . "<br>";
 		$field = implode(", ", $fields);
@@ -115,6 +119,9 @@ class xorg extends system{
 
 	
 	public function combo_array($fields, $table, $filter=null, $selected=null){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> xorg.php-> combo_array($fields, $table, $filter, $selected)\n");
+		
 //		int $i;
 //		print "<br>Selected: " . $selected . "<br>";
 		$field = implode(", ", $fields);

@@ -3,11 +3,15 @@
 class filter {
 	
 	function filter(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> filter.php-> filter()\n");
 		
 	}
 	
 	public function queryString($needle=null){
-		
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> filter.php-> queryString($needle)\n");
+				
 		$string = $_GET[filter];
 		$arr = array();
 		

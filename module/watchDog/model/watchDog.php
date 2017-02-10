@@ -5,12 +5,15 @@ class m_watchDog extends masterModule{
 	public $watchDog = "watch_dog";
 
 	function m_watchDog(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> watchDog Module >> model/watchDog.php-> m_watchDog()\n");
 
 	}
 
 	// List Poll
 	public function m_list($filter = null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> watchDog Module >> model/watchDog.php-> m_list($filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("watchDog", "c_list", "`timeStamp`, `owner`, `id`, `active`, `agent`, `version`, `ip`, `reffer`, `host`, `os`, `op`, `mode`, `title`", "`$this->watchDog`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 100, 7);

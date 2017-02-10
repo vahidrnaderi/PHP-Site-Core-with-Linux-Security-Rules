@@ -4,12 +4,15 @@ class m_cPanel extends masterModule{
 	public $moduleName = "cPanel";
 
 	function m_cPanel(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> cPanel Module >> model/cPanel.php-> m_cPanel()\n");
 
 	}
 
 	// List cPanel
 	public function m_list($filter = null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> cPanel Module >> model/cPanel.php-> m_list($filter)\n");
 
 		$system->dbm->db->select("`id`, `active`, `parent`, `op`, `mode`, `level`, `caption`, `viewIcon`, `viewInCP`", "`$settings[access]`", "`parent` = 0 AND `viewInCP` = 1 AND `active` = 1");
 
@@ -52,7 +55,8 @@ class m_cPanel extends masterModule{
 	}
 
 	public function m_emptyCache($show=true, $filter=null){
-		global $system, $lang;
+		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> cPanel Module >> model/cPanel.php-> m_emptyCache($show, $filter)\n");
 
 		if(!empty($filter)){
 			$system->utility->fileSystem->emptyDirectory($filter);

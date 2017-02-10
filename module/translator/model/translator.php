@@ -6,12 +6,15 @@ class m_translator extends masterModule{
 	public $langCodeTable = "lang_code";
 
 	function m_translator(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> model/translator.php-> m_translator()\n");
 
 		$this->shopProfile = $this->tablePrefix . $this->langTable;
 	}
 
 	public function m_listPhrase($filter=null){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> model/translator.php-> m_listPhrase($filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("translator", "c_listPhrase", "`base`.`id`, `base`.`active`, `base`.`timeStamp`, `$this->langCodeTable`.`code` as `langCode`, `base`.`code`, `translate`", "`$this->langTable` as `base`, `$this->langCodeTable`", "`base`.`langCode` = `$this->langCodeTable`.`id` $filter", "`base`.`code` ASC", "", "", "", "", 20, 7);
@@ -35,6 +38,7 @@ class m_translator extends masterModule{
 
 	public function m_editPhrase($langId, $translate){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> model/translator.php-> m_editPhrase($langId, $translate)\n");
 
 		$system->dbm->db->update("`$this->langTable`", "`translate` = '$translate'", "`id` = $langId");
 		$system->watchDog->exception("s", $lang[editPhrase], sprintf($lang[successfulDone], $lang[editPhrase], $translate));
@@ -42,6 +46,7 @@ class m_translator extends masterModule{
 
 	public function m_addPhrase($langCode, $code, $translate){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> model/translator.php-> m_addPhrase($langCode, $code, $translate)\n");
 
 		if($system->dbm->db->count_records("`$this->langTable`", "`langCode` = '$langCode' AND `code` = '$code'") == 0){
 			$timeStamp = time();
@@ -54,6 +59,7 @@ class m_translator extends masterModule{
 
 	public function m_delPhrase($id, $phrase){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> model/translator.php-> m_delPhrase($id, $phrase)\n");
 		
 		$system->dbm->db->delete("`$this->langTable`", "`id` = $id");
 		$system->watchDog->exception("s", $lang[delPhrase], sprintf($lang[successfulDone], $lang[delPhrase], $phrase));

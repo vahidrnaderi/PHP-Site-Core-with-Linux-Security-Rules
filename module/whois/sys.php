@@ -5,6 +5,9 @@
 define ("YAHOO_ONLINE", 1);
 define ("YAHOO_OFFLINE", 2);
 function execute($yahoo = "", &$errno, &$errstr){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> execute($yahoo, &$errno, &$errstr)\n");
+		
     $errno = 0;
     $errstr = "";
     $lines = @file ("http://opi.yahoo.com/online?u=" . $yahoo . "&m=t"); 
@@ -19,6 +22,8 @@ function execute($yahoo = "", &$errno, &$errstr){
 }
 function yahstat($id, $img=null){
     global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> yahstat($id, $img)\n");
+		
     if(!empty($id)){
 	if(is_array($id)){
 	    foreach($id as $i){
@@ -55,6 +60,9 @@ function yahstat($id, $img=null){
 #           Whois           #
 ###########################*/
 function whois($id){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> whois($id)\n");
+		
     if(informer($id, 'session') == '1'){
 	if(informer($id, 'perm') == '2')
 	    $who = 'ea';
@@ -81,6 +89,8 @@ function whois($id){
 ###########################*/
 function session_list(){
     global $mydb, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> session_list()\n");
+		
     $users = mysql_query("SELECT * FROM `session` WHERE `id` <> '0'");
     $guests = mysql_query("SELECT * FROM `session` WHERE `id` = '0'");
     $usercount = mysql_num_rows($users);
@@ -100,6 +110,8 @@ function session_list(){
 // Fetch stat of any table *****************
 function statistic($from, $field){
     global $mydb, $lang, $config, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> statistic($from, $field)\n");
+		
     $mydb->select("`$field`", "`$from`", "`aprove` = '1'");
     if($mydb->fetch_row() > 0){
 	while($row = $mydb->fetch_array())

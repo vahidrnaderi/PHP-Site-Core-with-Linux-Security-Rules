@@ -7,6 +7,8 @@ class m_seo extends masterModule{
 	private $actual;
 
 	function m_seo(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> m_seo()\n");
 
 	}
 
@@ -16,6 +18,7 @@ class m_seo extends masterModule{
 	// List Object
 	public function m_listObject($viewMode, $filter = null){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> m_listObject($viewMode, $filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("seo", "c_$viewMode", "`base`.`id`, `base`.`active`, `base`.`name`, `$settings[seoCategory]`.`name`", "`$settings[seoObject]` as `base`, `$settings[seoCategory]`", "`base`.`category` = `$settings[seoCategory]`.`id` $filter", "`base`.`timeStamp` DESC", "", "", "", "", 20, 7);
@@ -42,6 +45,7 @@ class m_seo extends masterModule{
 
 	public function m_sitemapGenerate($site, $navigate=true){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> m_sitemapGenerate($site, $navigate)\n");
 
 		$this->site = (strstr($site, 'http://')) ? $site : 'http://' . $site;
 		if($navigate) {
@@ -58,6 +62,9 @@ class m_seo extends masterModule{
 	}
 
 	public function getTitle() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> getTitle()\n");
+		
 		$preg2="/<title>(.*?)<\/title>/i";
 		$title = array();
 		preg_match($preg2,$this->html,$title);
@@ -65,6 +72,9 @@ class m_seo extends masterModule{
 	}
 
 	public function getLinks() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> getLinks()\n");
+		
 		$preg = "/<a.*? href=(\"|')(.*?)(\"|').*?>(.*?)<\/a>/i";
 		$links = array();
 		preg_match_all($preg,$this->html,$links);
@@ -125,6 +135,9 @@ class m_seo extends masterModule{
 	}
 
 	public function link($link) {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> link($link)\n");
+		
 		// remove hash portion of url to make sure the url isn't reprocessed
 		$hashPos = strpos($link,'#');
 		if ($hashPos !== false) $link = substr($link, 0, $hashPos);
@@ -135,6 +148,9 @@ class m_seo extends masterModule{
 	}
 
 	public function navigate() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> navigate()\n");
+		
 		$this->html = file_get_contents($this->actual);
 
 		if ($this->html) { // make sure we have something to parse
@@ -155,10 +171,16 @@ class m_seo extends masterModule{
 	}
 
 	public function getHash() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> getHash()\n");
+		
 		return $this->hash;
 	}
 
 	public function generateSiteMap() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> generateSiteMap()\n");
+		
 		$xml = new SimpleXMLElement("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"></urlset>");
 		$xml->addAttribute('encoding', 'UTF-8');
 //		print_r($this->hash);
@@ -175,6 +197,9 @@ class m_seo extends masterModule{
 	}
 
 	public function ping($sitemap_url){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> seo Module >> model/seo.php-> ping($sitemap_url)\n");
+		
 		$curl_req = array();
 		$urls = array();
 		$urls[] = "http://www.google.com/webmasters/tools/ping?sitemap=".urlencode($sitemap_url);

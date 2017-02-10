@@ -5,18 +5,22 @@ class watchDog extends system{
 
 	public function __construct() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> __construct()\n");
 		
 		$this->table = $settings['watchDog'];
 //		print "In BaseClass constructor\n";
 	}
 
 	function watchDog(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> watchDog()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 	}
 
 	public function exceptionType($type){
-		global $lang;
+		global $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> exceptionType($type)\n");
 
 		switch($type){
 			case "i":
@@ -56,6 +60,7 @@ class watchDog extends system{
 
 	public function exception($type, $title, $message, $button=null, $command=null){
 		global $lang, $settings, $system, $sysVar;
+		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> exception($type, $title, $message, $button, $command)\n");
 // echo "$message <br>";
 		$clientInfo = $system->utility->browserDetector->whatBrowser();
 
@@ -105,10 +110,12 @@ class watchDog extends system{
 		$system->xorg->smarty->assign("command", $command);
 		if($_SERVER["HTTP_X_REQUESTED_WITH"] == 'XMLHttpRequest'){
 //			echo " 1 ";
+			system::debug($settings['debugFile'], "chrE", "	Function=> watchDog.php-> die and exception($type, $title, $message, $button, $command)\n");
 			die($system->xorg->smarty->fetch($settings['commonTpl'] . "watchDog" . $settings['ext4']));
 //			echo " 2 ";
 		}else{
 //			echo " 3 ";
+			system::debug($settings['debugFile'], "chrE", "	Function=> watchDog.php-> die and exception($type, $title, $message, $button, $command)\n");
 			$system->xorg->smarty->display($settings['commonTpl'] . "watchDog" . $settings['ext4']);
 			
 ////			$system->xorg->smarty->assign("watchDogTest", $system->xorg->smarty->fetch($settings[commonTpl] . "watchDog" . $settings[ext4]));

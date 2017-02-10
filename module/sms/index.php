@@ -8,10 +8,14 @@ switch ($sysVar[mode]){
 	# Category                #
 	###########################
 	case "v_category":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> index.php-> v_category\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/category" . $settings['ext4']);
 		break;
 		// Add Category
 	case "v_addCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> index.php-> v_addCategory\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->combo(array('id', 'name'), $settings['smsCategory']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/category/add" . $settings['ext4']);
 		break;
@@ -44,10 +48,14 @@ switch ($sysVar[mode]){
 		# Object (SMS)            #
 		###########################
 	case "v_object":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> index.php-> v_object\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object" . $settings['ext4']);
 		break;
 		// Add Object
 	case "v_addObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> index.php-> v_addObject\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->combo(array('id', 'name'), $settings['smsCategory']));
 		$to = $system->utility->filter->queryString('to');
 		$system->xorg->smarty->assign("to", $to);
@@ -90,6 +98,8 @@ switch ($sysVar[mode]){
 		###########################
 		// Add Object to favorite
 	case "v_addObjectToFavorite":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> sms Module >> index.php-> v_addObjectToFavorite\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/add" . $settings['ext4']);
 		break;
 	case "c_addObjectToFavorite":

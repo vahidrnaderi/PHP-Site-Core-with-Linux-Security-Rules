@@ -12,6 +12,7 @@ class rss extends system {
 
 	function rss(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> rss()\n");
 		
 		$this->title = $settings['websiteTitle'];
     	$this->language = $settings['language'];
@@ -22,6 +23,7 @@ class rss extends system {
 
     public function create($items) {
     	global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> create($items)\n");
    	
         $res = "";
         // header
@@ -55,6 +57,8 @@ class rss extends system {
     }
 
 	public function load($source, $count=2){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> load($source, $count)\n");
 
 		$xmlDoc = new DOMDocument();
 		$xmlDoc->load($source);

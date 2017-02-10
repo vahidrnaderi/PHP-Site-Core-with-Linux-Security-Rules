@@ -3,10 +3,15 @@
 class arrayMan{
 
 	function arrayMan(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> arrayMan.php-> arrayMan()\n");
 
 	}
 
 	public function array_sort($array, $on, $order='desc'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> arrayMan.php-> array_sort($array, $on, $order)\n");
+		
 		$new_array = array();
 		$sortable_array = array();
 
@@ -40,9 +45,9 @@ class arrayMan{
 	}
 
 	public function parentFinder($table, $id){
-		global $system;
-
-
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> arrayMan.php-> parentFinder($table, $id)\n");
+		
 		$system->dbm->db->select("`parent`", "`$table`", "`id` = $id");
 		$row = $system->dbm->db->fetch_array();
 

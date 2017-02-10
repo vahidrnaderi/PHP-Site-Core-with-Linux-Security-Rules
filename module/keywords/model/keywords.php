@@ -2,6 +2,8 @@
 class m_keywords extends masterModule{
 
 	function m_keywords(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> keywords Module >> model/keywords.php-> m_keywords()\n");
 
 	}
 
@@ -11,6 +13,8 @@ class m_keywords extends masterModule{
 	// List Object
 	public function m_listObject($viewMode, $filter = null){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> keywords Module >> model/keywords.php-> m_listObject($viewMode, $filter)\n");
+	
 //echo "<br>keywords.php_line14   uid --> $_SESSION[uid] **** gid --> $_SESSION[gid] time-->".time()."</br> ";
 //echo "<br> <br> filter1--> $filter </br> </br>";
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;

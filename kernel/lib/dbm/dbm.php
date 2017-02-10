@@ -18,14 +18,14 @@ class dbm extends system{
 		$this->user = $user;
 
 		/* Mysql sub system */
-		$subSystem = $settings['libraryAddress'] . "/dbm/mysql/" . "mysql" . $settings['ext2'];
+/*		$subSystem = $settings['libraryAddress'] . "/dbm/mysql/" . "mysql" . $settings['ext2'];
 		if(file_exists($subSystem)){
 			$this->run($subSystem, 'On');
 			$this->db = new mysql($this->host, $this->user, $this->pass, $this->name);
 		}else{
 			$this->run($subSystem, 'Off');
 		}
-
+*/
 		switch($type){
 			case "mssql":
 				/* Mssql sub system */

@@ -7,6 +7,7 @@ class relation extends system{
 
 	public function relation(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> relation.php-> relation()\n");
 
 		/* Nusoap sub library */
 		$subSystem = $settings['libraryAddress'] . "/relation/nusoap/" . "sms.class" . $settings['ext2'];

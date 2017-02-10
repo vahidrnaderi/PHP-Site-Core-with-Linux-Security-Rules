@@ -3,6 +3,8 @@
 class selectElement extends htmlElements{
 	
 	function selectElement(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> selectElement.php-> selectElement()\n");
 		
 	}
 	
@@ -16,6 +18,7 @@ class selectElement extends htmlElements{
 	 */
 	public function select($name, $options, $selected = null, $size=1){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> selectElement.php-> select($name, $options, $selected, $size)\n");
 	
 //echo "<br><div style='color:white;direction:ltr;'>";
 //print_r($options);
@@ -31,6 +34,7 @@ class selectElement extends htmlElements{
 	
 	public function select2d($name, $options, $selected = null, $size=1){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> selectElement.php-> select2d($name, $options, $selected, $size)\n");
 		
 // echo "<br><div style='color:white;direction:ltr;'>";
 // print_r($options);	

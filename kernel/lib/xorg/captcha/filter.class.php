@@ -3,6 +3,9 @@
 class filters{
 	 
 	function noise (&$image, $runs = 30){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> filters.class.php-> noise (&$image, $runs)\n");
+		
 		$w = imagesx($image);
 		$h = imagesy($image);
 		for ($n = 0; $n < $runs; $n++){
@@ -20,6 +23,9 @@ class filters{
 	} //noise
 
 	function signs (&$image, $font, $cells = 3)	{
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> filters.class.php-> signs (&$image, $font, $cells)\n");
+		
 		$w = imagesx($image);
 		$h = imagesy($image);
 		for ($i = 0; $i < $cells; $i++){
@@ -40,6 +46,9 @@ class filters{
 	} //signs
 
 	function blur (&$image, $radius = 3){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> filters.class.php-> blur (&$image, $radius)\n");
+		
 		$radius  = round(max(0, min($radius, 50)) * 2);
 		$w       = imagesx($image);
 		$h       = imagesy($image);

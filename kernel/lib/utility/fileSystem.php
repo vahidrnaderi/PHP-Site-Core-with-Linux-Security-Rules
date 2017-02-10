@@ -3,10 +3,16 @@
 class fileSystem{
 	
 	function fileSystem(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fileSystem.php-> fileSystem()\n");
+		
 
 	}
 
 	public function scanDirectories($rootDir, $allowExt) {
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fileSystem.php-> scanDirectories($rootDir, $allowExt)\n");
+		
 		$dirContent = scandir($rootDir);
 		foreach($dirContent as $key => $content) {
 			if($content == '.' || $content == '..'){
@@ -26,6 +32,9 @@ class fileSystem{
 	}
 
 	public function emptyDirectory($rootDir){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fileSystem.php-> emptyDirectory($rootDir)\n");
+		
 		$dirContent = scandir($rootDir);
 		foreach ($dirContent as $key => $content){
 			if ($content != "." && $content != "..") {

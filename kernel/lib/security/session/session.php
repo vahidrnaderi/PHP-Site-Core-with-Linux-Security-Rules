@@ -10,8 +10,10 @@ class session extends system{
 	public $uid;
 	public $op;
 	public $mode;
-
+	
 	function session(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> session()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 		$this->ip = mysql_real_escape_string($_SERVER['REMOTE_ADDR']);
@@ -29,7 +31,8 @@ class session extends system{
 ////echo "<br>SESSION_mode-->".$this->mode." time-->".time()."</br>";			
 	}
 	public function start($uid, $gid){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> start($uid, $gid)\n");
 
 		$timeStamp = time();
 		$_SESSION['uid'] = intval($uid);
@@ -40,7 +43,9 @@ class session extends system{
 		$system->dbm->db->insert("`$this->table`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `uid`, `agent`, `reffer`, `ip`, `host`, `op`, `mode`", "1, $timeStamp, 1, 5, 1, 1, 1, 1, $_SESSION[uid], '$this->agent', '$this->reffer', '$this->ip', '$this->host', '$this->op', '$this->mode'");
 	}
 	public function kill($uid){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> kill($uid)\n");
+		
 ////echo "<br>session.php_line44   uid --> $_SESSION[uid] # $uid **** gid --> $_SESSION[gid] # $gid time-->".time()."</br> ";
 ////echo "<br>kill-->".$uid. " time-->".time()."</br>";
 		$system->dbm->db->delete("`$this->table`", "`uid` = $uid");
@@ -53,6 +58,9 @@ class session extends system{
 		$this->manager();
 	}
 	public function check($uid){
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> check($uid)\n");
+		
 ////echo "<br>SESSION_check time-->".time()."</br>";
 		if($system->dbm->db->count_records("`$this->table`", "`uid` = $uid") > 0 && session_is_registered('uid'))
 		return true;
@@ -60,7 +68,9 @@ class session extends system{
 		return false;
 	}
 	public function read($field=null){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> read($field)\n");
+		
 ////echo "<br>SESSION_read time-->".time()."</br>";
 		$system->dbm->db->select("*", "`$this->table`", "`ip` = '$_SERVER[REMOTE_ADDR]'");
 		$sessData = $system->dbm->db->fetch_array();
@@ -79,7 +89,9 @@ class session extends system{
 		}
 	}
 	public function update($uid, $gid){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> update($uid, $gid)\n");
+		
 //echo "<br>SESSION_update time-->".time()."</br>";
 		$timeStamp = time();
 		$_SESSION['uid'] = intval($uid);
@@ -91,6 +103,8 @@ class session extends system{
 
 	public function delete(){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> delete()\n");
+		
 ////echo "<br>SESSION_delete time-->".time()."</br>";
 		$timeStamp = time();
 		$offsetTime = $timeStamp - $settings['sessionTimeOut'];
@@ -100,7 +114,9 @@ class session extends system{
 	}
 
 	public function manager($uid=null, $gid=null){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> session.php-> manager($uid, $gid)\n");
+		
 ////echo "<br>SESSION_manager_start time-->".time()."</br>";
 		session_start();
 //echo "<br>### 1 </br>";

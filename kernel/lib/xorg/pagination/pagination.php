@@ -17,12 +17,16 @@ class pagination extends system{
 
 
 	public function pagination() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> pagination()\n");
+		
 		$this->rows_per_page = 50;
 		$this->links_per_page = 7;
 	}
 
 	public function paginateStart($op, $mode, $fields, $tables, $where=null, $order_by=null, $group_by=null, $having=null, $limit=null, $distinct=null, $rows_per_page=20, $links_per_page=7, $append = null){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> paginateStart($op, $mode, $fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct, $rows_per_page, $links_per_page, $append)\n");
 
 //echo "<br>paginateStart=> $tables<br>";
 
@@ -81,6 +85,7 @@ class pagination extends system{
 
 	public function renderFirst() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderFirst()\n");
 
 		if ($this->total_rows == 0)
 		return FALSE;
@@ -94,6 +99,7 @@ class pagination extends system{
 
 	public function renderLast() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderLast()\n");
 
 		if ($this->total_rows == 0)
 		return FALSE;
@@ -107,6 +113,7 @@ class pagination extends system{
 
 	public function renderNext() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderNext()\n");
 
 		if ($this->total_rows == 0)
 		return FALSE;
@@ -121,6 +128,7 @@ class pagination extends system{
 
 	public function renderPrev() {
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderPrev()\n");
 
 		if ($this->total_rows == 0)
 		return FALSE;
@@ -134,6 +142,9 @@ class pagination extends system{
 	}
 
 	public function renderNav() {
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderNav()\n");
+		
 		if ($this->total_rows == 0)
 		return FALSE;
 		
@@ -161,6 +172,7 @@ class pagination extends system{
 
 	public function renderFullNav() {
 		global $lang, $settings, $system;
+		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> renderFullNav()\n");
 
 		$system->xorg->smarty->assign("op", $this->op);
 		$system->xorg->smarty->assign("totalRows", $this->total_rows);

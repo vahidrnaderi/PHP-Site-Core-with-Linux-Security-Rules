@@ -5,12 +5,15 @@ class module extends system{
 	public $table = "module";
 
 	function module(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> module.php-> module()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 	}
 
 	public function loadModule(){
 		global $system, $settings, $lang, $sysVar;
+		system::debug($settings['debugFile'], "chrF", "	Function=> module.php-> loadModule()\n");
 		
 		$sysVar[op] = empty($_GET[op]) ? $settings['defaultOp'] : $_GET[op];
 		$sysVar[mode] = empty($_GET[mode]) ? $settings['defaultMode'] : $_GET[mode];

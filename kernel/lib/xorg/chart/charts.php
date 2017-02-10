@@ -34,6 +34,9 @@ class chart{
 
 	function MakeLinePointChart($fileName)
 	{
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> charts.php-> MakeLinePointChart($fileName)\n");
+		
 		// #DEFINITIONS#####################################
 		$chartx = 5;
 		$charty = 5;
@@ -304,6 +307,9 @@ class chart{
 
 	function MakeBarChart()
 	{
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> charts.php-> MakeBarChart()\n");
+		
 		// #DEFINITIONS#####################################
 		$chartx = 5;
 		$charty = 5;
@@ -511,6 +517,9 @@ class chart{
 
 	function DrawBullet($image, $x, $y, $type, $color)
 	{
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> charts.php-> DrawBullet($image, $x, $y, $type, $color)\n");
+		
 		switch ($type)
 		{
 			case 0:
@@ -555,6 +564,9 @@ class chart{
 	}
 
 	public function chartMaker($xArray, $yArray, $fileName, $title=null, $subTitle=null, $height=400){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> charts.php-> chartMaker($xArray, $yArray, $fileName, $title, $subTitle, $height)\n");
+		
 
 		#FINDING THE MAX NUMBER OF X ELEMENTS#####
 		$xcount = 0;

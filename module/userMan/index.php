@@ -5,15 +5,21 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	case "v_userMan":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_userMan\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/userMan" . $settings['ext4']);
 		break;
 	case "v_emailActivation":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_emailActivation\n");
+		
 		$filter = $system->filterSplit($_GET[filter]);
 		$system->xorg->smarty->assign("email", $system->dbm->db->informer("`user`", $filter, "email"));
 		$system->xorg->smarty->assign("id", $system->dbm->db->informer("`user`", $filter, "id"));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/emailActivation" . $settings['ext4']);
 		break;
 	case "v_mobileActivation":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_mobileActivation\n");
+		
 		$filter = $system->filterSplit($_GET[filter]);
 //		echo $filter;
 		$system->xorg->smarty->assign("mobile", $system->dbm->db->informer("`user`", $filter, "mobile"));
@@ -23,12 +29,16 @@ switch ($sysVar[mode]){
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/mobileActivation" . $settings['ext4']);
 		break;
 	case "v_signUp":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_signUp\n");
+		
 		$viewMode = (!empty($_POST[viewMode]) ? $_POST[viewMode] : "signUp");
 		$system->dbm->db->select("*", "`$settings[faqObject]`", "", "rand()", "", "", "0,1");
 		$system->xorg->smarty->assign("securityQuestion", $row = $system->dbm->db->fetch_array());
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/$viewMode" . $settings['ext4']);
 		break;
 	case "v_userAdd":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_userAdd\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/userAdd" . $settings['ext4']);
 		break;
 	case "v_menu":
@@ -41,6 +51,8 @@ switch ($sysVar[mode]){
 		$c_userMan->c_userList($_GET[filter], 'edit');
 		break;
 	case "v_changePass":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_changePass\n");
+		
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/changePass" . $settings['ext4']);
 		break;
 		

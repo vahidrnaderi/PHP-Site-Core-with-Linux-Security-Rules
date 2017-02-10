@@ -3,11 +3,14 @@
 class imageGalleryElement extends htmlElements{
 	
 	function imageGalleryElement(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> imageGalleryElement.php-> imageGalleryElement()\n");
 		
 	}
 	
 	public function gallery($id){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> imageGalleryElement.php-> gallery($id)\n");
 		
 		$system->dbm->db->select("`id`, `timeStamp`, `owner`, `name`, `category`, `url`", "`$settings[galleryObject]`", "`category` = $id");
 	

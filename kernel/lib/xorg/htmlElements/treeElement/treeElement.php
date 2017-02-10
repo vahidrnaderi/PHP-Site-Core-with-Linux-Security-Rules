@@ -5,11 +5,14 @@ class treeElement extends htmlElements{
 	private $leaf;
 	
 	function treeElement(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeElement()\n");
 		
 	}
 	
 	public function treeTrace($table, $category=0, $level=0, $flag=0) {
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeTrace($table, $category, $level, $flag)\n");
 				
 		$result = mysql_query("SELECT `id`, `category`, `name` FROM `$table` WHERE `category` = $category ORDER BY `name` ASC");
 		if(!empty($result)){
@@ -32,6 +35,9 @@ class treeElement extends htmlElements{
 	}
 	
 	public function tree($table, $category, $id, $class){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> tree($table, $category, $id, $class)\n");
+		
 //		echo "table=".$table. "category=".$category. "id=".$id. "class=".$class;
 		return "<ul id='$id' class='$class'>\n" . $this->treeTrace($table, $category) . "\n" . "</ul>";	
 	}

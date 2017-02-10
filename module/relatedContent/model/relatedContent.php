@@ -4,6 +4,8 @@ class m_relatedContent extends masterModule{
 	private $table = "seo";
 
 	function m_relatedContent(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> relatedContent Module >> model/relatedContent.php-> m_relatedContent()\n");
 
 	}
 
@@ -13,6 +15,7 @@ class m_relatedContent extends masterModule{
 	// Relatd Content
 	public function m_relatedURL($title){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> relatedContent Module >> model/relatedContent.php-> m_relatedURL($title)\n");
 
 		$title = mysql_real_escape_string($title);
 		$system->dbm->db->select("`id`, `url`, `title`", "`$this->table`", "`domain` = '$settings[domain]' AND `title` <> '$title'");
@@ -42,6 +45,7 @@ class m_relatedContent extends masterModule{
 	// Related keyword
 	public function m_relatedKeyword(){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> relatedContent Module >> model/relatedContent.php-> m_relatedKeyword()\n");
 		
 		$word = $system->utility->filter->queryString("word");		
 		$system->xorg->pagination->paginateStart("relatedContent", "c_relatekeyword", "`active`, `id`, `url`, `title`, `text`", "`$this->table`", "`word1` = '$word' OR `word2` = '$word' OR `word3` = '$word' OR `word4` = '$word' OR `word5` = '$word' OR `word6` = '$word' OR `word7` = '$word' OR `word8` = '$word' OR `word9` = '$word' OR `word10` = '$word'", "`timeStamp` DESC", "", "", "", "", 20, 7);

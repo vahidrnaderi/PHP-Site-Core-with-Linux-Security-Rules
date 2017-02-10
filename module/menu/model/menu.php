@@ -2,11 +2,14 @@
 class m_menu extends masterModule{
 
 	function m_menu(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_menu()\n");
 	
 	}
 
 	public function m_addObject($name, $parent=null, $url=null, $icon=null){
-		global $settings, $lang, $system; 
+		global $settings, $lang, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_addObject($name, $parent, $url, $icon)\n"); 
 		
 		$timeStamp = time();
 		$system->dbm->db->insert("`$settings[menu]`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gw`, `gx`, `tr`, `tx`, `ur`, `ux`, `name`, `category`, `url`, `icon`", "1, $timeStamp, $_SESSION[uid], 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '$name', '$parent', '$url', '$icon'");
@@ -14,15 +17,20 @@ class m_menu extends masterModule{
 	}
 	
 	public function m_editObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_editObject()\n");
 		
 	}
 	
 	public function m_delObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_delObject()\n");
 		
 	}
 	
 	public function m_listObject($filter=null){
 		global $settings, $system, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_listObject($filter)\n");
 		
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$time = time();
@@ -45,10 +53,14 @@ class m_menu extends masterModule{
 	}
 	
 	public function m_activateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_activateObject()\n");
 		
 	}
 	
 	public function m_deactivateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> model/menu.php-> m_deactivateObject()\n");
 		
 	}
 

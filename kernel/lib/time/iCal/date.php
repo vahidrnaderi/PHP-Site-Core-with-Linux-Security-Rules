@@ -3,6 +3,7 @@ class iCal{
 
 	public function dator($import = null, $format = null , $cal = 'jalali'){
 		global $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> dator($import, $format, $cal)\n");
 		
 		if(!isset($import))
 		$date = time();
@@ -41,7 +42,8 @@ class iCal{
 	}
 
 	public function jalali_month($time=null){
-		global $lang;
+		global $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> jalali_month($time)\n");
 
 		$time = (!empty($time) ? $time : time());
 		$number_of_day = date("z", $time);
@@ -75,7 +77,9 @@ class iCal{
 	}
 
 	public function jalali_day($time=null){
-		global $lang;
+		global $lang, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> jalali_day($time)\n");
+		
 		$time = (!empty($time) ? $time : time());
 		switch(date("D", $time)){
 			case "Sat":
@@ -103,6 +107,9 @@ class iCal{
 	}
 
 	public function geoimport($yimp, $mimp, $dimp, $himp=0, $mmimp=0, $simp=0){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> geoimport($yimp, $mimp, $dimp, $himp, $mmimp, $simp)\n");
+		
 		list( $gyear, $gmonth, $gday ) = $this->jalali_to_gregorian($yimp, $mimp, $dimp);
 		$time = @mktime($himp, $mmimp, $simp, $gmonth, $gday, $gyear);
 		//print date("M-d-Y", @mktime(0, 0, 0, $gmonth, $gday, $gyear));
@@ -110,6 +117,9 @@ class iCal{
 	}
 
 	public function agegen($birthtime){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> agegen($birthtime)\n");
+		
 		$age = ($birthtime < 0 ? time() + abs($birthtime) : time() - $birthtime);
 		$year = 60 * 60 * 24 * 365;
 		$age = $age / $year;
@@ -118,16 +128,25 @@ class iCal{
 	}
 
 	public function birthtime($year, $month=0, $day=0){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> birthtime($year, $month, $day)\n");
+		
 		$year = 60 * 60 * 24 * 365 * $year;
 		$birthtime = time() - $year;
 		return $birthtime;
 	}
 
 	public function div($a,$b) {
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> div($a,$b)\n");
+		
 		return (int) ($a / $b);
 	}
 
 	public function gregorian_to_jalali ($g_y, $g_m, $g_d){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> gregorian_to_jalali ($g_y, $g_m, $g_d)\n");
+		
 		$g_days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 		$j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
 		$gy = $g_y-1600;
@@ -158,6 +177,9 @@ class iCal{
 
 
 	public function jalali_to_gregorian($j_y, $j_m, $j_d){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> date.php-> jalali_to_gregorian($j_y, $j_m, $j_d)\n");
+		
 		$g_days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 		$j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
 		$jy = $j_y-979;

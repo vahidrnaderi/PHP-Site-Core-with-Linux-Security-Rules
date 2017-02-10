@@ -4,6 +4,8 @@ class m_groupMan extends masterModule{
 	public $tree;
 
 	public function m_groupMan(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_groupMan()\n");
 
 	}
 	###########################
@@ -12,6 +14,7 @@ class m_groupMan extends masterModule{
 	// Add Object
 	public function m_addObject($values){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_addObject($values)\n");
 
 		$timeStamp = time();
 		$system->dbm->db->insert("`$settings[groupManObject]`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gw`, `gx`, `tr`, `tx`, `ur`, `ux`, `name`, `description`", "1, $timeStamp, $_SESSION[uid], 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '$values[name]', '$values[description]'");
@@ -21,6 +24,7 @@ class m_groupMan extends masterModule{
 	// Edit Object
 	public function m_editObject($values){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_editObject($values)\n");
 
 		$timeStamp = time();
 		$system->dbm->db->update("`$settings[groupManObject]`", "`name` = '$values[name]', `description` = '$values[description]'", "`id` = $values[id]");
@@ -30,6 +34,7 @@ class m_groupMan extends masterModule{
 	// Del Object
 	public function m_delObject($id){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_delObject($id)\n");
 
 		$name = $system->dbm->db->informer("`$settings[groupManObject]`", "`id` = $id", "name");
 		$system->dbm->db->delete("`$settings[groupManObject]`", "`id` = $id");
@@ -38,6 +43,7 @@ class m_groupMan extends masterModule{
 	// List Object
 	public function m_listObject($viewMode, $filter=null){
 		global $system,$lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_listObject($viewMode, $filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$time = time();
@@ -59,15 +65,20 @@ class m_groupMan extends masterModule{
 	}
 	// Activate Object
 	public function m_activateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_activateObject()\n");
 
 	}
 	// Deactivate Object
 	public function m_deactivateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_deactivateObject()\n");
 
 	}
 	// List group member
 	public function m_listMembers($gid, $filter=null, $viewMode='list'){
 		global $lang, $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_listMembers($gid, $filter, $viewMode)\n");
 
 //		$filter = $system->filterSplitter($filter);
 
@@ -95,6 +106,7 @@ class m_groupMan extends masterModule{
 	// Set a user to a group
 	public function m_setMembers($gid, $uid){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_setMembers($gid, $uid)\n");
 
 		$timeStamp = time();
 		if($system->dbm->db->count_records("`$settings[groupManMembers]`", "`gid` = $gid AND `uid` = $uid") > 0){
@@ -110,6 +122,7 @@ class m_groupMan extends masterModule{
 	
 	public function m_userGroups($uid){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_userGroups($uid)\n");
 
 		$result = mysql_query("SELECT `gid` FROM `$settings[groupManMembers]` WHERE `uid` = $uid");
 		while($row = mysql_fetch_array($result)){

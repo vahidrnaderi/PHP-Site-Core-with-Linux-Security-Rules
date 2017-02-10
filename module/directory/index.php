@@ -8,6 +8,8 @@ switch ($sysVar[mode]){
 	# Category                #
 	###########################
 	case "v_category":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_category\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->htmlElements->treeElement->tree($settings['directoryCategory'], 0, 'directoryCategory', 'mcdropdown_menu'));
 		$system->xorg->smarty->assign("add", $system->xorg->smarty->fetch("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/category/add" . $settings['ext4']));
 		$system->xorg->smarty->assign("list", $c_directory->c_listCategory());
@@ -15,6 +17,8 @@ switch ($sysVar[mode]){
 		break;
 		// Add Category
 	case "v_addCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_addCategory\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->htmlElements->treeElement->tree($settings['directoryCategory'], 0, 'directoryCategory', 'mcdropdown_menu'));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/category/add" . $settings['ext4']);
 		break;
@@ -23,6 +27,8 @@ switch ($sysVar[mode]){
 		break;
 		// Edit Category
 	case "v_editCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_editCategory\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[directoryCategory]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("category", $system->xorg->combo(array('id', 'name'), $settings['directoryCategory'], '', $entity[category]));
@@ -33,6 +39,8 @@ switch ($sysVar[mode]){
 		break;
 		// Del Category
 	case "v_delCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_delCategory\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[directoryCategory]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("text", sprintf($lang[doYouWantDeleteCategory], $entity[name]));
@@ -47,16 +55,20 @@ switch ($sysVar[mode]){
 		break;
 		// Activate Category
 	case "c_activateCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> c_activateCategory\n");
 
 		break;
 		// Deactive Category
 	case "c_deactivateCategory":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> c_deactivateCategory\n");
 
 		break;
 		###########################
 		# Object (directory)           #
 		###########################
 	case "v_object":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_object\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->htmlElements->treeElement->tree($settings['directoryCategory'], 0, 'directoryCategory', 'mcdropdown_menu'));
 		$system->xorg->smarty->assign("add", $system->xorg->smarty->fetch("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object/add" . $settings['ext4'] ));
 		//		$system->xorg->smarty->assign("list", $c_directory->c_listObject());
@@ -65,6 +77,8 @@ switch ($sysVar[mode]){
 		break;
 		// Add Object
 	case "v_addObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_addObject\n");
+		
 		$system->xorg->smarty->assign("category", $system->xorg->htmlElements->treeElement->tree($settings['directoryCategory'], 0, 'directoryCategory', 'mcdropdown_menu'));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object/add" . $settings['ext4'] );
 		break;
@@ -73,6 +87,8 @@ switch ($sysVar[mode]){
 		break;
 		// Edit Object
 	case "v_editObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_editObject\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[directoryObject]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("category", $system->xorg->htmlElements->treeElement->tree($settings['directoryCategory'], 0, 'directoryCategory', 'mcdropdown_menu'));
@@ -83,6 +99,8 @@ switch ($sysVar[mode]){
 		break;
 		// Del Object
 	case "v_delObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> v_delObject\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[directoryObject]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("text", sprintf($lang['doYouWantDeleteObject'], $entity['title']));
@@ -97,10 +115,14 @@ switch ($sysVar[mode]){
 		break;
 		// Activate Object
 	case "c_activateObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> c_activateObject\n");
+		
 
 		break;
 		// Deactive Object
 	case "c_deactivateObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> index.php-> c_deactivateObject\n");
+		
 
 		break;
 	case "c_showListObject":

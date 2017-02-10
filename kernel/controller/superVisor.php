@@ -11,6 +11,7 @@ if(file_exists($config)){
 	$subSystem = $settings['controllerAddress'] . "/system" . $settings['ext2'];
 	if(file_exists($subSystem)){
 		require_once ($subSystem);
+		system::debug($settings['debugFile'], "str", "\n--------------------------------- \n Start of Loading Site. \n ---------------------------------\n");
 		$system = new system();
 		$system->run($subSystem, 'On');
 	}else{
@@ -47,6 +48,7 @@ if(file_exists($config)){
 	//		die("<center>$lang[licenseError]</center>");
 	//	}
 }else{
+	$system->debug($settings['debugFile'], "err", "Else=> superVisor.php-> Config file not exist\n");
 	die("The system is down !");
 }
 ?>

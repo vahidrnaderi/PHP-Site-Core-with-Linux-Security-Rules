@@ -11,6 +11,7 @@ class captcha{
 
 	function captcha ($length = 6){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> captcha ($length)\n");
 
 		header('Content-type: image/png');
 
@@ -41,6 +42,8 @@ class captcha{
 	} //captcha
 
 	function getFonts (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> getFonts ()\n");
 
 		$fonts = array();
 
@@ -65,10 +68,16 @@ class captcha{
 	} //getFonts
 
 	function getRandFont (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> getRandFont ()\n");
+		
 		return $this->fontpath . $this->fonts[mt_rand(0, count($this->fonts) - 1)];
 	} //getRandFont
 
 	function stringGen (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> stringGen ()\n");
+		
 		$uppercase  = range('A', 'Z');
 		//$lowercase  = range('a', 'z');
 		$numeric    = range(0, 9);
@@ -82,6 +91,9 @@ class captcha{
 	} //StringGen
 
 	function makeCaptcha (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> makeCaptcha ()\n");
+		
 		$imagelength = $this->Length * 25 + 16;
 		$imageheight = 75;
 		$image       = imagecreate($imagelength, $imageheight);
@@ -106,6 +118,9 @@ class captcha{
 	} //MakeCaptcha
 
 	function getCaptchaString (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> getCaptchaString ()\n");
+		
 		return $this->CaptchaString;
 	} //GetCaptchaString
 } //class: captcha

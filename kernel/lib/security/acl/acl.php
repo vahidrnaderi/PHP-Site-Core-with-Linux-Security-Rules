@@ -4,12 +4,15 @@ class acl extends system{
 	public $table = "access";
 
 	function acl(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> acl.php-> acl()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 	}
 
 	public function access($filter, $pmod=null){
-		global $system;
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> acl.php-> access($filter, $pmod)\n");
 
 		if(!empty($this->table)){
 //			$system->dbm->db->select("`owner`, `group`, `mor`, `mow`, `mox`, `mgr`, `mgw`, `mgx`, `mtr`, `mtw`, `mtx`, `mur`, `muw`, `mux`", "`$this->table`", $filter);

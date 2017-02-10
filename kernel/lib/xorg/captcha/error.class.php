@@ -4,15 +4,22 @@ class error{
 	var $errors;
 	 
 	function error (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> error.class.php-> error ()\n");
+		
 		$this->errors = array();
 	} //error
 	
 	function addError ($errormsg){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> error.class.php-> addError ($errormsg)\n");
+		
 		$this->errors[] = $errormsg;
 	} //addError
 	 
 	function displayError (){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> error.class.php-> displayError ()\n");
 		
 		$iheight     = count($this->errors) * 20 + 10;
 		$iheight     = ($iheight < 130) ? 130 : $iheight;
@@ -31,6 +38,9 @@ class error{
 	} //displayError
 	 
 	function isError (){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> error.class.php-> isError ()\n");
+		
 		if (count($this->errors) == 0){
 			return FALSE;
 		}else{

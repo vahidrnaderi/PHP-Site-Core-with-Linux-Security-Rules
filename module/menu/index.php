@@ -5,6 +5,8 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	case "v_object":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> index.php-> v_object\n");
+		
 		$system->xorg->smarty->assign("menuObject", $system->xorg->htmlElements->treeElement->tree($settings['menu'], 0, 'menuObject', 'mcdropdown_menu'));
 		$system->xorg->smarty->assign("add", $system->xorg->smarty->fetch("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object/add" . $settings['ext4']));
 		$system->xorg->smarty->assign("list", $c_menu->c_listObject());
@@ -12,6 +14,8 @@ switch ($sysVar[mode]){
 		break;
 		// Add Object
 	case "v_addObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> index.php-> v_addObject\n");
+		
 		$system->xorg->smarty->assign("menuObject", $system->xorg->htmlElements->treeElement->tree($settings['menu'], 0, 'menuObject', 'mcdropdown_menu'));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/object/add" . $settings['ext4']);
 		break;
@@ -20,6 +24,8 @@ switch ($sysVar[mode]){
 		break;
 		// Edit Object
 	case "v_editObject":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> index.php-> v_editObject\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[postCategory]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("menu", $system->xorg->combo(array('id', 'name'), $settings['postCategory'], '', $entity['menu']));
@@ -30,6 +36,8 @@ switch ($sysVar[mode]){
 		break;
 		// Del Object
 	case "v_delMenu":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> index.php-> v_delMenu\n");
+		
 		$id = $system->utility->filter->queryString('id');
 		$system->xorg->smarty->assign("entity", $entity = $system->dbm->db->informer("`$settings[postCategory]`", "`id` = '$id'"));
 		$system->xorg->smarty->assign("text", sprintf($lang[doYouWantDeleteCategory], $entity[name]));
@@ -51,6 +59,8 @@ switch ($sysVar[mode]){
 
 		break;
 	case "c_contentList":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> menu Module >> index.php-> c_contentList\n");
+		
 		require_once 'module/post/model/post.php';
 		$settings['colNumber'] = 'simple';
 		$system->xorg->prompt->promptShow('p', $lang['selectContent'], m_post::m_simpleListObject('simpleList'));

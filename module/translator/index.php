@@ -5,6 +5,8 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	case "v_addPhrase":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> translator Module >> index.php-> v_addPhrase\n");
+		
 		$system->xorg->smarty->assign("langCodeSelector", $system->xorg->combo(array('id', 'code'), $settings['langCodeTable']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/add" . $settings['ext4']);
 		break;

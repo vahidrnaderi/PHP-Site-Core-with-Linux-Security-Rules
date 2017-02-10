@@ -5,6 +5,8 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	case "v_load":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> pageLoader Module >> index.php-> v_load\n");
+		
 		if(empty($_GET[filter])){
 			require_once "module/post/config/config.php";
 			require_once "module/post/model/post.php";

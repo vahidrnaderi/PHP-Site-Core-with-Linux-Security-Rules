@@ -7,6 +7,7 @@ class time extends system{
 
 	public function time(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> time.php-> time()\n");
 
 		/* iCal sub library */
 		$subSystem = $settings['libraryAddress'] . "/time/iCal/" . "date" . $settings['ext2'];

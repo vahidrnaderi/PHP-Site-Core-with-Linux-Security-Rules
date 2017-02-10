@@ -11,6 +11,8 @@ class seo extends system{
 	public $keywords;
 
 	function seo($content=null){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> seo(\$content)\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 
@@ -25,6 +27,7 @@ class seo extends system{
 
 	public function scan(){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> scan()\n");
 
 		$timeStamp = time();
 		$this->title = mysql_real_escape_string($this->titleMaker());
@@ -53,6 +56,8 @@ class seo extends system{
 	}
 
 	public function body(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> body()\n");
 
 		$body = $this->xpath->evaluate('//body'); //get body tag
 		$body = $body->item(0);
@@ -60,10 +65,15 @@ class seo extends system{
 	}
 
 	public function text(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> text()\n");
+		
 		return preg_replace('/\s+/', ' ', strip_tags($this->body()));
 	}
 
 	public function meta($name){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> meta($name)\n");
 
 		$tags = $this->xpath->evaluate('//meta'); //get meta tag
 		for($i = 0; $i < $tags->length; $i++){
@@ -76,6 +86,7 @@ class seo extends system{
 
 	public function metaKeywordMaker($mode){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> metaKeywordMaker($mode)\n");
 		
 		if(empty($_SERVER[QUERY_STRING])){
 			return $settings['keyWords'];
@@ -127,6 +138,7 @@ class seo extends system{
 
 	public function metaDescriptionMaker($type='best'){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> metaDescriptionMaker($type)\n");
 
 		if(empty($_SERVER[QUERY_STRING])){
 			return $settings['description'];
@@ -136,6 +148,8 @@ class seo extends system{
 	}
 
 	public function title(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> title()\n");
 
 		$title = $this->xpath->evaluate('//title'); //get title tag
 		$title = $title->item(0);
@@ -144,6 +158,7 @@ class seo extends system{
 
 	public function titleMaker($type='best'){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> titleMaker($type)\n");
 
 		if(empty($_SERVER[QUERY_STRING])){
 			return $settings['websiteTitle'];
@@ -175,6 +190,9 @@ class seo extends system{
 	}
 
 	private function similar($object, $type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> similar($object, $type)\n");
+		
 		switch ($type){
 			case "first":
 				return $object[0];
@@ -212,6 +230,8 @@ class seo extends system{
 	}
 
 	public function div(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> div()\n");
 
 		$tags = $this->xpath->evaluate('//div');//get all div tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -223,6 +243,8 @@ class seo extends system{
 	}
 
 	public function a($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> a($type)\n");
 
 		$tags = $this->xpath->evaluate('//a'); //get all a tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -234,6 +256,8 @@ class seo extends system{
 	}
 
 	public function h1($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h1($type)\n");
 
 		$tags = $this->xpath->evaluate('//h1'); //get all h1 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -245,6 +269,8 @@ class seo extends system{
 	}
 
 	public function h2($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h2($type)\n");
 
 		$tags = $this->xpath->evaluate('//h2'); //get all h2 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -256,6 +282,8 @@ class seo extends system{
 	}
 
 	public function h3($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h3($type)\n");
 
 		$tags = $this->xpath->evaluate('//h3'); //get all h3 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -267,6 +295,8 @@ class seo extends system{
 	}
 
 	public function h4($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h4($type)\n");
 
 		$tags = $this->xpath->evaluate('//h4'); //get all h4 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -278,6 +308,8 @@ class seo extends system{
 	}
 
 	public function h5($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h5($type)\n");
 
 		$tags = $this->xpath->evaluate('//h5'); //get all h5 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -289,6 +321,8 @@ class seo extends system{
 	}
 
 	public function h6($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> h6($type)\n");
 
 		$tags = $this->xpath->evaluate('//h6'); //get all h6 tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -300,6 +334,8 @@ class seo extends system{
 	}
 
 	public function p($type='first'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> p($type)\n");
 
 		$tags = $this->xpath->evaluate('//p'); //get all p tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -313,6 +349,8 @@ class seo extends system{
 	}
 
 	public function strong($type='all'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> strong($type)\n");
 
 		$tags = $this->xpath->evaluate('//strong'); //get all strong tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -333,6 +371,8 @@ class seo extends system{
 	}
 
 	public function li($type='best'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> li($type)\n");
 
 		$tags = $this->xpath->evaluate('//li'); //get all li tags
 		for($i = 0; $i < $tags->length; $i++){
@@ -344,6 +384,8 @@ class seo extends system{
 	}
 
 	public function img($type='last'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> img($type)\n");
 
 		$tags = $this->xpath->evaluate('//img'); //get img tag
 		for($i = 0; $i < $tags->length; $i++){
@@ -356,6 +398,7 @@ class seo extends system{
 
 	public function thumbnail($type='last'){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> thumbnail($type)\n");
 
 		$tags = $this->xpath->evaluate('//img'); //get img tag
 		for($i = 0; $i < $tags->length; $i++){

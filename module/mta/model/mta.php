@@ -29,10 +29,14 @@ class m_mta extends masterModule{
 
 
 	function m_mta(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mta()\n");
 
 	}
 
 	public function m_attach(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_attach()\n");
 
 		$file = $this->path . "/" . $this->attachFile;
 		$fileSize = filesize($file);
@@ -63,6 +67,7 @@ class m_mta extends masterModule{
 
 	public function m_mail($fromEmail, $fromName, $toEmail, $toName, $subject, $message, $attachFile=null, $bcc=null, $cc=null){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mail($fromEmail, $fromName, $toEmail, $toName, $subject, $message, $attachFile, $bcc, $cc)\n");
 
 		// Mandatory headers
 		$this->xMailer = 'PHP-' . phpversion();
@@ -132,6 +137,7 @@ class m_mta extends masterModule{
 
 	public function m_massMail($fromEmail, $fromName, $toEmail, $toName, $subject, $message, $filter=null, $attachFile=null){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_massMail($fromEmail, $fromName, $toEmail, $toName, $subject, $message, $filter, $attachFile)\n");
 
 		$filter = $system->filterSplitter($filter);
 
@@ -162,6 +168,7 @@ class m_mta extends masterModule{
 
 	public function m_addMtaQueue ($subject, $message, $link, $image=null, $from=null, $fromName, $attachment=null){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_addMtaQueue ($subject, $message, $link, $image, $from, $fromName, $attachment)\n");
 
 		$from = (!empty($from)) ? $from : $settings['roboMail'];
 		$fromName = (!empty($fromName)) ? $fromName : $settings['roboMail'];
@@ -172,6 +179,7 @@ class m_mta extends masterModule{
 	
 	private function m_mtaQueueFind (){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaQueueFind ()\n");
 
 		$system->dbm->db->select("`id`, `from`, `fromName`, `subject`, `image`, `message`, `link`", "`$settings[mtaQueue]`", "`count` < `maxCount`", "`count` ASC", "", "", "0,1");
 		$this->queue = $system->dbm->db->fetch_array();
@@ -179,6 +187,7 @@ class m_mta extends masterModule{
 	
 	private function m_mtaReceiverFind (){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaReceiverFind ()\n");
 		
 		$queueId = $this->queue['id'];
 		$this->receiver = mysql_fetch_array(mysql_query("SELECT `id`, `firstName`, `lastName`, `email` FROM `$settings[humanResource]` WHERE `id` NOT IN(SELECT `humanResourceId` FROM `$settings[mtaLog]` WHERE `queueId` = $queueId) ORDER BY rand() LIMIT 0,1"), MYSQL_ASSOC);
@@ -186,6 +195,7 @@ class m_mta extends masterModule{
 	
 	private function m_mtaSmtpFind (){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaSmtpFind ()\n");
 
 		$time = time();
 		$timeOffset = $time-$settings['timeSlice'];
@@ -198,6 +208,7 @@ class m_mta extends masterModule{
 
 	public function m_mtaSend ($file){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaSend ($file)\n");
 
 		$this->m_mtaSmtpFind();
 		$this->m_mtaQueueFind();
@@ -217,7 +228,7 @@ class m_mta extends masterModule{
 			
 			$system->mail->From = (!empty($this->queue['from'])) ? $this->queue['from'] : $settings['roboMail'];
 			$system->mail->FromName = (!empty($this->queue['fromName'])) ? $this->queue['fromName'] : $settings['domainName'];
-//			$system->mail->SetFrom("digiseo.ir@gmail.com");
+//******			$system->mail->SetFrom("digiseo.ir@gmail.com");
 			$system->mail->Subject = $this->queue['subject'];
 			
 			$system->xorg->smarty->assign("subject", $this->queue['subject']);
@@ -230,7 +241,7 @@ class m_mta extends masterModule{
 			$system->mail->AltBody = $this->queue['message'];
 			
 			$system->mail->addAddress($this->receiver['email'], $this->receiver['firstName'] . ' ' . $this->receiver['lastName']);
-//			$system->mail->addBCC("s.a.hosseini@gmail.com");
+			$system->mail->addBCC("vahidrnaderi@idealmart.ir");		//******"s.a.hosseini@gmail.com");
 			$system->mail->addReplyTo($settings['roboMail']);
 			$system->mail->isHTML(true);
 			
@@ -250,6 +261,7 @@ class m_mta extends masterModule{
 
 	public function m_mtaLog (){
 		global $settings, $system;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaLog ()\n");
 		
 		$time = time();
 		$queueId = $this->queue['id'];

@@ -2,6 +2,8 @@
 class m_directory extends masterModule{
 
 	public function m_directory(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_directory()\n");
 
 	}
 	###########################
@@ -10,6 +12,7 @@ class m_directory extends masterModule{
 	// Add Category
 	public function m_addCategory($name, $category, $description=null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_addCategory($name, $category, $description)\n");
 
 		$timeStamp = time();
 		$system->dbm->db->insert("`$settings[directoryCategory]`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gw`, `gx`, `tr`, `tx`, `ur`, `ux`, `name`, `category`, `description`", "1, $timeStamp, $_SESSION[uid], 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '$name', $category, '$description'");
@@ -18,6 +21,7 @@ class m_directory extends masterModule{
 	// Edit Category
 	public function m_editCategory($id, $name, $category=null, $description=null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_editCategory($id, $name, $category, $description)\n");
 
 		$system->dbm->db->update("`$settings[directoryCategory]`", "`name` = '$name', `category` = '$category', `description` = '$description'", "`id` = $id");
 		$system->watchDog->exception("s", $lang[editCategory], sprintf($lang[successfulDone], $lang[editCategory], $name));
@@ -25,6 +29,7 @@ class m_directory extends masterModule{
 	// Del Category
 	public function m_delCategory($id){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_delCategory($id)\n");
 
 		$name = $system->dbm->db->informer("`$settings[directoryCategory]`", "`id` = $id", "name");
 		$system->dbm->db->delete("`$settings[directoryCategory]`", "`id` = $id");
@@ -33,6 +38,7 @@ class m_directory extends masterModule{
 	// List Category
 	public function m_listCategory(){
 		global $system,$lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_listCategory()\n");
 
 		$system->xorg->pagination->paginateStart("directory", "c_listCategory", "`active`, `id`, `name`, `category`, `description`", "`$settings[directoryCategory]`", "", "`timeStamp` DESC", "", "", "", "", 50, 7);
 
@@ -58,10 +64,14 @@ class m_directory extends masterModule{
 	}
 	// Activate Category
 	public function m_activateCategory(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_activateCategory()\n");
 
 	}
 	// Deactivate Category
 	public function m_deactivateCategory(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_deactivateCategory()\n");
 
 	}
 	###########################
@@ -70,6 +80,7 @@ class m_directory extends masterModule{
 	// Add Object
 	public function m_addObject($values, $show=false){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_addObject($values, $show)\n");
 
 		$timeStamp = time();
 		$values[category] = empty($values[category]) ? 0 : $values[category];
@@ -83,6 +94,7 @@ class m_directory extends masterModule{
 	// Edit Object
 	public function m_editObject($values){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_editObject($values)\n");
 
 		$timeStamp = time();
 		$values[category] = empty($values[category]) ? 0 : $values[category];
@@ -94,6 +106,7 @@ class m_directory extends masterModule{
 	// Del Object
 	public function m_delObject($id){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_delObject($id)\n");
 
 		$title = $system->dbm->db->informer("`$settings[directoryObject]`", "`id` = $id", "title");
 		$system->dbm->db->delete("`$settings[directoryObject]`", "`id` = $id");
@@ -102,6 +115,7 @@ class m_directory extends masterModule{
 	// List Object
 	public function m_listObject($viewMode, $filter=null){
 		global $system,$lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_listObject($viewMode, $filter)\n");
 
 		$time = time();
 
@@ -139,15 +153,20 @@ class m_directory extends masterModule{
 	}
 	// Activate Object
 	public function m_activateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_activateObject()\n");
 
 	}
 	// Deactivate Object
 	public function m_deactivateObject(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_deactivateObject()\n");
 
 	}
 	// Rss Feed	
 	public function m_rssFeed($filter=null){
 		global $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> directory Module >> model/directory.php-> m_rssFeed($filter)\n");
 		
 		$time = time();
 

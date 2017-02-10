@@ -4,6 +4,7 @@ class license extends system{
 
 	function license(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> license.php-> license()\n");
 		
 		$url = "http://localhost/costumers/$settings[domainName]";
 		
@@ -15,6 +16,7 @@ class license extends system{
 		if ($statusCode == 200) {
 
 		}else{
+			system::debug($settings['debugFile'], "err", "	Function=> license.php-> license()-- license not found.\n");
 			die('Error');
 		}
 		curl_close($curl);

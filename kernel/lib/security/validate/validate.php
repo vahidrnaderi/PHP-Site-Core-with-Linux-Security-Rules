@@ -19,12 +19,14 @@ class validate extends system{
 	public $table = "access";
 
 	function validate(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/validate.php-> validate()\n");
 
 		$this->table = $this->tablePrefix . $this->table;
 	}
 
 	public function chControl(){
-		global $system, $lang;
+		global $system, $lang, $settings;
 
 		$variables = array(
 		"GET" => $_GET,
@@ -33,6 +35,8 @@ class validate extends system{
 //		"SERVER" => $_SERVER,
 //		"SESSION" => $_SESSION
 		);
+
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/validate.php-> chControl()->".print_r($variables,true)."\n");
 		
 //		print_r($_POST);
 		
@@ -83,6 +87,9 @@ class validate extends system{
 
 	//Check Regular expression *****************
 	public function eregor($value, $type){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/validate.php-> eregor($value, $type)\n");
+		
 		switch($type){
 			case "String":
 				return ereg("^[a-zA-Z0-9_\.\-]", $value) ? true : false;
@@ -143,6 +150,7 @@ class validate extends system{
 	// Filter all bad words ********************
 	public function wordFilter($word){
 		global $lang, $system, $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/validate.php-> wordFilter($word)\n");
 
 		$word = addslashes($word);
 		$system->dbm->db->select("`word`", "`$settings[badWord]`", "`word` LIKE '$word'");
@@ -153,6 +161,8 @@ class validate extends system{
 	// Validate any string for HTML, regular expression and space
 	public function validator($name, $value, $type, $strip, $checkEmpty, $maxChar, $downLim=null, $upLim=null){
 		global $lang;
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/validate.php-> validator($name, $value, $type, $strip, $checkEmpty, $maxChar, $downLim, $upLim)\n");
 
 		$value = trim($value);		
 		if($checkEmpty == 'ce'){

@@ -17,11 +17,14 @@ class chartElement extends htmlElements{
 	private $cursorShowTooltip = "false";
 	
 	function chartElement(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> chartElement.php-> chartElement()\n");
 		
 	}
 	
 	public function bar ($title, $label, $data=null){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrF", "	Function=> chartElement.php-> bar ($title, $label, $data)\n");
 		
 		$system->xorg->smarty->assign("height", $this->height);
 		$system->xorg->smarty->assign("width", $this->width);

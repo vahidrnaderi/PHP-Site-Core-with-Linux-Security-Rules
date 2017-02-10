@@ -2,13 +2,22 @@
 class gd{
 
 	function gd(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fagd.php-> gd()\n");
+		
 	}	
 	
 	public function utf8_strlen($str) {
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fagd.php-> utf8_strlen($str)\n");
+		
 		return preg_match_all('/[\x00-\x7F\xC0-\xFD]/', $str, $dummy);
 	}
 
 	public function fagd($str,$z="",$method='normal'){
+		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> fagd.php-> fagd($str,$z,$method)\n");
+		
 
 		$p_chars = array (
 	'آ' => array ('ﺂ', 'ﺂ', 'آ'),

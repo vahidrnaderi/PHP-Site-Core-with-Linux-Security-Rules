@@ -5,6 +5,8 @@ class m_contact{
 	public $contactMessageTable = "contact_message";
 
 	function m_contact(){
+		global $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> model/contact.php-> m_contact()\n");
 
 		$this->userTable = $this->tablePrefix . $this->userTable;
 
@@ -12,6 +14,7 @@ class m_contact{
 
 	public function m_sendMessage($userName, $email, $subject, $message, $carbonCopy){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> model/contact.php-> m_sendMessage($userName, $email, $subject, $message, $carbonCopy)\n");
 
 		$timeStamp = time();
 		$system->dbm->db->insert("`$this->contactMessageTable`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `sender`, `email`, `subject`, `message`", "1, $timeStamp, 1, 8, 1, 1, 1, 1, '$userName', '$email', '$subject', '$message'");
@@ -28,6 +31,7 @@ class m_contact{
 	// List Messages
 	public function m_listMessage($filter = null){
 		global $system, $lang, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> model/contact.php-> m_listMessage($filter)\n");
 
 		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		$system->xorg->pagination->paginateStart("contact", "c_listMessage", "`id`, `timeStamp`, `active`, `sender`, `subject`, `email`, `message`", "`$this->contactMessageTable`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 10, 7);
@@ -53,6 +57,7 @@ class m_contact{
 	// Show Messages
 	public function m_showMessage($id){
 		global $system, $settings, $lang;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> model/contact.php-> m_showMessage($id)\n");
 
 		//		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
 		//		$system->xorg->pagination->paginateStart("article", "c_list", "`id`, `active`, `name`", "`$this->articleEntity`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 10, 7);

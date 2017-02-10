@@ -8,6 +8,8 @@ switch ($sysVar[mode]){
 		# Object (prompt)           #
 		###########################
 	case "v_show":
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> prompt Module >> index.php-> v_show\n");
+		
 		$system->xorg->smarty->assign("code", 'POPUP: #');
 		$system->xorg->smarty->assign("color", '#6EB1EF');
 		$system->xorg->smarty->assign("icon", 'information.png');
