@@ -27,7 +27,7 @@ class module extends system{
 //		print "OP: $sysVar[op]<br>";
 //		print "Mode: $sysVar[mode]<br>";
 				
-		//if(in_array($_SERVER['HTTP_HOST'], $system->security->trustUrl->trustUrlList())){
+//		if(in_array($_SERVER['HTTP_HOST'], $system->security->trustUrl->trustUrlList())){
 		$sysVar[secure] = $system->security->validate->chControl();
 			if($sysVar[op]){
 				if($system->security->acl->access("`op` = '$sysVar[op]' AND `mode` = '$sysVar[mode]' AND `active` = '1'", 'r-x')){
@@ -43,13 +43,12 @@ class module extends system{
 				}
 			}else{
 				$system->xorg->smarty->fetchedVar = $system->xorg->smarty->fetch($settings['customiseTpl'] . "main" . $settings['ext4']);
-			}
-		/*else{
-			print "here";
-		}*/
-		//}else{
-		//	print $system->watchDog->exception("w", $lang[securityWarning], $lang[accDeny]);
-		//}
+			}//else{
+//			print "here";
+//		}
+//		}else{
+//			print $system->watchDog->exception("w", $lang[securityWarning], $lang[accDeny]);
+//		}
 	}
 
 }

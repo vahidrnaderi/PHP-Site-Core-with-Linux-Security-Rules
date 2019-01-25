@@ -5,7 +5,7 @@ class treeElement extends htmlElements{
 	private $leaf;
 	
 	function treeElement(){
-		global $settings;
+		global $system, $settings;
 		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeElement()\n");
 		
 	}
@@ -14,13 +14,13 @@ class treeElement extends htmlElements{
 		global $system, $lang, $settings;
 		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeTrace($table, $category, $level, $flag)\n");
 				
-		$result = mysql_query("SELECT `id`, `category`, `name` FROM `$table` WHERE `category` = $category ORDER BY `name` ASC");
+		$result = mysqli_query($system->dbm->db->dbhandler, "SELECT `id`, `category`, `name` FROM `$table` WHERE `category` = $category ORDER BY `name` ASC");
 		if(!empty($result)){
 			if($flag == 1)
 			$this->leaf .= str_repeat("\t", $level+1) . "<ul>\n";
-			while ($row = mysql_fetch_array($result)){
-				$res = mysql_query("SELECT `id` FROM `$table` WHERE `category` = $row[id]");
-				if(mysql_num_rows($res) > 0){
+			while ($row = mysqli_fetch_array($result)){
+			    $res = mysqli_query($system->dbm->db->dbhandler, "SELECT `id` FROM `$table` WHERE `category` = $row[id]");
+				if(mysqli_num_rows($res) > 0){
 					$this->leaf .= str_repeat("\t", $level+2) . "<li rel='$row[id]'>$row[name]\n";
 					$this->treeTrace($table, $row['id'], $level+1, 1);
 					$this->leaf .= str_repeat("\t", $level+2) . "</li>\n";

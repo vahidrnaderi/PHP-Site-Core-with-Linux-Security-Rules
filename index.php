@@ -5,7 +5,12 @@ if(file_exists(superVisor . ".php"))
 	require_once(superVisor . ".php");
 ////echo "<br> **** 11 **** <br>";
 //if($_SERVER['HTTP_REFERER'] == '' || in_array($_SERVER['HTTP_REFERER'], $system->security->trustUrl->trustUrlList())){
+// echo "</br>1->session_id()-->".session_id();
+// echo "</br>1->SESSION['uid']-->".$_SESSION['uid']."</br>";
+// print_r ($_SESSION);
 $system->security->session->manager();
+// echo "</br>2->session_id()-->".session_id();
+// echo "</br>2->SESSION['uid']-->".$_SESSION['uid'];
 
 $settings['domain'] = $domain = preg_replace("/^(.*\.)?([^.]*\..*)$/", "$2", $_SERVER['HTTP_HOST']);
 ////echo "<br> **** 12 **** <br>";

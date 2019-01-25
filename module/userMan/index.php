@@ -34,6 +34,7 @@ switch ($sysVar[mode]){
 		$viewMode = (!empty($_POST[viewMode]) ? $_POST[viewMode] : "signUp");
 		$system->dbm->db->select("*", "`$settings[faqObject]`", "", "rand()", "", "", "0,1");
 		$system->xorg->smarty->assign("securityQuestion", $row = $system->dbm->db->fetch_array());
+//$system->xorg->smarty->assign("basketSecurityQuestion", $row = $system->dbm->db->fetch_array());
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/$viewMode" . $settings['ext4']);
 		break;
 	case "v_userAdd":
@@ -63,6 +64,13 @@ switch ($sysVar[mode]){
 		$c_userMan->c_userDel($_GET[filter]);
 		break;
 	case "c_signUp":
+		if ($_POST[fromBasket]){
+			$_SESSION['fromBasket'] = true;
+			$_SESSION['afterSignUp'] = false;
+		}else{
+			$_SESSION['fromBasket'] = false;
+			$_SESSION['afterSignUp'] = true;
+		}
 		$c_userMan->c_signUp($_POST);
 		break;
 	case "c_userAdd":
@@ -78,10 +86,18 @@ switch ($sysVar[mode]){
 		$c_userMan->c_loginContentTitle();
 		break;
 	case "c_login":
-//***		echo 1;
-		$c_userMan->c_login($_POST[userName], $_POST[password]);
+		//***		echo 1;
+		if ($_POST[fromBasket]){
+			$_SESSION['fromBasket'] = true;
+			$_SESSION['afterSignUp'] = false;
+		}else{
+			$_SESSION['fromBasket'] = false;
+			$_SESSION['afterSignUp'] = true;
+		}
+		$c_userMan->c_login($_POST['userName'], $_POST['password']);
 		break;
 	case "c_logout":
+		$_SESSION[fromBasket] = false;
 		$c_userMan->c_logout();
 		break;
 	case "c_edit":

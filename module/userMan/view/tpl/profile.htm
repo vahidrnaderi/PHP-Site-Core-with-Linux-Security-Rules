@@ -7,7 +7,7 @@
 			</div>
 			{if $userList.1.userType != 0}
 			<div id="editProfile" class="LH25 center pointer" style="color: #ff7b00;">
-				<div id="editProfileLink">{$lang.edit}</div>
+				<div id="editProfileLink">{$lang.edit} {$lang.information}</div>
 				<div id="showProfileLink" class="displayNone">{$lang.show}</div>
 			</div>
 			<div class="LH25 right pointer">
@@ -23,16 +23,29 @@
 					<option value="2">حقوقی</option>
 				</select>
 				<div class="col-xs-4">
-					<button onclick="
-						$('#content').farajax('loader', '/userMan/c_edit',
-						   'id={$userList.1.id}::{$lang.id}<>Number<>1<>ce<>11' +
-						   '&userType=' + document.getElementById('userType').value	+ '::{$lang.userType}<>Number<>1<>ce<>5<>0<>3' +
-						   '&selectUserType=1'
-						);
-						$('#content').farajax('loader', '/userMan/v_profile');
-						">
-						{$lang.submit}
-					</button>
+					{if $fromBasket}
+						<button onclick="
+							$('#register').farajax('loader', '/userMan/c_edit',
+							   'id={$userList.1.id}::{$lang.id}<>Number<>1<>ce<>11' +
+							   '&userType=' + document.getElementById('userType').value	+ '::{$lang.userType}<>Number<>1<>ce<>5<>0<>3' +
+							   '&selectUserType=1'
+							);
+							$('#register').farajax('loader', '/userMan/v_profile');
+							">
+							{$lang.submit}
+						</button>
+					{else}
+						<button onclick="
+							$('#content').farajax('loader', '/userMan/c_edit',
+							   'id={$userList.1.id}::{$lang.id}<>Number<>1<>ce<>11' +
+							   '&userType=' + document.getElementById('userType').value	+ '::{$lang.userType}<>Number<>1<>ce<>5<>0<>3' +
+							   '&selectUserType=1'
+							);
+							$('#content').farajax('loader', '/userMan/v_profile');
+							">
+							{$lang.submit}
+						</button>
+					{/if}
 				</div>
 			</div>
 		{/if}
@@ -287,10 +300,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.fatherName}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.fatherName}</em>
@@ -314,10 +329,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.idNumber}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.idNumber}</em>
@@ -327,10 +344,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.personalCode}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.personalCode}</em>
@@ -365,10 +384,12 @@
 				{if $userItem.userType == 1} {* personal type *}
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.level}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.level}</em>
@@ -379,10 +400,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.major}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.major}</em>
@@ -392,10 +415,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.proficiency}:</div>
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.proficiency}</em>
@@ -436,10 +461,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.workField}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.workField}</em>
@@ -473,10 +500,12 @@
 				</div>
 				<div class="clearFix">
 					
+					<!-- 
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left tip editProfile pointer" style="font-size:18px;color:red;" title="فیلد اجباری">
 						*
 					
 					</div>
+					 --><div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.phone}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.phone}</em>
@@ -488,8 +517,13 @@
 					<div class="row col-xs-1 col-lxs-1 bold LH35 left editProfile">&nbsp;</div>
 					<div class="row col-xs-5 col-lxs-3 bold LH35">{$lang.email}:</div> 
 					<div class="row col-xs-6 col-lxs-5 LH35">
-						<em class="showProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
-						<em class="editProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+						{if $userItem.email!=null}
+							<em class="showProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+							<em class="editProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+						{else}
+							<em class="showProfile LH35"><a href="mailto:{$userItem.email}" rel="nofollow">{$userItem.email}</a></em>
+							<input class="editProfile" id="email" name="email" maxlength="45" value="{$userItem.email}">
+						{/if}
 					</div>
 					
 				</div>
@@ -518,7 +552,7 @@
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.issued}</em>
 						<input id="cityId" type="hidden" name="cityId" maxlength="45" value="{$userItem.issuedId}">
-						{*if $userItem.issued != ''}
+						{*if $userItem.issued != 0}
 						<span class="editProfile" id="citySelectBox">{$userItem.issued} <span onclick="$('#city').remove();$('#citySelectBox').farajax('loader', '/htmlElements/v_selectCity', 'name=city&sid=' + $('#stateId').val() + '&selected={$userItem.issuedId}');">[ویرایش]</span></span>
 						{else}
 						<span class="editProfile" id="citySelectBox">ابتدا استان خود را انتخاب نمایید</span>
@@ -537,7 +571,7 @@
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.region}</em>
 						<input id="regionId" type="hidden" name="regionId" maxlength="45" value="{$userItem.regionId}">
-						{*if $userItem.region != ''}
+						{*if $userItem.region != 0}
 						<span class="editProfile" id="regionSelectBox">{$userItem.region} <span onclick="$('#region').remove();$('#regionSelectBox').farajax('loader', '/htmlElements/v_selectRegion', 'name=region&selected={$userItem.regionId}');">[ویرایش]</span></span>
 						{else}
 						<span class="editProfile" id="regionSelectBox">ابتدا شهر خود را انتخاب نمایید</span>
@@ -556,7 +590,7 @@
 					<div class="row col-xs-6 col-lxs-5 LH35">
 						<em class="showProfile LH35">{$userItem.district}</em>
 						<input id="districtId" type="hidden" name="districtId" maxlength="45" value="{$userItem.districtId}">
-						{*if $userItem.district != ''}
+						{*if $userItem.district != 0}
 						<span class="editProfile" id="districtSelectBox">{$userItem.district} <span onclick="$('#district').remove();$('#districtSelectBox').farajax('loader', '/htmlElements/v_selectDistrict', 'name=district&selected={$userItem.districtId}');">[ویرایش]</span></span>
 						{else}
 						<span class="editProfile" id="districtSelectBox">ابتدا منطقه خود را انتخاب نمایید</span>
@@ -662,18 +696,21 @@
 			   {elseif $userItem.userType == 1}
 				   '&firstName=' + document.getElementById('firstName').value + '::{$lang.firstName}<>Multi<>1<>ce<>45' +
 				   '&lastName=' + document.getElementById('lastName').value + '::{$lang.lastName}<>Multi<>1<>ce<>45' +
-				   '&fatherName=' + document.getElementById('fatherName').value + '::{$lang.fatherName}<>Multi<>1<>ce<>45' +
+				   '&fatherName=' + document.getElementById('fatherName').value + '::{$lang.fatherName}<>Multi<>1<>nce<>45' +
 				   '&gender=' + document.getElementById('gender').value + '::{$lang.gender}<>Number<>1<>ce<>1' +
-				   '&idNumber=' + document.getElementById('idNumber').value + '::{$lang.idNumber}<>Multi<>1<>ce<>16' +
-				   '&personalCode=' + document.getElementById('personalCode').value + '::{$lang.personalCode}<>Multi<>1<>ce<>10<>0000000000<>9999999999' +
+				   '&idNumber=' + document.getElementById('idNumber').value + '::{$lang.idNumber}<>Multi<>1<>nce<>16' +
+				   '&personalCode=' + document.getElementById('personalCode').value + '::{$lang.personalCode}<>Multi<>1<>nce<>10<>0000000000<>9999999999' +
 				   '&nationality=' + document.getElementById('nationality').value + '::{$lang.nationality}<>Number<>1<>nce<>3' +
 				   '&religion=' + document.getElementById('religion').value + '::{$lang.religion}<>Number<>1<>nce<>2' +
 				   '&financialStatus=' + document.getElementById('financialStatus').value + '::{$lang.financialStatus}<>Number<>1<>nce<>2' +
 				   '&level=' + document.getElementById('level').value + '::{$lang.level}<>Number<>1<>nce<>2' +
-				   '&major=' + document.getElementById('major').value	+ '::{$lang.major}<>Multi<>1<>ce<>30' +
-				   '&proficiency=' + document.getElementById('proficiency').value	+ '::{$lang.proficiency}<>Multi<>1<>ce<>50' +
+				   '&major=' + document.getElementById('major').value	+ '::{$lang.major}<>Multi<>1<>nce<>30' +
+				   '&proficiency=' + document.getElementById('proficiency').value	+ '::{$lang.proficiency}<>Multi<>1<>nce<>50' +
 			   {/if}
-			   '&workField=' + document.getElementById('workField').value + '::{$lang.workField}<>Multi<>1<>ce<>45' +
+				{if $userItem.email==null}
+					'&email=' + document.getElementById('email').value	+ '::{$lang.email}<>Mail<>1<>nce<>45' +
+				{/if}
+			   '&workField=' + document.getElementById('workField').value + '::{$lang.workField}<>Multi<>1<>nce<>45' +
 			   '&workDetails=' + document.getElementById('workDetails').value + '::{$lang.workDetails}<>Multi<>1<>nce<>100' +
 			   '&state=' + document.getElementById('state').value + '::{$lang.state}<>Number<>1<>ce<>2' +
 			   '&city=' + document.getElementById('city').value + '::{$lang.city}<>Number<>1<>ce<>5' +
@@ -686,7 +723,13 @@
 			   '&pNo=' + document.getElementById('pNo').value	+ '::{$lang.pNo}<>Number<>1<>ce<>6' +
 			   '&floor=' + document.getElementById('floor').value	+ '::{$lang.floor}<>Number<>1<>ce<>4' +
 			   '&unit=' + document.getElementById('unit').value	+ '::{$lang.unit}<>Number<>1<>ce<>5'
-			);">
+			);
+			$('#level2to3').removeClass('hide');
+//			$('#level2').slideUp('slow'); 
+//			$('#level3').slideDown('slow');
+
+			$('#basketContent').farajax('loader', '/basket/v_object');
+			">
 			{$lang.submit}
 		</button>
 	</div>

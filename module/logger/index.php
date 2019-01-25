@@ -5,7 +5,7 @@ require_once(visor . ".php");
 
 switch ($sysVar[mode]){
 	
-	// List
+	// List Log
 	case "c_list":
 		$c_logger->c_list($_POST[filter]);
 		break;

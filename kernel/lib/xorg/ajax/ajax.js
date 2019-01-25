@@ -26,7 +26,7 @@
 //alert ("oh yes");
 			if($(target).css("display") == "none"){
 				$('#accessories').slideToggle('slow'); 
-				/*$(target).fadeIn("slow");*/
+/*$(target).fadeIn("slow");*/
 //alert ("slidetoggle");
 			}
 		}else{
@@ -97,7 +97,7 @@
 //alert("2-target->"+target+" * elem->"+elem+" * options->"+options+" * arg->"+arg+" * data->"+data);
         if (options && typeof(options) == "string") {
            if (options == "loader") {
-               loader(arg, data);               
+               loader(arg, data);
            }
            return
         }
@@ -168,7 +168,8 @@
     			        }
     			        if (o.status == 500) {
     			        	$(target).html("Error number " + o.status + ". Internal server error, please contact to system administrator.");
-    			        } else if(o.status == 404){	
+//					$('#content').html("<br\>Error number " + o.status + ". Internal server error, please contact to system administrator.");
+    			        } else if(o.status == 404){
 //alert("7");    			        	
     			        	$(target).html("Error number " + o.status + ". Cant find, please contact to system administrator.");
     			        }else{

@@ -95,7 +95,7 @@ class xorg extends system{
 	}
 
 	public function combo($fields, $table, $filter=null, $selected=null){
-		global $settings;
+		global $system, $settings;
 		system::debug($settings['debugFile'], "chrF", "	Function=> xorg.php-> combo($fields, $table, $filter, $selected)\n");
 		
 //		int $i;
@@ -103,23 +103,23 @@ class xorg extends system{
 		$field = implode(", ", $fields);
 //print_r($field);
 		$filter = (!empty($filter) ? "WHERE $filter" : null);
-		$result = mysql_query("SELECT $field FROM `$table` $filter");
+		$result = mysqli_query($system->dbm->db->dbhandler, "SELECT $field FROM `$table` $filter");
 		if($result){
 			$out[selected] = $selected;
-			while($row = mysql_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){
 				$out[$row[$fields[0]]] = $row[$fields[1]] . " " . $row[$fields[2]] . " " . $row[$fields[3]] . " " . $row[$fields[4]] . " " . $row[$fields[5]] . " " . $row[$fields[6]];
 			}
 //print_r($out);
 			return $out;
 		}else{
-			$message = 'ENO: System:1 - Invalid Query: ' . mysql_error() . "\n";
+		    $message = 'ENO: System:1 - Invalid Query: ' . mysqli_error($system->dbm->db->dbhandler) . "\n";
 			return $message;
 		}
 	}
 
 	
 	public function combo_array($fields, $table, $filter=null, $selected=null){
-		global $settings;
+		global $settings, $system;
 		system::debug($settings['debugFile'], "chrF", "	Function=> xorg.php-> combo_array($fields, $table, $filter, $selected)\n");
 		
 //		int $i;
@@ -127,10 +127,10 @@ class xorg extends system{
 		$field = implode(", ", $fields);
 //print_r($field);
 		$filter = (!empty($filter) ? "WHERE $filter" : null);
-		$result = mysql_query("SELECT $field FROM `$table` $filter");
+		$result = mysqli_query($system->dbm->db->dbhandler, "SELECT $field FROM `$table` $filter");
 		if($result){
 			$out[selected] = $selected;
-			while($row = mysql_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){
 //echo "<br> row=>> ";
 //print_r($row);
 //echo "<br> fields=>> ";
@@ -150,7 +150,7 @@ class xorg extends system{
 //echo " * ";
 			return $out;
 		}else{
-			$message = 'ENO: System:1 - Invalid Query: ' . mysql_error() . "\n";
+		    $message = 'ENO: System:1 - Invalid Query: ' . mysqli_error($system->dbm->db->dbhandler) . "\n";
 //echo " ** ";
 			return $message;
 		}

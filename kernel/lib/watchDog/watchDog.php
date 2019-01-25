@@ -60,17 +60,17 @@ class watchDog extends system{
 
 	public function exception($type, $title, $message, $button=null, $command=null){
 		global $lang, $settings, $system, $sysVar;
-		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> exception($type, $title, $message, $button, $command)\n");
+		system::debug($settings['debugFile'], "chrF", "	Function=> watchDog.php-> exception($type, $title, $message, $button, $command)\n message==> \n".print_r($message,true)." \n");
 // echo "$message <br>";
 		$clientInfo = $system->utility->browserDetector->whatBrowser();
 
-		$op = mysql_real_escape_string($sysVar[op]);
-		$mode = mysql_real_escape_string($sysVar[mode]);
+		$op = mysqli_real_escape_string($system->dbm->db->dbhandler, $sysVar[op]);
+		$mode = mysqli_real_escape_string($system->dbm->db->dbhandler, $sysVar[mode]);
 		$agent = $clientInfo[browsertype];
 		$version = $clientInfo[version];
-		$ip = mysql_real_escape_string($_SERVER[REMOTE_ADDR]);
-		$reffer = mysql_real_escape_string($_SERVER[HTTP_REFERER]);
-		$host = mysql_real_escape_string(gethostbyaddr($_SERVER[REMOTE_ADDR]));
+		$ip = mysqli_real_escape_string($system->dbm->db->dbhandler, $_SERVER[REMOTE_ADDR]);
+		$reffer = mysqli_real_escape_string($system->dbm->db->dbhandler, $_SERVER[HTTP_REFERER]);
+		$host = mysqli_real_escape_string($system->dbm->db->dbhandler, gethostbyaddr($_SERVER[REMOTE_ADDR]));
 		$os = $clientInfo[platform];
 
 		if(!is_array($message)){
@@ -89,11 +89,11 @@ class watchDog extends system{
 		$exceptionType = $this->exceptionType($type);
 
 		$timeStamp = time();
-		//		$offsetTime = $timeStamp - 2592000;
-		$title = mysql_real_escape_string($title);
-		$messageToDb = mysql_real_escape_string($messageToDb);
+//		$offsetTime = $timeStamp - 2592000;
+		$title = mysqli_real_escape_string($system->dbm->db->dbhandler, $title);
+		$messageToDb = mysqli_real_escape_string($system->dbm->db->dbhandler, $messageToDb);
 
-		//		$system->dbm->db->delete("$this->table", "`timeStamp` < $offsetTime");
+//		$system->dbm->db->delete("$this->table", "`timeStamp` < $offsetTime");
 		$uid = !empty($_SESSION[uid]) ? $_SESSION[uid] : 2;
 		$system->dbm->db->insert("`$this->table`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `uid`, `agent`, `version`, `reffer`, `ip`, `host`, `os`, `op`, `mode`, `type`, `title`, `description`", "1, $timeStamp, 1, 5, 1, 1, 1, 1	, $uid, '$agent', '$version', '$reffer', '$ip', '$host', '$os', '$op', '$mode', '$type', '$title', '$messageToDb'");
 
@@ -115,7 +115,7 @@ class watchDog extends system{
 //			echo " 2 ";
 		}else{
 //			echo " 3 ";
-			system::debug($settings['debugFile'], "chrE", "	Function=> watchDog.php-> die and exception($type, $title, $message, $button, $command)\n");
+			system::debug($settings['debugFile'], "chrE", "	Function=> watchDog.php-> die and exception($type, $title, message==>". print_r($message).", button==> ". print_r($button).", $command)\n");
 			$system->xorg->smarty->display($settings['commonTpl'] . "watchDog" . $settings['ext4']);
 			
 ////			$system->xorg->smarty->assign("watchDogTest", $system->xorg->smarty->fetch($settings[commonTpl] . "watchDog" . $settings[ext4]));

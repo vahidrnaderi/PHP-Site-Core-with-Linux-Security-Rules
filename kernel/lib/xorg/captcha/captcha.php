@@ -17,13 +17,13 @@ class captcha{
 
 		$this->Length   = $length;
 
-		//$this->fontpath = dirname($_SERVER['SCRIPT_FILENAME']) . '/fonts/';
+//$this->fontpath = dirname($_SERVER['SCRIPT_FILENAME']) . '/fonts/';
 		$this->fontpath = "theme/$settings[theme]/font/";
 		$this->fonts    = $this->getFonts();
 		$errormgr       = new error;
 
 		if ($this->fonts == FALSE){
-			//$errormgr = new error;
+//$errormgr = new error;
 			$errormgr->addError('No fonts available!');
 			$errormgr->displayError();
 			die();
@@ -79,7 +79,7 @@ class captcha{
 		system::debug($settings['debugFile'], "chrF", "	Function=> captcha.php-> stringGen ()\n");
 		
 		$uppercase  = range('A', 'Z');
-		//$lowercase  = range('a', 'z');
+//$lowercase  = range('a', 'z');
 		$numeric    = range(0, 9);
 
 		$CharPool   = array_merge($uppercase, $numeric);

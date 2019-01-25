@@ -8,7 +8,7 @@ class dbm extends system{
 	public $type;
 	public $user;
 
-	public function dbm($type, $host, $user, $pass, $name){
+	public function dbm($type, $host, $user, $pass, $name, $port=NULL, $socket=NULL){
 		global $settings;
 
 		$this->host = $host;
@@ -16,6 +16,8 @@ class dbm extends system{
 		$this->pass = $pass;
 		$this->type = $type;
 		$this->user = $user;
+		$this->port = $port;
+		$this->socket = $socket;
 
 		/* Mysql sub system */
 /*		$subSystem = $settings['libraryAddress'] . "/dbm/mysql/" . "mysql" . $settings['ext2'];
@@ -52,7 +54,8 @@ class dbm extends system{
 				$subSystem = $settings['libraryAddress'] . "/dbm/mysqli/" . "mysqli" . $settings['ext2'];
 				if(file_exists($subSystem)){
 					$this->run($subSystem, 'On');
-					$this->db = new mysqli();
+					$this->db = new mysqliDB($this->host, $this->user, $this->pass, $this->name, $this->$port, $this->$socket);
+//					$this->db = new MysqliDb($this->host, $this->user, $this->pass, $this->name );
 				}else{
 					$this->run($subSystem, 'Off');
 				}

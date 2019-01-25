@@ -22,20 +22,21 @@
  */
 
 function fetchImgInfo($src, $width=null, $height=null, $flag=null){
-	
+    global $system;
+    
 	switch ($flag){
 		case 'max':
-			return mysql_fetch_array(mysql_query("SELECT * FROM `cache` WHERE `src` = '$src' AND `width` = (SELECT max(`width`) FROM `cache`)"));
+		    return mysqli_fetch_array(mysqli_query($system->dbm->db->dbhandler, "SELECT * FROM `cache` WHERE `src` = '$src' AND `width` = (SELECT max(`width`) FROM `cache`)"));
 			break;
 		default:
-			return mysql_fetch_array(mysql_query("SELECT * FROM `cache` WHERE `src` = '$src' AND `width` = $width AND `height` = $height"));
+		    return mysqli_fetch_array(mysqli_query($system->dbm->db->dbhandler, "SELECT * FROM `cache` WHERE `src` = '$src' AND `width` = $width AND `height` = $height"));
 			break;
 	}
 	
 }
 
 function smarty_function_iimg($params, &$smarty) {
-	global $settings;
+	global $system, $settings;
 	
 	$src = urldecode($params['src']);
 	$id = !empty($params['id']) ? 'id="' . $params['id'] . '"' : null;
@@ -78,7 +79,7 @@ function smarty_function_iimg($params, &$smarty) {
 	}
 	
 	$cacheImage = 'tmp/cache/img/' . $fileName . '-' . $width . '-' . $height . '.' . $fileExtension;
-	if(mysql_num_rows(mysql_query("SELECT `id` FROM `cache` WHERE `name` = '$fileName' AND `extension` = '$fileExtension' AND `width` = $width AND `height` = $height")) > 0){
+	if(mysqli_num_rows(mysqli_query($system->dbm->db->dbhandler, "SELECT `id` FROM `cache` WHERE `name` = '$fileName' AND `extension` = '$fileExtension' AND `width` = $width AND `height` = $height")) > 0){
 //		echo 5;
 		return '<div style="margin:0 auto; width:' . $width . 'px;"><figure><img ' . $id . ' src="' . $cacheImage . '" ' . $widthString . ' ' . $heightString . ' ' . $class . ' ' . $alt . ' ' . $title . '>' . $figCaption . '</figure></div>';
 	}else{
@@ -99,7 +100,7 @@ function smarty_function_iimg($params, &$smarty) {
 		
 		if($thumb->save($cacheImage)){
 			$time = time();
-			mysql_query("INSERT INTO `cache` (`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `src`, `type`, `name`, `extension`, `width`, `height`) VALUES (1, $time, 1, 1, 1, 1, 1, '$src', 'image', '$fileName', '$fileExtension', $width, $height)");
+			mysqli_query($system->dbm->db->dbhandler, "INSERT INTO `cache` (`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `src`, `type`, `name`, `extension`, `width`, `height`) VALUES (1, $time, 1, 1, 1, 1, 1, '$src', 'image', '$fileName', '$fileExtension', $width, $height)");
 		}		
 
 //		$thumb->show();

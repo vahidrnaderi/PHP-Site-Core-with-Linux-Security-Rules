@@ -31,9 +31,9 @@ class m_cPanel extends masterModule{
 
 			$where = "`parent` = $row[id] AND `active` = 1 AND `viewInCP` = 1";
 //			print "SELECT `id`, `active`, `parent`, `op`, `mode`, `level`, `caption`, `viewIcon`, `viewInCP` FROM `$settings[access]` WHERE `owner` = $_SESSION[uid] AND `or` = 1 AND $where OR `group` = $_SESSION[gid] AND `gr` = 1 AND $where OR `tr` = 1 AND $where";			
-			$result = mysql_query("SELECT `id`, `active`, `parent`, `op`, `mode`, `level`, `caption`, `viewIcon`, `viewInCP` FROM `$settings[access]` WHERE `owner` = $_SESSION[uid] AND `or` = 1 AND $where OR `group` in ($_SESSION[gid]) AND `gr` = 1 AND $where OR `tr` = 1 AND $where");
+			$result = mysqli_query($system->dbm->db->dbhandler, "SELECT `id`, `active`, `parent`, `op`, `mode`, `level`, `caption`, `viewIcon`, `viewInCP` FROM `$settings[access]` WHERE `owner` = $_SESSION[uid] AND `or` = 1 AND $where OR `group` in ($_SESSION[gid]) AND `gr` = 1 AND $where OR `tr` = 1 AND $where");
 			if($result){
-				while($child = mysql_fetch_array($result)){
+				while($child = mysqli_fetch_array($result)){
 					if(!empty($child[caption])){
 						$entityList[$count][child][$child[id]][id] = $child[id];
 						$entityList[$count][child][$child[id]][active] = $child[active];

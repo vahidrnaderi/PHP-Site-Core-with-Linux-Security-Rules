@@ -16,7 +16,7 @@ class license extends system{
 		if ($statusCode == 200) {
 
 		}else{
-			system::debug($settings['debugFile'], "err", "	Function=> license.php-> license()-- license not found.\n");
+			system::debug($settings['debugFile'], "chrE", "	Function=> license.php-> license()-- license not found.\n");
 			die('Error');
 		}
 		curl_close($curl);

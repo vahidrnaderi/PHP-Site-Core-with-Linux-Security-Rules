@@ -13,7 +13,7 @@ class lang extends system{
 	
 	public function langMan(){
 		global $system, $settings;
-		system::debug($settings['debugFile'], "chrF", "	Function=> lang.php-> langMan()\n");
+		system::debug($settings['debugFile'], "chrF", "	Function=> lang.php-> langMan()--SESSION['uid']==>$_SESSION[uid]\n");
 		
 		if(!empty($_SESSION['uid'])){
 			if($system->dbm->db->informer("`$this->userSettings`", "`uid` = $_SESSION[uid] AND `name` = 'lang'", "value") != null){

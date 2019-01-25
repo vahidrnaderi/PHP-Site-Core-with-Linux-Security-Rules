@@ -49,16 +49,16 @@ class m_directory extends masterModule{
 			$entityList[$count][id] = $row[id];
 			$entityList[$count][name] = $row[name];
 			$entityList[$count][category] = $system->dbm->db->informer("`$settings[directoryCategory]`", "`id` = $row[category]", 'name');
-			//			$entityList[$count][description] = $row[description];
+//			$entityList[$count][description] = $row[description];
 			$count++;
 		}
 		$system->xorg->smarty->assign("navigation", $system->xorg->pagination->renderFullNav());
 		$system->xorg->smarty->assign("entityList", $entityList);
-		//		print_r($entityList);
+//		print_r($entityList);
 		unset($entityList);
 		$entityList = array();
-		//		print "List";
-		//		print_r($entityList);
+//		print "List";
+//		print_r($entityList);
 		return $system->xorg->smarty->display($settings['moduleAddress'] . "/" . $settings['moduleName'] . "/view/tpl/category/list" . $settings['ext4']);
 
 	}

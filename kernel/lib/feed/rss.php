@@ -23,7 +23,7 @@ class rss extends system {
 
     public function create($items) {
     	global $settings;
-		system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> create($items)\n");
+	system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> create($items)\n");
    	
         $res = "";
         // header

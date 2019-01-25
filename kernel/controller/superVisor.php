@@ -6,12 +6,12 @@ $settings['domain'] = $domain = preg_replace("/^(.*\.)?([^.]*\..*)$/", "$2", $_S
 if(file_exists($config)){
 	require_once ($config);
 
-	//	if($domain == $settings['domainName']){
+//	if($domain == $settings['domainName']){
 	/* Base system */
 	$subSystem = $settings['controllerAddress'] . "/system" . $settings['ext2'];
 	if(file_exists($subSystem)){
 		require_once ($subSystem);
-		system::debug($settings['debugFile'], "str", "\n--------------------------------- \n Start of Loading Site. \n ---------------------------------\n");
+		system::debug($settings['debugFile'], "str", "\n --------------------------------- \n Start of Loading Site. \n ---------------------------------\n");
 		$system = new system();
 		$system->run($subSystem, 'On');
 	}else{
@@ -35,18 +35,18 @@ if(file_exists($config)){
 		$system->run($subSystem, 'Off');
 	}
 
-	//	}else{
-	//		/* Base system */
-	//		$subSystem = $settings[controllerAddress] . "/system" . $settings[ext2];
-	//		if(file_exists($subSystem)){
-	//			require_once ($subSystem);;
-	//			$system = new system();
-	//			$system->run($subSystem, 'On');
-	//		}else{
-	//			$system->run($subSystem, 'Off');
-	//		}
-	//		die("<center>$lang[licenseError]</center>");
-	//	}
+//	}else{
+//		/* Base system */
+//		$subSystem = $settings[controllerAddress] . "/system" . $settings[ext2];
+//		if(file_exists($subSystem)){
+//			require_once ($subSystem);;
+//			$system = new system();
+//			$system->run($subSystem, 'On');
+//		}else{
+//			$system->run($subSystem, 'Off');
+//		}
+//		die("<center>$lang[licenseError]</center>");
+//	}
 }else{
 	$system->debug($settings['debugFile'], "err", "Else=> superVisor.php-> Config file not exist\n");
 	die("The system is down !");

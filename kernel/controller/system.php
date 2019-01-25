@@ -25,7 +25,7 @@ class system{
 		if($settings['debug']=='on')
 			switch ($type){
 				case "str":
-					$message = $localTime."-->Start: ".$message;
+					$message = "\n#####################\n".$localTime."-->Start Debug: ".$message;
 					break;
 				case "chr":
 					if($settings['chr']=='on')
@@ -39,9 +39,13 @@ class system{
 					if($settings['chrM']=='on')
 						$message = $localTime."-->Chart Functions: ".$message;
 					break;
-				case "err":
+				case "chrE":
 					if($settings['chrE']=='on')
 						$message = $localTime."-->Error: ".$message;
+					break;
+				case "chrL":
+					if($settings['chrL']=='on')
+						$message = $localTime."-->Debug Log: ".$message;
 					break;
 				default:
 					$message = $localTime."-->Fatal-Error: system.php=> Function: debug($fileName, $type, $message) -> No Debug's type definition.";
@@ -50,7 +54,7 @@ class system{
 		
 		if($settings['debugMyFileWrite']=='on'){
 			$myFile = fopen($settings['debugFile'], "a") or die("Unable to open file!");
-			//			echo "myfile->$myfile<br>";
+//			echo "myfile->$myfile<br>";
 			fwrite($myFile, "-----------$localTime************debug($fileName, $type, $message)\n");
 			fclose($myFile);
 		}
@@ -65,6 +69,8 @@ class system{
 	
 	public function system(){
 		global $settings;
+		system::debug($settings['debugFile'], "chrF", "	Function=> system.php-> system()\n");
+		
 
 		$this->tablePrefix = $settings['tablePrefix'];
 
@@ -193,9 +199,9 @@ class system{
 		
 		if($status == 1 || $status == 'On' || $status == 'on'){
 			require_once($subSystem);
-			$this->debug($settings['debugFile'], "chr", "subSystem is ON=> $subSystem\n");
+			$this->debug($settings['debugFile'], "chr", "Function=> system.php-> run(subSystem=> $subSystem , status is ON)\n");
 		}elseif($status == 0 || $status == 'Off' || $status == 'off'){
-			$this->debug($settings['debugFile'], "err", "subSystem is OFF=> $subSystem\n");
+			$this->debug($settings['debugFile'], "err", "Function=> system.php-> run(subSystem=> $subSystem , status is OFF)\n");
 			die("\"$subSystem\" is Off");
 		}
 	}

@@ -133,7 +133,8 @@ function createUploader(e, t) {
 
 //****************************************************************************************************
 
-/****   sample from digiSeo.ir  ***********
+//****   sample from digiSeo.ir  ***********
+/*
 $(document).on("click", '#postCategory', function (e) {
 	$('#postCategory li').removeClass('selected');
     $(e.target).closest("li").addClass("selected");
@@ -443,6 +444,8 @@ $(document).on('click', "#editProfileLink", function() {
 	$(this).hide(); 
 	$('#showProfileLink').show();
 	$('#submitProfile').fadeIn();
+	$('#statusSelectBox').farajax('loader', '/htmlElements/v_selectStatus', 'name=financialStatus&selected=' + $('#financialStatusId').val());
+	
 	if($('#gender').length == 0)
 		$('#genderSelectBox').farajax('loader', '/htmlElements/v_selectGender', 'name=gender&selected=' + $('#genderId').val());
 	if($('#religion').length == 0)
@@ -459,8 +462,7 @@ $(document).on('click', "#editProfileLink", function() {
 		$('#regionSelectBox').farajax('loader', '/htmlElements/v_selectRegion', 'name=region&selected=' + $('#regionId').val());
 	if($('#district').length == 0)
 		$('#districtSelectBox').farajax('loader', '/htmlElements/v_selectDistrict', 'name=district&selected=' + $('#districtId').val());
-	if($('#financialStatus').length == 0)
-		$('#statusSelectBox').farajax('loader', '/htmlElements/v_selectStatus', 'name=financialStatus&selected=' + $('#financialStatusId').val());
+//	if($('#financialStatus').length == 0)
 });
 
 $(document).on('click', "#showProfileLink", function() {

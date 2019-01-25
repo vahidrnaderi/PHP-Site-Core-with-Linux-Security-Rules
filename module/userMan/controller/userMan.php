@@ -53,12 +53,12 @@ class c_userMan extends m_userMan{
 		}
 		if($system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `userName` = '$userName' AND (`password` = '$password' OR `password` = '$passwordOrg')") == 1 || $system->dbm->db->count_records("`$this->userTable`", "`active` = 1 AND `email` = '$userName' AND (`password` = '$password' OR `password` = '$passwordOrg')") == 1){
 // echo "<br>2-> ".$this->userTable."<br>";				
-			$result = mysql_query("SELECT `id`, `gid` FROM `$this->userTable` WHERE `userName` = '$userName' OR `email` = '$userName'");
-			$profile = mysql_fetch_array($result);
+			$result = mysqli_query($system->dbm->db->dbhandler, "SELECT `id`, `gid` FROM `$this->userTable` WHERE `userName` = '$userName' OR `email` = '$userName'");
+			$profile = mysqli_fetch_array($result);
 			require_once 'module/groupMan/model/groupMan.php';
-			$gids = m_groupMan::m_userGroups($profile[id]);
-			$profile[gid] = $profile[gid] . $gids;
-			$this->m_login($profile[id], $profile[gid]);
+			$gids = m_groupMan::m_userGroup($profile['id']);
+			$profile['gid'] = $profile[gid] . $gids;
+			$this->m_login($profile['id'], $profile['gid']);
 		}else{
 // echo "<br>3-> ".$this->userTable."<br>";
 			$message = 'خطا در ورود با اطلاعات: userName='.$userName.' password='.$passwordOrg;

@@ -91,16 +91,16 @@ function session_list(){
     global $mydb, $lang, $settings;
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> whois Module >> sys.php-> session_list()\n");
 		
-    $users = mysql_query("SELECT * FROM `session` WHERE `id` <> '0'");
-    $guests = mysql_query("SELECT * FROM `session` WHERE `id` = '0'");
-    $usercount = mysql_num_rows($users);
-    $guestcount = mysql_num_rows($guests);
+    $users = mysqli_query($system->dbm->db->dbhandler, "SELECT * FROM `session` WHERE `id` <> '0'");
+    $guests = mysqli_query($system->dbm->db->dbhandler, "SELECT * FROM `session` WHERE `id` = '0'");
+    $usercount = mysqli_num_rows($users);
+    $guestcount = mysqli_num_rows($guests);
     $out = "<TABLE CLASS=PANEL ALIGN=CENTER WIDTH=90% CELLSPACING=0 CELLPADDING=0 BORDER=0>";
     $out .= "<TR><TD class=headerTB ALIGN=CENTER COLSPAN=2>-- $lang[ONLINEUSER] --</TD>";
     $out .= "<TR><TD WIDTH=70%>$lang[USER]</TD><TD WIDTH=30%>$usercount</TD></TR>";
     $out .= "<TR><TD WIDTH=70%>$lang[GUEST]</TD><TD WIDTH=30%>$guestcount</TD></TR>";
     $out .= "<TR><TD class=headerTB ALIGN=CENTER COLSPAN=2><HR></TD>";
-    while($num = mysql_fetch_array($users)){
+    while($num = mysqli_fetch_array($users)){
 	$info = informer($num[id]);
 	$out .= "<TR><TD WIDTH=70%><A " . tooltip(userinfo, $num[id]) . ">$info[username]</A></TD><TD WIDTH=30%>" . yahstat($info['yid'], 5) . "</TD></TR>";
     }

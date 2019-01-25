@@ -30,12 +30,12 @@ class seo extends system{
 		system::debug($settings['debugFile'], "chrF", "	Function=> seo.php-> scan()\n");
 
 		$timeStamp = time();
-		$this->title = mysql_real_escape_string($this->titleMaker());
-		$this->text = mysql_real_escape_string($this->text());
+		$this->title = mysqli_real_escape_string($system->dbm->db->dbhandler, $this->titleMaker());
+		$this->text = mysqli_real_escape_string($system->dbm->db->dbhandler, $this->text());
 		$this->keywords = $keywords = $this->metaKeywordMaker('silent');
 
-		//		print "Time: $timeStamp<br>URL: $_SERVER[QUERY_STRING]<br>Title: $this->title<br>Text: $this->text<br>";
-		//		print "Keywords: " . print_r($keywords);
+//		print "Time: $timeStamp<br>URL: $_SERVER[QUERY_STRING]<br>Title: $this->title<br>Text: $this->text<br>";
+//		print "Keywords: " . print_r($keywords);
 
 		$_SERVER[QUERY_STRING] = str_replace("op=", '', $_SERVER[QUERY_STRING]);
 		$_SERVER[QUERY_STRING] = str_replace("&mode=", '/', $_SERVER[QUERY_STRING]);
@@ -94,7 +94,7 @@ class seo extends system{
 			return $this->p($type);
 			$arrB = $this->strong();
 			if(count($arrB) < 10){
-				//			$words = array_count_values(preg_split("/[\s,.]+/", strip_tags($this->body())));
+//			$words = array_count_values(preg_split("/[\s,.]+/", strip_tags($this->body())));
 				$ps = $this->p('all');
 				if(is_array($ps)){
 					foreach ($ps as $p){
@@ -109,27 +109,27 @@ class seo extends system{
 							$arrW[$word] = $count;
 						}
 					}
-					//			print_r($arrW);
+//			print_r($arrW);
 					@arsort($arrW);
 					$arrW = @array_keys($arrW);
 				}
 			}
 
 			if(count($arrB) > 0 && count($arrW) > 0){
-				//			print "1<br>";
+//			print "1<br>";
 				$out = array_merge($arrB, $arrW);
 			}elseif(count($arrB) == 0 && count($arrW) > 0){
-				//			print "2<br>";
+//			print "2<br>";
 				$out = $arrW;
 			}elseif(count($arrB) > 0 && count($arrW) == 0){
-				//			print "3<br>";
+//			print "3<br>";
 				$out = $arrB;
 			}
 
 			if($mode == 'silent'){
 				return @array_slice($out, 0, 10);
 			}else{
-				//			print implode(', ', array_slice($out, 0, 10));
+//			print implode(', ', array_slice($out, 0, 10));
 				return @implode(', ', array_slice($out, 0, 10));
 			}
 		}
@@ -216,11 +216,11 @@ class seo extends system{
 							$word = trim($word, ".");
 							$word = trim($word, ",");
 							if(strlen($word) > 7){
-								//								print "$obj => $word => " . substr_count(strip_tags($this->body()), $word) . "<br>";
+//								print "$obj => $word => " . substr_count(strip_tags($this->body()), $word) . "<br>";
 								$best[$obj] = $best[$obj] + substr_count(strip_tags($this->body()), $word);
 							}
 						}
-						//						print "----------------<br>";
+//						print "----------------<br>";
 					}
 				}
 				$out = @array_keys($best, max($best));
@@ -340,8 +340,8 @@ class seo extends system{
 		$tags = $this->xpath->evaluate('//p'); //get all p tags
 		for($i = 0; $i < $tags->length; $i++){
 			$tag = $tags->item($i); //select a p tag
-			//			similar_text($tag->nodeValue, $this->title, $percent);
-			//			if($percent > 10)
+//			similar_text($tag->nodeValue, $this->title, $percent);
+//			if($percent > 10)
 			$values[] = $tag->nodeValue;
 		}
 		if(count($values) > 0)

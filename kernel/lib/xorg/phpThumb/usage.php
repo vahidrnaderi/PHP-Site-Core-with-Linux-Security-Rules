@@ -1,7 +1,7 @@
 <?php
 require_once 'ThumbLib.inc.php';
 
-$fileName = (isset($_GET['url'])) ? urldecode($_GET['url']) : '../../../../theme/IdealMart/img/default.jpg';
+$fileName = (isset($_GET['url'])) ? urldecode($_GET['url']) : '../../../../theme/mobdesign/img/default.jpg';
 //echo '1 '.$fileName;
 $pathParts = @pathinfo($_GET['url']);
 //echo '2 '.$pathParts;
@@ -9,7 +9,7 @@ try {
 	$thumb = @PhpThumbFactory::create($fileName);
 //	echo '3 '.$thumb;
 }catch(Exception $e){
-	$thumb = @PhpThumbFactory::create('../../../../theme/IdealMart/img/default.jpg');
+	$thumb = @PhpThumbFactory::create('../../../../theme/mobdesign/img/default.jpg');
 //	echo '4 '.$thumb;
 }
 

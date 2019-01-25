@@ -190,7 +190,7 @@ class m_mta extends masterModule{
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> model/mta.php-> m_mtaReceiverFind ()\n");
 		
 		$queueId = $this->queue['id'];
-		$this->receiver = mysql_fetch_array(mysql_query("SELECT `id`, `firstName`, `lastName`, `email` FROM `$settings[humanResource]` WHERE `id` NOT IN(SELECT `humanResourceId` FROM `$settings[mtaLog]` WHERE `queueId` = $queueId) ORDER BY rand() LIMIT 0,1"), MYSQL_ASSOC);
+		$this->receiver = mysqli_fetch_array(mysqli_query($system->dbm->db->dbhandler, "SELECT `id`, `firstName`, `lastName`, `email` FROM `$settings[humanResource]` WHERE `id` NOT IN(SELECT `humanResourceId` FROM `$settings[mtaLog]` WHERE `queueId` = $queueId) ORDER BY rand() LIMIT 0,1"), MYSQLI_ASSOC);
 	}
 	
 	private function m_mtaSmtpFind (){

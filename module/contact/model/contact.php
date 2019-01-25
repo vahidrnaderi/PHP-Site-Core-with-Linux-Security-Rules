@@ -59,8 +59,8 @@ class m_contact{
 		global $system, $settings, $lang;
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> contact Module >> model/contact.php-> m_showMessage($id)\n");
 
-		//		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
-		//		$system->xorg->pagination->paginateStart("article", "c_list", "`id`, `active`, `name`", "`$this->articleEntity`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 10, 7);
+//		$filter = !empty($filter) ? $system->filterSplitter($filter) : null;
+//		$system->xorg->pagination->paginateStart("article", "c_list", "`id`, `active`, `name`", "`$this->articleEntity`", "1 $filter", "`timeStamp` DESC", "", "", "", "", 10, 7);
 		$system->dbm->db->select("*", "`$this->contactMessageTable`", "`id` = $id");
 
 		$row = $system->dbm->db->fetch_array();

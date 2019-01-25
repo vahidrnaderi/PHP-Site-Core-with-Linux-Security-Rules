@@ -17,7 +17,7 @@ class acl extends system{
 		if(!empty($this->table)){
 //			$system->dbm->db->select("`owner`, `group`, `mor`, `mow`, `mox`, `mgr`, `mgw`, `mgx`, `mtr`, `mtw`, `mtx`, `mur`, `muw`, `mux`", "`$this->table`", $filter);
 //			print "SELECT `owner`, `group`, `mor`, `mow`, `mox`, `mgr`, `mgw`, `mgx`, `mtr`, `mtw`, `mtx`, `mur`, `muw`, `mux` FROM `$this->table` WHERE $filter";
-			$acc = mysql_fetch_array(mysql_query("SELECT `owner`, `group`, `mor`, `mow`, `mox`, `mgr`, `mgw`, `mgx`, `mtr`, `mtw`, `mtx`, `mur`, `muw`, `mux` FROM `$this->table` WHERE $filter"));
+		    $acc = mysqli_fetch_array(mysqli_query($system->dbm->db->dbhandler, "SELECT `owner`, `group`, `mor`, `mow`, `mox`, `mgr`, `mgw`, `mgx`, `mtr`, `mtw`, `mtx`, `mur`, `muw`, `mux` FROM `$this->table` WHERE $filter"));
 //			$acc = $system->dbm->db->fetch_array();
 //			print_r($acc);
 //			print "<br>";

@@ -17,7 +17,7 @@ class m_relatedContent extends masterModule{
 		global $system, $settings;
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> relatedContent Module >> model/relatedContent.php-> m_relatedURL($title)\n");
 
-		$title = mysql_real_escape_string($title);
+		$title = mysqli_real_escape_string($system->dbm->db->dbhandler, $title);
 		$system->dbm->db->select("`id`, `url`, `title`", "`$this->table`", "`domain` = '$settings[domain]' AND `title` <> '$title'");
 		while($row = $system->dbm->db->fetch_array()){
 			similar_text($title, $row[title], $percent);

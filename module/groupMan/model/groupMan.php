@@ -124,11 +124,20 @@ class m_groupMan extends masterModule{
 		global $system, $settings;
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_userGroups($uid)\n");
 
-		$result = mysql_query("SELECT `gid` FROM `$settings[groupManMembers]` WHERE `uid` = $uid");
-		while($row = mysql_fetch_array($result)){
+		$result = mysqli_query($system->dbm->db->dbhandler, "SELECT `gid` FROM `$settings[groupManMembers]` WHERE `uid` = $uid");
+		while($row = mysqli_fetch_array($result)){
 			$gids = $gids . ',' . $row['gid']; 
 		}
 		return $gids;
+	}
+	
+	public function m_userGroup($uid){
+		global $system, $settings;
+		system::debug($settings['debugFile'], "chrM", "	Module-Function=> groupMan Module >> model/groupMan.php-> m_userGroup($uid)\n");
+	
+		$gid = $system->dbm->db->informer("`$settings[groupManMembers]`", "`uid` = $uid", "`gid`");
+		
+		return $gid;
 	}
 
 }

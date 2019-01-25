@@ -77,7 +77,7 @@ class sms_soap
 				return array('error' => true, 'fault' => true, 'message' => $this->client->getError());
 			}
 
-       return $result;
+        return $result;
     }
 
 	public static function CorrectNumber(&$uNumber)
