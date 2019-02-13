@@ -454,6 +454,8 @@ $(document).on('click', "#editProfileLink", function() {
 		$('#levelSelectBox').farajax('loader', '/htmlElements/v_selectLevel', 'name=level&selected=' + $('#levelId').val());
 	if($('#nationality').length == 0)
 		$('#nationalitySelectBox').farajax('loader', '/htmlElements/v_selectCountry', 'name=nationality&selected=' + $('#nationalityId').val());
+	if($('#country').length == 0)
+		$('#countrySelectBox').farajax('loader', '/htmlElements/v_selectCountry', 'name=country&selected=' + $('#countryId').val());
 	if($('#state').length == 0)
 		$('#stateSelectBox').farajax('loader', '/htmlElements/v_selectState', 'name=state&selected=' + $('#stateId').val());
 	if($('#city').length == 0)

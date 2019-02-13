@@ -26,7 +26,7 @@ class pagination extends system{
 
 	public function paginateStart($op, $mode, $fields, $tables, $where=null, $order_by=null, $group_by=null, $having=null, $limit=null, $distinct=null, $rows_per_page=20, $links_per_page=7, $append = null){
 		global $system, $settings;
-		system::debug($settings['debugFile'], "chrF", "	Function=> pagination.php-> paginateStart($op, $mode, $fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct, $rows_per_page, $links_per_page, $append)\n");
+		system::debug($settings['debugFile'], "chrF", "	Function=> kernel/lib/xorg/pagination/pagination.php-> paginateStart($op, $mode, $fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct, $rows_per_page, $links_per_page, $append)\n");
 
 //echo "<br>paginateStart=> $tables<br>";
 

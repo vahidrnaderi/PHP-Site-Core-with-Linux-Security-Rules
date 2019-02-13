@@ -37,10 +37,12 @@ class c_userMan extends m_userMan{
 	}
 
 	public function c_userList($filter=null, $viewMode='show'){
-		if($_SESSION['uid'] == 1){
+	    global $system;
+	    
+	    if($_SESSION['uid'] == 1 AND $filter != null){
 			return $this->m_userList($filter, $viewMode);
 		}else{
-			return $this->m_userList("id=$_SESSION[uid]", $viewMode);
+			return $this->m_userList("base.id=$_SESSION[uid]", $viewMode);
 		}
 	}
 

@@ -20,7 +20,7 @@ class system{
 	public function debug($fileName, $type, $message){
 		global $settings;
 		
-		$localTime=date(" Y/m/d-h:i:sa");
+		$localTime=date("e(P)= Y/m/d-H:i:s");
 		
 		if($settings['debug']=='on')
 			switch ($type){
@@ -51,8 +51,13 @@ class system{
 					$message = $localTime."-->Fatal-Error: system.php=> Function: debug($fileName, $type, $message) -> No Debug's type definition.";
 					break;
 		}
-		
+
+// 		echo "<br\>1->". var_dump(file_exists($settings[debugFile]))."<br\>";	
+// 		echo "<br\>";
+//		echo "<br\>1->".var_dump(is_writable($settings[debugFile]))."<br\>";
+// echo "<br/>2->$settings[debugFile]--> ***-->>debug($fileName, $type, $message)<br/>";		
 		if($settings['debugMyFileWrite']=='on'){
+// echo "<br\>3<br\>";	
 			$myFile = fopen($settings['debugFile'], "a") or die("Unable to open file!");
 //			echo "myfile->$myfile<br>";
 			fwrite($myFile, "-----------$localTime************debug($fileName, $type, $message)\n");

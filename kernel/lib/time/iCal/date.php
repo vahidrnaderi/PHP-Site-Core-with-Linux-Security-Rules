@@ -170,7 +170,9 @@ class iCal{
 		}
 		for ($i = 0; $i < 11 && $j_day_no >= $j_days_in_month[$i]; ++$i)
 		$j_day_no -= $j_days_in_month[$i];
+		if ($j_day_no<10) $j_day_no='0'.$j_day_no;
 		$jm = $i+1;
+		if ($jm<10) $jm='0'.$jm;
 		$jd = $j_day_no+1;
 		return array($jy, $jm, $jd);
 	}

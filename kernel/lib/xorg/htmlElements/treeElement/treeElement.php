@@ -12,7 +12,8 @@ class treeElement extends htmlElements{
 	
 	public function treeTrace($table, $category=0, $level=0, $flag=0) {
 		global $system, $lang, $settings;
-		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeTrace($table, $category, $level, $flag)\n");
+		// به دلیل تکرار بالا کامنت شد
+// 		system::debug($settings['debugFile'], "chrF", "	Function=> treeElement.php-> treeTrace($table, $category, $level, $flag)\n");
 				
 		$result = mysqli_query($system->dbm->db->dbhandler, "SELECT `id`, `category`, `name` FROM `$table` WHERE `category` = $category ORDER BY `name` ASC");
 		if(!empty($result)){

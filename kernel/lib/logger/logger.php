@@ -33,13 +33,13 @@ class logger extends system{
 // echo "$message <br>";
 		$clientInfo = $system->utility->browserDetector->whatBrowser();
 
-		$op = mysql_real_escape_string($sysVar[op]);
-		$mode = mysql_real_escape_string($sysVar[mode]);
+		$op = mysqli_real_escape_string($system->dbm->db->dbhandler, $sysVar[op]);
+		$mode = mysqli_real_escape_string($system->dbm->db->dbhandler, $sysVar[mode]);
 		$agent = $clientInfo[browsertype];
 		$version = $clientInfo[version];
-		$ip = mysql_real_escape_string($_SERVER[REMOTE_ADDR]);
-		$reffer = mysql_real_escape_string($_SERVER[HTTP_REFERER]);
-		$host = mysql_real_escape_string(gethostbyaddr($_SERVER[REMOTE_ADDR]));
+		$ip = mysqli_real_escape_string($system->dbm->db->dbhandler, $_SERVER[REMOTE_ADDR]);
+		$reffer = mysqli_real_escape_string($system->dbm->db->dbhandler, $_SERVER[HTTP_REFERER]);
+		$host = mysqli_real_escape_string($system->dbm->db->dbhandler, gethostbyaddr($_SERVER[REMOTE_ADDR]));
 		$os = $clientInfo[platform];
 
 		if(!is_array($message)){
@@ -53,8 +53,8 @@ class logger extends system{
 
 		$timeStamp = time();
 		//		$offsetTime = $timeStamp - 2592000;
-		$title = mysql_real_escape_string($title);
-		$messageToDb = mysql_real_escape_string($messageToDb);
+		$title = mysqli_real_escape_string($system->dbm->db->dbhandler, $title);
+		$messageToDb = mysqli_real_escape_string($system->dbm->db->dbhandler, $messageToDb);
 
 		//		$system->dbm->db->delete("$this->table", "`timeStamp` < $offsetTime");
 		$uid = !empty($_SESSION[uid]) ? $_SESSION[uid] : 2;

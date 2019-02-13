@@ -13,8 +13,8 @@ switch ($sysVar[mode]){
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_emailActivation\n");
 		
 		$filter = $system->filterSplit($_GET[filter]);
-		$system->xorg->smarty->assign("email", $system->dbm->db->informer("`user`", $filter, "email"));
-		$system->xorg->smarty->assign("id", $system->dbm->db->informer("`user`", $filter, "id"));
+		$system->xorg->smarty->assign("email", $system->dbm->db->informer("`$settings[usrsID]`", $filter, "email"));
+		$system->xorg->smarty->assign("id", $system->dbm->db->informer("`$settings[usrsID]`", $filter, "id"));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/emailActivation" . $settings['ext4']);
 		break;
 	case "v_mobileActivation":
@@ -22,10 +22,10 @@ switch ($sysVar[mode]){
 		
 		$filter = $system->filterSplit($_GET[filter]);
 //		echo $filter;
-		$system->xorg->smarty->assign("mobile", $system->dbm->db->informer("`user`", $filter, "mobile"));
+		$system->xorg->smarty->assign("mobile", $system->dbm->db->informer("`$settings[usrsID]`", $filter, "mobile"));
 //		echo "</br>";
 //		echo $mobile;
-		$system->xorg->smarty->assign("id", $system->dbm->db->informer("`user`", $filter, "id"));
+		$system->xorg->smarty->assign("id", $system->dbm->db->informer("`$settings[usrsID]`", $filter, "id"));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/mobileActivation" . $settings['ext4']);
 		break;
 	case "v_signUp":
@@ -46,6 +46,17 @@ switch ($sysVar[mode]){
 		$c_userMan->c_menu();
 		break;
 	case "v_profile":
+	    system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> v_profile---   \$_POST=".print_r($_POST,true)." \$_GET=".print_r($_GET,true)."\n");
+	    
+	    if ($_POST['fromBasket']==1){
+	        $_SESSION['fromBasket'] = 1;
+	        $_SESSION['afterSignUp'] = 1;
+	        $_SESSION['fromCPanel']=0;
+	    }
+	    
+	    $system->xorg->smarty->assign("fromBasket", $_SESSION['fromBasket']);
+	    $system->xorg->smarty->assign("fromCPanel", $_SESSION['fromCPanel']);
+	    
 		$c_userMan->c_userList($_GET[filter]);
 		break;
 	case "v_edit":
@@ -64,13 +75,20 @@ switch ($sysVar[mode]){
 		$c_userMan->c_userDel($_GET[filter]);
 		break;
 	case "c_signUp":
-		if ($_POST[fromBasket]){
-			$_SESSION['fromBasket'] = true;
-			$_SESSION['afterSignUp'] = false;
+		if ($_POST[fromBasket]==1){
+			$_SESSION['fromBasket'] = 1;
+			$_SESSION['afterSignUp'] = 0;
 		}else{
-			$_SESSION['fromBasket'] = false;
-			$_SESSION['afterSignUp'] = true;
-		}
+			$_SESSION['fromBasket'] = 0;
+			$_SESSION['afterSignUp'] = 1;
+		}		
+		
+		$system->xorg->smarty->assign("fromBasket", $_SESSION['fromBasket']);
+		$system->xorg->smarty->assign("fromCPanel", $_SESSION['fromCPanel']);
+		
+		$system->xorg->smarty->assign("fromBasket", $_SESSION['fromBasket']);
+		$system->xorg->smarty->assign("fromCPanel", $_SESSION['fromCPanel']);
+		
 		$c_userMan->c_signUp($_POST);
 		break;
 	case "c_userAdd":
@@ -87,20 +105,35 @@ switch ($sysVar[mode]){
 		break;
 	case "c_login":
 		//***		echo 1;
-		if ($_POST[fromBasket]){
-			$_SESSION['fromBasket'] = true;
-			$_SESSION['afterSignUp'] = false;
+		if ($_POST[fromBasket]==1){
+			$_SESSION['fromBasket'] = 1;
+			$_SESSION['afterSignUp'] = 0;
 		}else{
-			$_SESSION['fromBasket'] = false;
-			$_SESSION['afterSignUp'] = true;
+			$_SESSION['fromBasket'] = 0;
+			$_SESSION['afterSignUp'] = 1;
 		}
+		
+		$system->xorg->smarty->assign("fromBasket", $_SESSION['fromBasket']);
+		$system->xorg->smarty->assign("fromCPanel", $_SESSION['fromCPanel']);
+		
 		$c_userMan->c_login($_POST['userName'], $_POST['password']);
 		break;
 	case "c_logout":
-		$_SESSION[fromBasket] = false;
+		$_SESSION[fromBasket] = 0;
 		$c_userMan->c_logout();
 		break;
 	case "c_edit":
+	    system::debug($settings['debugFile'], "chrM", "	Module-Function=> userMan Module >> index.php-> c_edit---   \$_POST=".print_r($_POST,true)." \$_GET=".print_r($_GET,true)."\n");
+	    
+	    if ($_POST['fromBasket']==1){
+	        $_SESSION['fromBasket'] = 0;
+	        $_SESSION['afterSignUp'] = 1;	        
+	        $_SESSION['fromCPanel']=2;
+	    }
+	    
+	    $system->xorg->smarty->assign("fromBasket", $_SESSION['fromBasket']);
+	    $system->xorg->smarty->assign("fromCPanel", $_SESSION['fromCPanel']);
+	    
 		$c_userMan->c_edit($_POST);
 		break;
 	case "c_setSettings":

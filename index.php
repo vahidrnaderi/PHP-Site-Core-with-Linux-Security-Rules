@@ -1,6 +1,7 @@
 <?php
 ob_start("ob_gzhandler");
 define("superVisor", "kernel/controller/superVisor");
+date_default_timezone_set('Asia/Tehran');
 if(file_exists(superVisor . ".php"))
 	require_once(superVisor . ".php");
 ////echo "<br> **** 11 **** <br>";

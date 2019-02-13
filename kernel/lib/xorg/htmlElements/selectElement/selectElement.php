@@ -9,12 +9,12 @@ class selectElement extends htmlElements{
 	}
 	
 	/**
-	 * Select element
-	 * @param unknown_type $name
-	 * @param unknown_type $options
-	 * @param unknown_type $selected
-	 * @param unknown_type $size
-	 * @return Ambigous <string, void, unknown>
+// 	 * Select element
+// 	 * @param unknown_type $name
+// 	 * @param unknown_type $options
+// 	 * @param unknown_type $selected
+// 	 * @param unknown_type $size
+// 	 * @return Ambigous <string, void, unknown>
 	 */
 	public function select($name, $options, $selected = null, $size=1){
 		global $system, $settings;

@@ -13,31 +13,31 @@ switch ($sysVar[mode]){
 	case "v_selectReligion":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> htmlElements Module >> index.php-> v_selectReligion\n");
 		
-		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[religion]`"), $_POST['selected']));
+		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[religion]`", "`name` != 'NULL'"), $_POST['selected']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/empty" . $settings['ext4']);
 		break;
 	case "v_selectLevel":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> htmlElements Module >> index.php-> v_selectLevel\n");
 		
-		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[level]`"), $_POST['selected']));
+		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[level]`", "`name` != 'NULL'"), $_POST['selected']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/empty" . $settings['ext4']);
 		break;
 	case "v_selectCountry":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> htmlElements Module >> index.php-> v_selectCountry\n");
 		
-		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[countries]`"), $_POST['selected']));
+		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[countries]`", "`name` != 'NULL'"), $_POST['selected']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/empty" . $settings['ext4']);
 		break;
 	case "v_selectState":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> htmlElements Module >> index.php-> v_selectState\n");
 		
-		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[state]`"), $_POST['selected']));
+		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[state]`", "`name` != 'NULL'"), $_POST['selected']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/empty" . $settings['ext4']);
 		break;
 	case "v_selectStatus":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> htmlElements Module >> index.php-> v_selectStatus\n");
 		
-		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[status]`"), $_POST['selected']));
+		$system->xorg->smarty->assign("value", $system->xorg->htmlElements->selectElement->select($_POST['name'], $system->dbm->db->lookup("`$settings[status]`", "`name` != 'NULL'"), $_POST['selected']));
 		$system->xorg->smarty->display("$settings[moduleAddress]/$settings[moduleName]/$settings[viewAddress]/$settings[tplAddress]/empty" . $settings['ext4']);
 		break;
 	case "v_selectCity":

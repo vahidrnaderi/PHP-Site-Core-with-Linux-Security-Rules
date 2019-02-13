@@ -163,7 +163,7 @@ class session extends system{
 		$this->sessionId = session_id();
 // 		echo "sessionId count-->".$system->dbm->db->count_records("`$this->table`", "`sessionId` = '$this->sessionId'");
 		
-		if(empty($_SESSION['uid']) || ($system->dbm->db->informer("`user`", "`id` = $suid", "id") == null)){
+		if(empty($_SESSION['uid']) || ($system->dbm->db->informer("`$settings[usrsID]`", "`id` = $suid", "id") == null)){
 //  			echo "</br>empty session--$this->sessionId</br>";
 			$uid = empty($uid) ? 2 : $uid;
 			$gid = empty($gid) ? 3 : $gid;

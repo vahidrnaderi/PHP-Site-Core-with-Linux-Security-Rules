@@ -82,7 +82,16 @@ class m_groupMan extends masterModule{
 
 //		$filter = $system->filterSplitter($filter);
 
-		$system->xorg->pagination->paginateStart("groupMan", "v_listMembers", "`id`, `active`, `timeStamp`, `userName`, `email`, `firstName`, `lastName`, `userPic`", "`$settings[userTable]`", "", "`timeStamp` DESC", "", "", "", "", 10, 7);
+		
+		if ($system->dbm->db->informer("`$settings[usrsID]`","`id` = $_SESSION[uid]","userType")==1) {
+		    $system->xorg->pagination->paginateStart("groupMan", "v_listMembers", "`base`.`id`, `base`.`active`, `base`.`timeStamp`, `base`.`userName`, `base`.`email`, `base`.`userType`, `pers`.`firstName`, `pers`.`lastName`, `pers`.`userPic`", "`$settings[usrs_ID]` AS `base`, `$settings[usrs_Personal]` AS `pers`", "", "`timeStamp` DESC", "", "", "", "", 10, 7);
+		    $userInfo[fullname]=$userInfo['firstName']." ".$userInfo['lastName'];
+		}elseif ($system->dbm->db->informer("`$settings[usrsID]`","`id` = $_SESSION[uid]","userType")==2){
+		    $system->xorg->pagination->paginateStart("groupMan", "v_listMembers", "`base`.`id`, `base`.`active`, `base`.`timeStamp`, `base`.`userName`, `base`.`email`, `base`.`userType`, `co`.`coType`, `co`.`coName`, `co`.`userPic`", "`$settings[usrs_ID]` AS `base`, `$settings[usrs_Co]` AS `co`", "", "`timeStamp` DESC", "", "", "", "", 10, 7);
+		    $userInfo[fullname]=$lang['company']." ".$userInfo['coType']." ".$userInfo['coName'];
+		}
+		
+// 		$system->xorg->pagination->paginateStart("groupMan", "v_listMembers", "`id`, `active`, `timeStamp`, `userName`, `email`, `firstName`, `lastName`, `userPic`", "`$settings[userTable]`", "", "`timeStamp` DESC", "", "", "", "", 10, 7);
 		$count = 1;
 		while ($row = $system->dbm->db->fetch_array()){
 			$entityList[$count][count] = $count;
@@ -91,8 +100,15 @@ class m_groupMan extends masterModule{
 			$entityList[$count][timeStamp] = $system->time->iCal->dator($row[timeStamp]);
 			$entityList[$count][userName] = $row[userName];
 			$entityList[$count][email] = $row[email];
-			$entityList[$count][firstName] = $row[firstName];
-			$entityList[$count][lastName] = $row[lastName];
+			
+			if ($row[uerType]==1){
+			    $entityList[$count][firstName] = $row[firstName];
+			    $entityList[$count][lastName] = $row[lastName];
+			}elseif($row[uerType]==2){
+			    $entityList[$count][firstName] = $row[coName];
+			    $entityList[$count][lastName] = $row[coType];
+			}
+			
 			$entityList[$count][isMember] = $system->dbm->db->count_records("`$settings[groupManMembers]`", "`gid` = $gid AND `uid` = $row[id]");
 			$entityList[$count][gid] = $gid;
 			$count++;
@@ -111,11 +127,23 @@ class m_groupMan extends masterModule{
 		$timeStamp = time();
 		if($system->dbm->db->count_records("`$settings[groupManMembers]`", "`gid` = $gid AND `uid` = $uid") > 0){
 			$system->dbm->db->delete("`$settings[groupManMembers]`", "`gid` = $gid AND `uid` = $uid");
-			$system->dbm->db->update("`user`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_ID`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Personal`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Co`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Tel`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Address`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Relations`","`gid` = 2","`id` = $uid");
+			$system->dbm->db->update("`usrs_Bank_Accounts`","`gid` = 2","`id` = $uid");
 			$system->watchDog->exception('s', $lang[delFromGroup], sprintf($lang[successfulDone], $lang[delFromGroup], $system->dbm->db->informer("`$settings[groupManObject]`", "`id` = $gid", "name")));
 		}else{
 			$system->dbm->db->insert("`$settings[groupManMembers]`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gx`, `gid`, `uid`", "1, $timeStamp, 1, 1, 1, 1, 1, 1, 1, $gid, $uid");
-			$system->dbm->db->update("`user`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_ID`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Personal`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Co`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Tel`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Address`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Relations`","`gid` = $gid","`id` = $uid");
+			$system->dbm->db->update("`usrs_Bank_Accounts`","`gid` = $gid","`id` = $uid");
 			$system->watchDog->exception('s', $lang[addToGroup], sprintf($lang[successfulDone], $lang[addToGroup], $system->dbm->db->informer("`$settings[groupManObject]`", "`id` = $gid", "name")));
 		}
 	}
