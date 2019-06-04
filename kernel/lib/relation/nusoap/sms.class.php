@@ -22,7 +22,6 @@ class sms_soap
 	
     public function SendSMS($message, $from, $to, $type)
 	{
-//		echo "<br> SendSms <br>";
 		if(is_array($to))
 		{
 			$i = sizeOf($to);
@@ -46,9 +45,6 @@ class sms_soap
 
         $response = $this->call("enqueue", $params);
         
-//****
-//         echo "<p style='direction:ltr'><br>  call  <br>";
-//         print_r ($response);
 
 		return $response;
     }
@@ -64,12 +60,6 @@ class sms_soap
 	{
       	$result = $this->client->call($method, $params);
         
-//****
-//          	echo "<p style='direction:ltr'>";
-//  			print_r ($result);
-// 			echo "<br> call <br>";
-//			print_r ($this->client);
-// 			print_r ($this->client->return[enqueueReturn]);
 
 
 			if($this->client->fault || ((bool)$this->client->getError()))

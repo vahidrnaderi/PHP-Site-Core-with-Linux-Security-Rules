@@ -92,7 +92,7 @@ class m_userMan extends masterModule{
 //			if($values['password'] == $values['retypePassword']){
 	////1			if(strlen($values['password']) >= $settings['minCharPassword']){
 					if($_POST['securityQuestion'] === $system->dbm->db->informer("`$settings[faqObject]`", "`id` = $_POST[securityId]", "answer")){
-						$password =$values['password'];//null; ////1 md5($values['password']);
+						$password =$values['password'];	//null; ////1 md5($values['password']);
 	
 						$system->dbm->db->insert("`$this->userTable`", "`active`, `timeStamp`, `owner`, `group`, `or`, `ow`, `ox`, `gr`, `gx`, `tr`, `tx`, `gid`, `password`, `$signUpFlag`, `userType`", "1, '$timeStamp', 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, '$password', '$values[userName]', '0'");  ////1 $values[userType]
 	
@@ -171,9 +171,9 @@ class m_userMan extends masterModule{
 		$values['addressType'] = (!empty($values['addressType'])) ? $values['addressType'] : 0;
 		
 //print_r($values);
-		$religion = (!empty($values['religion'])) ? "$values[religion]" : null;
-		$financialStatus = (!empty($values['financialStatus'])) ? "$values[financialStatus]" : null;
-		$level = (!empty($values[level])) ? "$values[level]" : null;
+		$religion = (!empty($values['religion'])) ? ",`religion` = $values[religion]" : null;
+		$financialStatus = (!empty($values['financialStatus'])) ? ",`financialStatus` = $values[financialStatus]" : null;
+		$level = (!empty($values[level])) ? ",`level` = $values[level]" : null;
 
 		$deActiveMobile = ($system->dbm->db->informer("`$this->userTable`", "`id` = $_SESSION[uid]", "mobile") != $values['mobile']) ? ",`showMobile` = 0 " : null;
 //		echo ("<br>*** " . $system->dbm->db->informer("`$settings[userTable]`", "`id` = $_SESSION[uid]", "mobile"))."<br> != <br>**** " .$values['mobile'] ;
@@ -364,26 +364,26 @@ class m_userMan extends masterModule{
 			    $userList[$count][unit] = $row['unit'];
 			    $userList[$count][zipcode] = $row['zipcode'];
 			    
-    			if ($row['userType'] == 1){
-    			    $userList[$count][firstName] = $row['firstName'];
-    			    $userList[$count][lastName] = $row['lastName'];
-    			    $userList[$count][fatherName] = $row['fatherName'];
-    			    $userList[$count][genderId] = $row['gender'];
-    			    $userList[$count][gender] = $system->dbm->db->informer("`$this->genderTable`", "`id` = $row[gender]", 'name');
-    			    $userList[$count][idNumber] = $row['idNumber'];
-    			    $userList[$count][personalCode] = $row['personalCode'];
-    			    $userList[$count][levelId] = $row['level'];
-    			    $userList[$count][level] = $system->dbm->db->informer("`$this->levelTable`", "`id` = $row[level]", 'name');
-    			    $userList[$count][major] = $row['major'];
-    			    $userList[$count][proficiency] = $row['proficiency'];
-    			}elseif ($row['userType'] == 2){
-    			    $userList[$count][coName] = $row['coName'];
-    			    $userList[$count][coType] = $row['coType'];
-    			    $userList[$count][coCapital] = $row['coCapital'];
-    			    $userList[$count][coCEO] = $row['coCEO'];
-    			    $userList[$count][certificates] = $row['certificates'];
-    			    $userList[$count][regTime] = $row['regTime'];
-    			}
+	    			if ($row['userType'] == 1){
+	    			    $userList[$count][firstName] = $row['firstName'];
+	    			    $userList[$count][lastName] = $row['lastName'];
+	    			    $userList[$count][fatherName] = $row['fatherName'];
+	    			    $userList[$count][genderId] = $row['gender'];
+	    			    $userList[$count][gender] = $system->dbm->db->informer("`$this->genderTable`", "`id` = $row[gender]", 'name');
+	    			    $userList[$count][idNumber] = $row['idNumber'];
+	    			    $userList[$count][personalCode] = $row['personalCode'];
+	    			    $userList[$count][levelId] = $row['level'];
+	    			    $userList[$count][level] = $system->dbm->db->informer("`$this->levelTable`", "`id` = $row[level]", 'name');
+	    			    $userList[$count][major] = $row['major'];
+	    			    $userList[$count][proficiency] = $row['proficiency'];
+	    			}elseif ($row['userType'] == 2){
+	    			    $userList[$count][coName] = $row['coName'];
+	    			    $userList[$count][coType] = $row['coType'];
+	    			    $userList[$count][coCapital] = $row['coCapital'];
+	    			    $userList[$count][coCEO] = $row['coCEO'];
+	    			    $userList[$count][certificates] = $row['certificates'];
+	    			    $userList[$count][regTime] = $row['regTime'];
+	    			}
 			}
 			$count++;
 		}

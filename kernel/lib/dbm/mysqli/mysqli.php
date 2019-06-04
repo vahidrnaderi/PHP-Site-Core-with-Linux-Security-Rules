@@ -49,37 +49,28 @@ class mysqliDB
         $this->db_user=$user;
         $this->db_passwd=$passwd;
         $this->db_host=$host;
-//         $this->db_link_ptr=NULL;
-
         
         $this->dbhandler=@mysqli_connect($host,$user,$passwd,$db,$port,$socket);
-//         $this->db_link_ptr=@mysqli_connect($host,$user,$passwd,$db) or $this->error("",mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));
         if (mysqli_connect_errno())
         {
             $this->error("",mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));
-//             $this->error("",mysqli_connect_error(),mysqli_connect_errno());
-//             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
-//        $this->dbhandler=@mysqli_select_db($db);
        
         if (!$this->dbhandler) {
             if ($create=="1")  {
                 // Create database
                 $sql = "CREATE DATABASE $db";
                 if (!$this->dbhandler->query($sql) === TRUE) {
-//                    echo "Error creating database: " . $conn->error;
                     $this->error("impossible to create the database.",mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));
                 }
-//                @mysqli_create_db($db,$this->db_link_ptr) or $this->error("imposible crear la base de datos.",mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));;
-//                 $this->dbhandler=@mysqli_select_db($this->dbhandler, $db);
             }
         }
         mysqli_set_charset($this->dbhandler, 'utf8');
         
-//         $this->ip = mysqli_real_escape_string($this->dbhandler, $_SERVER['REMOTE_ADDR']);
-//         $this->host = mysqli_real_escape_string($this->dbhandler, gethostbyaddr($_SERVER['REMOTE_ADDR']));
-//         $this->reffer = mysqli_real_escape_string($this->dbhandler, $_SERVER['HTTP_REFERER']);
-//         $this->agent = mysqli_real_escape_string($this->dbhandler, $_SERVER['HTTP_USER_AGENT']);
+        $this->ip = mysqli_real_escape_string($this->dbhandler, $_SERVER['REMOTE_ADDR']);
+        $this->host = mysqli_real_escape_string($this->dbhandler, gethostbyaddr($_SERVER['REMOTE_ADDR']));
+        $this->reffer = mysqli_real_escape_string($this->dbhandler, $_SERVER['HTTP_REFERER']);
+        $this->agent = mysqli_real_escape_string($this->dbhandler, $_SERVER['HTTP_USER_AGENT']);
         
         
     }
@@ -88,10 +79,7 @@ class mysqliDB
         global $system, $lang, $settings;
         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> error($where,$error,$errno)\n");
         
-        //		die($system->watchDog->exception("e", "$lang[dataBaseProblem] $errno", mysqli_real_escape_string("$error at $where")));
-        echo "$where<br>";
-        die($error."<br>".$errno);
-        die();
+		die($system->watchDog->exception("e", "$lang[dataBaseProblem] $errno", mysqli_real_escape_string("$error at $where")));
     }
     
     public function error_msg() {
@@ -153,7 +141,7 @@ class mysqliDB
         global $settings;
         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> mysqli_db_result(link->".print_r($link,true).",$recno,$field)\n");
     
-        if(/*$result*/$link->num_rows==0) return 'unknown';
+        if($link->num_rows==0) return 'unknown';
             $link->data_seek($row);
             $ceva=$link->fetch_assoc();
             $rasp=$ceva[$field];
@@ -163,11 +151,9 @@ class mysqliDB
     
     public function count_records($table,$filter="") {
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> count_records($table,$filter)\n");
-        // 				print "</br><font style='color:yellow'>select count(*) as num from $table where $filter</br>";
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> count_records($table,$filter)\n");
         $res = @mysqli_query($this->dbhandler, "select count(*) as num from $table".(($filter!="")?" where $filter" : ""));
         $xx= $this->mysqli_db_result($res,0,"num");
-// echo "<font style='color:red'>xx -> $xx</font></br>";
 
         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> count_records($table,$filter) = $xx \n");
         return $xx;
@@ -186,54 +172,33 @@ class mysqliDB
         global $system, $lang, $settings;
         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> select(fields->[$fields]|tables->[$tables]|where->[$where]|$order_by|$group_by|$having|$limit|$distinct) -- SESSION[fromBasket]-->$_SESSION[fromBasket]\n");
         
-        // echo "<br>select=> $tables<br>";
         if($distinct == 1){
             $sql_stat=" SELECT DISTINCT $fields FROM $tables ";
         }else{
             $sql_stat=" SELECT $fields FROM $tables ";
         }
         
-        //		if ($_SESSION[uid] != 1){
         if(strstr($tables, ",")){
             if(!empty($where)){
-                //echo "<br> **** 1 **** <br>";
                 $sql_stat.="WHERE `base`.`owner` = $_SESSION[uid] AND `base`.`or` = 1 AND $where OR `base`.`group` IN ($_SESSION[gid]) AND `base`.`gr` = 1 AND $where OR `base`.`tr` = 1 AND $where OR `base`.`ur` = 1 AND $where ";
             }else{
-                //echo "<br> **** 2 **** <br>";
                 $sql_stat.="WHERE `base`.`owner` = $_SESSION[uid] AND `base`.`or` = 1 OR `base`.`group` IN ($_SESSION[gid]) AND `base`.`gr` = 1 OR `base`.`tr` = 1 OR `base`.`ur` = 1 ";
             }
         }else{
-            //echo "<br> **** 3 **** <br>";
             if(!empty($where)){
-//                 if ($_SESSION[fromBasket]==0){
-//                     $sql_stat.="WHERE `owner` = $_SESSION[uid] AND `or` = 1 AND $where OR `group` IN ($_SESSION[gid]) AND `gr` = 1 AND $where OR `tr` = 1 AND $where OR `ur` = 1 AND $where ";
-//                 }else{
                     $sql_stat.="WHERE `owner` = 2 AND `or` = 1 AND $where OR `group` IN ($_SESSION[gid]) AND `gr` = 1 AND $where OR `tr` = 1 AND $where OR `ur` = 1 AND $where ";
-//                 }
             }else{
-                //echo "<br> **** 4 **** <br>";
                 $sql_stat.="WHERE `owner` = $_SESSION[uid] AND `or` = 1 OR `group` IN ($_SESSION[gid]) AND `gr` = 1 OR `tr` = 1 OR `ur` = 1 ";
             }
         }
-        //			print $sql_stat;
-        //		}else{
-        //			$sql_stat.= "WHERE $where";
-        //		}
             
         if (!empty($group_by)) $sql_stat.="GROUP By $group_by ";
         if (!empty($order_by)) $sql_stat.="ORDER BY $order_by ";
         if (!empty($having)) $sql_stat.="HAVING $having ";
         if (!empty($limit)) $sql_stat.="LIMIT $limit ";
         
-        //*****
-        //echo "<br><br>sql_stat--> ". $sql_stat . "<br><br>";
-        ////		system::debug($settings['debugFile'], "chrF", "\n sql_stat--> $sql_stat \n");
         
         $this->db_result=@mysqli_query($this->dbhandler, $sql_stat) or $this->error($sql_stat,mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));
-        //		$this->db_affected_rows=@mysqli_num_rows($this->db_result);
-        //		if($this->db_affected_rows == 0){
-        //			$this->error(null, $lang[thereIsNoEntry], null);
-        //		}
             
         return $this->db_result;
     }
@@ -283,25 +248,11 @@ class mysqliDB
         if (is_array($fields)) $theFields=implode(",",$fields); else $theFields=$fields;
         if (is_array($values)) $theValues="'".implode("','",$values)."'"; else $theValues=$values;
         
-        //		if(!is_array($values)){
-        //			if(strstr($values, "', '")){
-        //				explode("', '", $values);
-        //			}elseif(strstr($values, "','")){
-        //				explode("','", $values);
-        //			}
-        //		}
-        //		foreach ($values as $key=>$value){
-        //			$arr[] = mysqli_real_escape_string($value);
-        //		}
-        //		$theValues="'" . implode("','",$arr) . "'";
         
         $theValues=str_replace("'now()'","now()",$theValues);
         
         if (!empty($theFields)) $sql_stat.="($theFields) ";
         $sql_stat.="values ($theValues)";
-        //echo "<br>insert=> <br>";
-        //print_r ($sql_stat);
-        //echo "<br>";
         return @mysqli_query($this->dbhandler, $sql_stat) or $this->error($sql_stat,mysqli_error($this->dbhandler),mysqli_errno($this->dbhandler));
     }
     
@@ -362,30 +313,14 @@ class mysqliDB
     }
     
     public function fetch_array($link="") {
-        global $settings;
-        // به دلیل تعداد تکرار زیاد حذف شده		
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> fetch_array(link ==> ".print_r($link)."\n");
-        //		if(isset($this->db_result)){
+        global $settings;	
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> fetch_array(link ==> ".print_r($link)."\n");
         if ($link==null){
             $row=mysqli_fetch_array($this->db_result, MYSQLI_ASSOC);
         }else{
             $row=mysqli_fetch_array($link, MYSQLI_ASSOC);
         }
-        //		echo "<br/>$this->db_result => ".$this->db_result;
-        //echo "<p style='direction:ltr;color:green;'>mysqli_list_tables = >>".mysqli_list_tables($this->db_name)." <br/>";
-        //echo "<p style='direction:ltr;color:black;'>mysqli_fetch_array(".$this->db_result.", ".$this->db_name.",table= ".mysqli_tablename(mysqli_list_tables($this->db_name)).", ".MYSQLI_ASSOC.")<br/>";
-//         echo "<br/>row =>> <br/>";
-//         print_r ($row);
-//         echo "<br/>";
-        //echo "<p style='direction:ltr;color:grey;'>mysqli_table_name =>> ".mysqli_table_name();
-        //echo "</p>";
-        //echo "<p style='direction:ltr;color:orange;>";
-        //print_r ($this);
-        //echo "</p>";
         return $row;
-        //		}else{
-        //			return "There is no entry";
-        //		}
     }
     
     public function fetch_field() {
@@ -418,9 +353,9 @@ class mysqliDB
     public function informer($table, $filter, $field=null){
         global $lang;
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> informer($table, $filter, $field)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> informer($table, $filter, $field)\n");
         
-        //		print "<br> SELECT * FROM $table WHERE $filter - $field <br>";
+       
         $res = mysqli_query($this->dbhandler, "SELECT * FROM $table WHERE $filter");
         if(!empty($res)){
             $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
@@ -445,7 +380,7 @@ class mysqliDB
     public function lookup($table, $filter=null){
         global $system;
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> lookup($table, $filter)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> lookup($table, $filter)\n");
         
         
         if(!empty($filter))
@@ -463,7 +398,7 @@ class mysqliDB
     
     public function hashLister($fields, $tables, $where=null, $order_by=null, $group_by=null, $having=null, $limit=null, $distinct=null){
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> hashLister($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> hashLister($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
         
         if(!empty($fields) && !empty($tables)){
             $this->select($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct);
@@ -484,7 +419,7 @@ class mysqliDB
     
     public function arrayLister($fields, $tables, $where=null, $order_by=null, $group_by=null, $having=null, $limit=null, $distinct=null){
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> arrayLister($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> arrayLister($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
         
         if(!empty($fields) && !empty($tables)){
             $this->select($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct);
@@ -502,7 +437,7 @@ class mysqliDB
     
     public function arrayLister2d($fields, $tables, $where=null, $order_by=null, $group_by=null, $having=null, $limit=null, $distinct=null){
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> arrayLister2d($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> arrayLister2d($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct)\n");
         
         if(!empty($fields) && !empty($tables)){
             $this->select($fields, $tables, $where, $order_by, $group_by, $having, $limit, $distinct);
@@ -527,9 +462,8 @@ class mysqliDB
     public function query($query){
         global $lang;
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query(query==>\n$query)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query(query==>\n$query)\n");
         
-        //		print "<br> SELECT * FROM $table WHERE $filter - $field <br>";
         $res = mysqli_query($this->dbhandler, $query);
         if(!empty($res)){
             $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
@@ -551,7 +485,7 @@ class mysqliDB
     public function usrsQuery($type, $usrs_query=NULL, $telPriority=1, $addrPriority=1, $fields=NULL, $filter=NULL){
         global $lang;
         global $settings;
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields)\n");
         
         if (!empty($filter)){
             $filter = 'AND '.$filter;
@@ -589,36 +523,26 @@ class mysqliDB
                 system::debug($settings['debugFile'], "err", "	Function=> mysqli.php-> query(ther is no type entry...)\n");
         }
         
-//         system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields)\n");
+        system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields)\n");
         
-        //		print "<br> SELECT * FROM $table WHERE $filter - $field <br>";
         $res = mysqli_query($this->dbhandler, $query);
         
         
-//         echo "<br/>res-><br/>";
-//         print_r($res);
-//         echo "<br/>";
         
         if(!empty($res)){
             $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
             
             
-//             echo "<br/>row-><br/>";
-//             print_r($row);
-//             echo "<br/>";
             
             
             if(!empty($row)){
-                //                 echo "<br/>1<br/>";
                 system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields) = \n".print_r($row,true)."\n");
                 return $row;
             }else{
-                //                 echo "<br/>2<br/>";
                 system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields) = NULL\n");
                 return null;
             }
         }else{
-            //             echo "<br/>3<br/>";
             system::debug($settings['debugFile'], "chrF", "	Function=> mysqli.php-> query($type , query==>\n$query\n, $fields) = NULL\n");
             return null;
         }

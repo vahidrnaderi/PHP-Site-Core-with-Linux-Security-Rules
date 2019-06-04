@@ -26,7 +26,7 @@ class rss extends system {
 	system::debug($settings['debugFile'], "chrF", "	Function=> rss.php-> create($items)\n");
    	
         $res = "";
-        // header
+//        header
         $res .= "<?xml version=\"1.0\" encoding=\"".$this->encoding."\"?>\n";
         $res .= "<rss version=\"$this->version\">\n";
         $res .= "\t<channel>\n";
@@ -35,7 +35,7 @@ class rss extends system {
         $res .= "\t\t<link>".$this->link."</link>\n";
         $res .= "\t\t<language>".$this->language."</language>\n";
         $res .= "\t\t<generator>".$this->generator."</generator>\n";
-        //items
+//        items
         foreach($items as $item) {
             $res .= "\t\t<item>\n";
             $res .= "\t\t\t<category>".stripslashes($item['category'])."</category>\n";
@@ -47,7 +47,7 @@ class rss extends system {
             $res .= "\t\t\t<link>http://$settings[domainName]".stripslashes($item["link"])."</link>\n";
             $res .= "\t\t</item>\n";
         }
-        //footer
+//        footer
         $res .= "\t</channel>\n";
         $res .= "</rss>\n";
 //        print_r ($res);
@@ -63,13 +63,13 @@ class rss extends system {
 		$xmlDoc = new DOMDocument();
 		$xmlDoc->load($source);
 		
-		//get elements from "<channel>"
+//		get elements from "<channel>"
 		$channel = $xmlDoc->getElementsByTagName('channel')->item(0);
 		$feed[channelLink] = $channel->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
 		$feed[channelTitle] = $channel->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
 		$feed[channelDescription] = $channel->getElementsByTagName('description')->item(0)->childNodes->item(0)->nodeValue;
 
-		//get and output "<item>" elements
+//		get and output "<item>" elements
 		$x = $xmlDoc->getElementsByTagName('item');
 		for ($i=0; $i<=$count; $i++){
 			$feed[items][$i][title] = $x->item($i)->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;

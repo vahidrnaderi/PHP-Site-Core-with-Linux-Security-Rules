@@ -4,7 +4,7 @@ class logger extends system{
 	public $table;
 
 	public function __construct() {
-		global $settings;
+	    global $settings, $system;
 		system::debug($settings['debugFile'], "chrF", "	Function=> logger.php-> __construct()\n");
 		
 		$this->table = $settings['logger'];
@@ -12,7 +12,7 @@ class logger extends system{
 	}
 
 	function logger(){
-		global $settings;
+	    global $settings, $system;
 		system::debug($settings['debugFile'], "chrF", "	Function=> logger.php-> logger()\n");
 
 		$this->table = $this->tablePrefix . $this->table;

@@ -1,0 +1,17 @@
+{nocache}
+<a href="/userMan/v_profile" clickable="menu-toggle">
+	{if isset($userPic)}
+	<div class="col-xs-3">
+		<img width="40" height="40" src="{$userPic}" class="img-circle">
+		{*iimg width=40 height=40 src="{$userPic}" class="img-circle"*}
+	</div>
+	<div class="col-xs-9">
+		{$welcomeMessageTitle}
+	</div>
+	{else}
+	<div class="col-xs-12 center">
+		{$welcomeMessageTitle}
+	</div>
+	{/if}
+</a>
+{/nocache}

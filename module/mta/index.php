@@ -12,9 +12,9 @@ switch ($sysVar[mode]){
 	case "c_sendMail":
 		system::debug($settings['debugFile'], "chrM", "	Module-Function=> mta Module >> index.php-> c_sendMail\n");
 		
-		$to = "";//"behingroup@yahoo.com";
-		$bcc = "vahidrnaderi@idealmart.com";//"s.a.hosseini@gmail.com";
-		$toName = "";//"Behin Taraz";
+		$to = "";		//"behingroup@yahoo.com";
+		$bcc = "vahidrnaderi@idealmart.com";		//"s.a.hosseini@gmail.com";
+		$toName = "";		//"Behin Taraz";
 		$subject = "درخواست محصول";
 		$text = $system->xorg->smarty->display("$settings[templateDir]/$_POST[mailText]" . $settings['ext4']);
 		mail($to, $subject, $text, "MIME-Version: 1.0\r\nContent-type: text/html; charset=utf-8\r\nFrom: $toName <$toName>\nX-Mailer: PHP/" . phpversion());

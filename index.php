@@ -3,43 +3,29 @@ ob_start("ob_gzhandler");
 define("superVisor", "kernel/controller/superVisor");
 date_default_timezone_set('Asia/Tehran');
 if(file_exists(superVisor . ".php"))
-	require_once(superVisor . ".php");
-////echo "<br> **** 11 **** <br>";
-//if($_SERVER['HTTP_REFERER'] == '' || in_array($_SERVER['HTTP_REFERER'], $system->security->trustUrl->trustUrlList())){
-// echo "</br>1->session_id()-->".session_id();
-// echo "</br>1->SESSION['uid']-->".$_SESSION['uid']."</br>";
-// print_r ($_SESSION);
+require_once(superVisor . ".php");
 $system->security->session->manager();
-// echo "</br>2->session_id()-->".session_id();
-// echo "</br>2->SESSION['uid']-->".$_SESSION['uid'];
 
 $settings['domain'] = $domain = preg_replace("/^(.*\.)?([^.]*\..*)$/", "$2", $_SERVER['HTTP_HOST']);
-////echo "<br> **** 12 **** <br>";
 $system->xorg->smarty->assign("settings", $settings);
-////echo "<br> **** 13 **** <br>";
 $system->xorg->smarty->assign("lang", $lang = $system->lang->langMan());
-////echo "<br> **** 14 **** <br>";
 $system->xorg->smarty->assign("sysVar", $sysVar);
-////echo "<br> **** 15 **** <br>";
 
 $system->module->loadModule();
-////echo "<br> **** 16 **** <br>";
 $content = $system->xorg->smarty->fetchedVar;
-////echo "<br> **** 17 **** <br>";
 $system->seo->seo($content);
-////echo "<br> **** 18 **** <br>";
-//$system->seo->scan();
-//require_once "module/relatedContent/model/relatedContent.php";
-//$relatedContent = new m_relatedContent();
-//$relatedContent->m_relatedURL($system->seo->titleMaker());
+$system->seo->scan();
+require_once "module/relatedContent/model/relatedContent.php";
+$relatedContent = new m_relatedContent();
+$relatedContent->m_relatedURL($system->seo->titleMaker());
 //echo "Title: " . $system->seo->titleMaker() . "<br>";
-$content = $content/* . $relatedContent->m_relatedURL($system->seo->titleMaker())*/;
+
+$content = $content	/* . $relatedContent->m_relatedURL($system->seo->titleMaker())*/;
+
 //echo $relatedContent->m_relatedURL($system->seo->titleMaker());
-//print_r ($settings);
 if($_SERVER["HTTP_X_REQUESTED_WITH"] == 'XMLHttpRequest'){
 	echo $content;
 }else{
-////	echo $content;
 	if(file_exists("theme/$settings[theme]")){
 		require_once "theme/$settings[theme]/env/env" . $settings['ext2'];
 		echo $system->xorg->smarty->fetch($settings['commonTpl'] . 'main' . $settings['ext4']);

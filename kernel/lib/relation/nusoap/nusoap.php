@@ -7445,18 +7445,12 @@ class nusoap_client extends nusoap_base  {
 		$soapmsg = $this->serializeEnvelope($payload,$this->requestHeaders,$usedNamespaces,$style,$use,$encodingStyle);
 		$this->debug("endpoint=$this->endpoint, soapAction=$soapAction, namespace=$namespace, style=$style, use=$use, encodingStyle=$encodingStyle");
 		$this->debug('SOAP message length=' . strlen($soapmsg) . ' contents (max 1000 bytes)=' . substr($soapmsg, 0, 1000));
-//****		
-// 		echo "<br> debug_str: " . $this->debug_str . " <br>";
-		
 		// send
 		$return = $this->send($this->getHTTPBody($soapmsg),$soapAction,$this->timeout,$this->response_timeout);
 		if($errstr = $this->getError()){
 			$this->debug('Error: '.$errstr);
 			return false;
 		} else {
-//****			
-// 			print_r ($return);
-// 			echo "<br> send successfull <br>";
 			
 			$this->return = $return;
 			$this->debug('sent message successfully and got a(n) '.gettype($return));
@@ -7472,18 +7466,12 @@ class nusoap_client extends nusoap_base  {
 					$this->debug("$k = $v<br>");
 				}
 				
-//****
-// 			print_r ($return);
-// 			echo "<br> 1 <br>";		
 		
 				return $return;
 			} elseif ($style == 'document') {
 				// NOTE: if the response is defined to have multiple parts (i.e. unwrapped),
 				// we are only going to return the first part here...sorry about that
 				
-//****
-// 			print_r ($return);
-// 			echo "<br> 2 <br>";		
 		
 				return $return;
 			} else {
@@ -7493,9 +7481,6 @@ class nusoap_client extends nusoap_base  {
 					// in the array
 					if(sizeof($return) > 1){
 				
-//****
-// 			print_r ($return);
-// 			echo "<br> 3 <br>";		
 		
 						return $return;
 					}
@@ -7504,18 +7489,11 @@ class nusoap_client extends nusoap_base  {
 					$this->debug('return shifted value: ');
 					$this->appendDebug($this->varDump($return));
 				
-//****
-//  		print_r ($return);
-// 			echo "<br> debug_str: " . $this->debug_str . " <br>";
-// 			echo "<br> 4 <br>";		
 		
            			return $return;
 				// nothing returned (ie, echoVoid)
 				} else {
 				
-//****
-// 			print_r ($return);
-// 			echo "<br> 5 <br>";		
 		
 					return "";
 				}

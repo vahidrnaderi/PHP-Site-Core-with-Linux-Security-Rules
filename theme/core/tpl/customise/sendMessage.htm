@@ -1,0 +1,51 @@
+{nocache}
+<br style="clear: both;">
+{if $smarty.session.uid == 2}
+<div style="padding: 1px;">
+	<div class="row col-xs-3 col-lxs-3 LH30">{$lang.userName}:</div>
+	<div class="row col-xs-9 col-lxs-9"><input id="userName" name="userName" class="input" type="text" size="25" maxlength="45"></div>
+	<br style="clear: both;">
+</div>
+<div style="padding: 1px;">
+	<div class="row col-xs-3 col-lxs-3 LH30">{$lang.email}:</div>
+	<div class="row col-xs-9 col-lxs-9"><input id="email" name="email" class="input" type="text" size="25" maxlength="100"></div>
+	<br style="clear: both;">
+</div>
+{else}
+<br style="clear: both;">
+<!-- div style="padding: 1px;">
+	<div class="col-xs-12 col-lxs-12 LH60">&nbsp;</div>
+</div -->
+{/if}
+<div style="padding: 1px;">
+	<div class="row col-xs-3 col-lxs-3 LH30">{$lang.subject}:</div>
+	<div class="row col-xs-9 col-lxs-9"><input id="subject" name="subject" class="input" type="text" size="25" maxlength="100"></div>
+	<br style="clear: both;">
+</div>
+<div style="padding: 1px;">
+	<div class="row col-xs-3 col-lxs-3 LH40">
+		{$lang.message}:
+		<br>		
+		{if $smarty.session.uid == 2}
+		<div style="padding: 3px;">
+			<button style="height: 45px; width: 50px;" onclick="$('#content').farajax('loader', '/contact/c_sendMessage', 'userName=' + document.getElementById('userName').value + '::{$lang.userName}<>Multi<>1<>nce<>45' + '&email=' + document.getElementById('email').value + '::{$lang.email}<>Mail<>1<>nce<>45' + '&subject=' + document.getElementById('subject').value	+ '::{$lang.subject}<>Multi<>1<>ce<>100' + '&message=' + document.getElementById('message').value + '::{$lang.message}<>Multi<>1<>ce<>1000');">
+				<span>{$lang.send}</span>
+			</button>
+		</div>
+		{else}
+		<div style="padding: 3px;">
+			<button style="height: 45px; width: 50px;" onclick="$('#content').farajax('loader', '/contact/c_sendMessage', 'subject=' + document.getElementById('subject').value	+ '::{$lang.subject}<>Multi<>1<>ce<>100' + '&message=' + document.getElementById('message').value + '::{$lang.message}<>Multi<>1<>ce<>1000');">
+				<span>{$lang.send}</span>
+			</button>
+		</div>
+		{/if}
+	</div>
+	<div class="row col-xs-9 col-lxs-9"><textarea id="message" name="message" class="input" rows="5" cols="25"></textarea></div>
+	<br style="clear: both;">
+</div>
+<!-- 
+<div style="padding: 1px;">
+	{$lang.carbonCopy}: <input id="carbonCopy" name="carbonCopy" class="input" type="checkbox" value="0" onchange="checkBoxToggle('carbonCopy');">
+</div>
+-->
+{/nocache}

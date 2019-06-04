@@ -50,7 +50,7 @@ class acl extends system{
 						return ($acc['mor'] == 1 && $acc['mow'] == 1 && $acc['mox'] == 1 ? true : false);
 						break;
 				}
-			}elseif(in_array($acc[group], explode(',', $_SESSION[gid]))){
+			}elseif(in_array($acc['group'], explode(',', $_SESSION['gid']))){
 //				print "ACC2";
 				switch($pmod){
 					default:
@@ -75,7 +75,7 @@ class acl extends system{
 						return ($acc['mgr'] == 1 && $acc['mgw'] == 1 && $acc['mgx'] == 1 ? true : false);
 						break;
 				}
-			}elseif($_SESSION[uid] != 2 && $_SESSION[gid] != 3){
+			}elseif($_SESSION['uid'] != 2 && $_SESSION['gid'] != 3){
 //				print "ACC3";
 				switch($pmod){
 					default:
@@ -100,7 +100,7 @@ class acl extends system{
 						return ($acc['mtr'] == 1 && $acc['mtw'] == 1 && $acc['mtx'] == 1 ? true : false);
 						break;
 				}
-			}elseif($_SESSION[uid] == 2 && $_SESSION[gid] == 3){
+			}elseif($_SESSION['uid'] == 2 && $_SESSION['gid'] == 3){
 //				print "ACC4";
 				switch($pmod){
 					default:

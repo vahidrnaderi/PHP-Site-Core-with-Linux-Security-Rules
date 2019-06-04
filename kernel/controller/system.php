@@ -17,9 +17,10 @@ class system{
 	public $xorg;
 	public $debug;
 
-	public function debug($fileName, $type, $message){
+	public static function debug($fileName, $type, $message){
 		global $settings;
 		
+		date_default_timezone_set("Asia/Tehran");
 		$localTime=date("e(P)= Y/m/d-H:i:s");
 		
 		if($settings['debug']=='on')
@@ -51,30 +52,22 @@ class system{
 					$message = $localTime."-->Fatal-Error: system.php=> Function: debug($fileName, $type, $message) -> No Debug's type definition.";
 					break;
 		}
-
-// 		echo "<br\>1->". var_dump(file_exists($settings[debugFile]))."<br\>";	
-// 		echo "<br\>";
-//		echo "<br\>1->".var_dump(is_writable($settings[debugFile]))."<br\>";
-// echo "<br/>2->$settings[debugFile]--> ***-->>debug($fileName, $type, $message)<br/>";		
+	
 		if($settings['debugMyFileWrite']=='on'){
-// echo "<br\>3<br\>";	
 			$myFile = fopen($settings['debugFile'], "a") or die("Unable to open file!");
-//			echo "myfile->$myfile<br>";
 			fwrite($myFile, "-----------$localTime************debug($fileName, $type, $message)\n");
 			fclose($myFile);
 		}
 		
 		
-//			echo "message->$message<br>";
 		$myFile = fopen($fileName, "a") or die("Unable to open file!");
-//			echo "myfile->$myfile<br>";
 		fwrite($myFile, $message);
 		fclose($myFile);
 	}
 	
-	public function system(){
+	public function __construct(){
 		global $settings;
-		system::debug($settings['debugFile'], "chrF", "	Function=> system.php-> system()\n");
+		$this->debug($settings['debugFile'], "chrF", "	Function=> system.php-> __construct()\n");
 		
 
 		$this->tablePrefix = $settings['tablePrefix'];
@@ -226,11 +219,6 @@ class system{
 					}
 				}
 			}
-//echo 'slices-> <br>';			
-//print_r($slices);
-//echo '<br>';
-//			if ($slices[0][value] == "AND"){
-//echo 44;				
 				if(is_array($slices)){
 					foreach ($slices as $key => $slice){
 //						if ($slice[value] == "OR" || $slice[value] == "AND"){
@@ -238,9 +226,6 @@ class system{
 								if(is_numeric($slice['value'])){
 									if(strstr($slice['name'], ".")){
 										$dotSlice = explode(".", $slice['name']);
-//echo "<div style='direction:ltr;'>dotSlice1-> ";			
-//print_r($dotSlice);
-//echo '<br></div>';
 //////*********  FOR search between two prices
 										if($dotSlice[1]==basePrice1){
 											$out .= " AND `$dotSlice[0]`.`basePrice` >= $slice[value]";
@@ -249,53 +234,27 @@ class system{
 										}else{
 											$out .= " AND `$dotSlice[0]`.`$dotSlice[1]` = $slice[value]";
 										}
-//echo "<div style='direction:ltr;'>out1-> ";			
-//print_r($out);
-//echo '<br></div>';
 									}else{
 										$out .= " AND `$slice[name]` = $slice[value]";
-//echo "<div style='direction:ltr;'>out2-> ";			
-//print_r($out);
-//echo '<br></div>';
 									}
 								}else{
 									if(strstr($slice[name], ".")){
 										$dotSlice = explode(".", $slice[name]);
-//echo "<div style='direction:ltr;'>dotSlice11-> ";			
-//print_r($dotSlice);
-//echo '<br></div>';
 										$out .= " AND `$dotSlice[0]`.`$dotSlice[1]` LIKE '%$slice[value]%'";
-//echo "<div style='direction:ltr;'>out11-> ";			
-//print_r($out);
-//echo '<br></div>';
 									}else{
 										$out .= " AND `$slice[name]` LIKE '%$slice[value]%'";
-//echo "<div style='direction:ltr;'>out21-> ";			
-//print_r($out);
-//echo '<br></div>';
 									}
 								}
 							}
 //						}
 					}
 				}
-//			}else{				
-//echo 55;
-//echo '<br>';				
+//			}else{			
 //				if(is_array($slices)){
 //					foreach ($slices as $key => $slice){
-//echo '<br>101<br>';						
-//echo $slice[value];
-//echo '<br>';					
 //						if ($slice[value] == "OR" || $slice[value] == "AND"){
-//echo '<br>111<br>';			
-//echo 'OKKKKKK!!!!!!!';	
-//echo '<br>';							
 //						}else{
 //							if($slice[value] != ""){
-//echo '<br>222<br>';			
-//echo $slice[value];	
-//echo '<br>';								
 //								if(is_numeric($slice[value])){
 //									if(strstr($slice[name], ".")){
 //										$dotSlice = explode(".", $slice[name]);
@@ -315,10 +274,7 @@ class system{
 //						}
 //					}
 //				}
-//			}
-//echo '<br>';			
-//echo $out;	
-//echo '<br>';			
+//			}		
 			return $out;
 		}
 		return null;
